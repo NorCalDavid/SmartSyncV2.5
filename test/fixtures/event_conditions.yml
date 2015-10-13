@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  type: 
+  published: false
+  condition: MyString
+  trigger_id: 1
+  test_option_id: 1
+  test_value_one: MyString
+  test_value_two: MyString
+
+two:
+  name: MyString
+  description: MyText
+  type: 
+  published: false
+  condition: MyString
+  trigger_id: 1
+  test_option_id: 1
+  test_value_one: MyString
+  test_value_two: MyString

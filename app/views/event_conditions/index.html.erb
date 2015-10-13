@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Event Conditions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Published</th>
+      <th>Condition</th>
+      <th>Trigger</th>
+      <th>Test option</th>
+      <th>Test value one</th>
+      <th>Test value two</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_conditions.each do |event_condition| %>
+      <tr>
+        <td><%= event_condition.name %></td>
+        <td><%= event_condition.description %></td>
+        <td><%= event_condition.type %></td>
+        <td><%= event_condition.published %></td>
+        <td><%= event_condition.condition %></td>
+        <td><%= event_condition.trigger_id %></td>
+        <td><%= event_condition.test_option_id %></td>
+        <td><%= event_condition.test_value_one %></td>
+        <td><%= event_condition.test_value_two %></td>
+        <td><%= link_to 'Show', event_condition %></td>
+        <td><%= link_to 'Edit', edit_event_condition_path(event_condition) %></td>
+        <td><%= link_to 'Destroy', event_condition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event condition', new_event_condition_path %>

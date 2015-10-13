@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Event Actions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Published</th>
+      <th>Action</th>
+      <th>Target</th>
+      <th>Command</th>
+      <th>Test option</th>
+      <th>Execution order</th>
+      <th>Executed count</th>
+      <th>Executed last</th>
+      <th>Event condition</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_actions.each do |event_action| %>
+      <tr>
+        <td><%= event_action.name %></td>
+        <td><%= event_action.description %></td>
+        <td><%= event_action.type %></td>
+        <td><%= event_action.published %></td>
+        <td><%= event_action.action %></td>
+        <td><%= event_action.target_id %></td>
+        <td><%= event_action.command_id %></td>
+        <td><%= event_action.test_option_id %></td>
+        <td><%= event_action.execution_order %></td>
+        <td><%= event_action.executed_count %></td>
+        <td><%= event_action.executed_last %></td>
+        <td><%= event_action.event_condition_id %></td>
+        <td><%= link_to 'Show', event_action %></td>
+        <td><%= link_to 'Edit', edit_event_action_path(event_action) %></td>
+        <td><%= link_to 'Destroy', event_action, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event action', new_event_action_path %>

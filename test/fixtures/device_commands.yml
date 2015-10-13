@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  device_id: 1
+  comamnd_id: MyString
+  published: false
+  executed_count: 1
+  executed_last: 2015-10-13 12:58:51
+  event_condition_id: 1
+
+two:
+  device_id: 1
+  comamnd_id: MyString
+  published: false
+  executed_count: 1
+  executed_last: 2015-10-13 12:58:51
+  event_condition_id: 1

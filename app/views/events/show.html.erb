@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Favorite:</strong>
+  <%= @event.favorite %>
+</p>
+
+<p>
+  <strong>Executed count:</strong>
+  <%= @event.executed_count %>
+</p>
+
+<p>
+  <strong>Default:</strong>
+  <%= @event.default %>
+</p>
+
+<p>
+  <strong>0,:</strong>
+  <%= @event.0, %>
+</p>
+
+<p>
+  <strong>Null:</strong>
+  <%= @event.null %>
+</p>
+
+<p>
+  <strong>False:</strong>
+  <%= @event.false %>
+</p>
+
+<p>
+  <strong>Executed last:</strong>
+  <%= @event.executed_last %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @event.status %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

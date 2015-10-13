@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @comamnd.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @comamnd.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @comamnd.type %>
+</p>
+
+<p>
+  <strong>Resource:</strong>
+  <%= @comamnd.resource %>
+</p>
+
+<p>
+  <strong>Endpoint:</strong>
+  <%= @comamnd.endpoint %>
+</p>
+
+<%= link_to 'Edit', edit_comamnd_path(@comamnd) %> |
+<%= link_to 'Back', comamnds_path %>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_group.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event_group.description %>
+</p>
+
+<p>
+  <strong>Favorite:</strong>
+  <%= @event_group.favorite %>
+</p>
+
+<p>
+  <strong>Executed count:</strong>
+  <%= @event_group.executed_count %>
+</p>
+
+<p>
+  <strong>Executed last:</strong>
+  <%= @event_group.executed_last %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @event_group.status %>
+</p>
+
+<%= link_to 'Edit', edit_event_group_path(@event_group) %> |
+<%= link_to 'Back', event_groups_path %>

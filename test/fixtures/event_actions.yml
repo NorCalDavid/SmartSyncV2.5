@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  type: 
+  published: false
+  action: MyString
+  target_id: 1
+  command_id: 1
+  test_option_id: 1
+  execution_order: 1
+  executed_count: 1
+  executed_last: 2015-10-13 12:32:06
+  event_condition_id: 1
+
+two:
+  name: MyString
+  description: MyText
+  type: 
+  published: false
+  action: MyString
+  target_id: 1
+  command_id: 1
+  test_option_id: 1
+  execution_order: 1
+  executed_count: 1
+  executed_last: 2015-10-13 12:32:06
+  event_condition_id: 1

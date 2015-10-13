@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_action.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event_action.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @event_action.type %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @event_action.published %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @event_action.action %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @event_action.target_id %>
+</p>
+
+<p>
+  <strong>Command:</strong>
+  <%= @event_action.command_id %>
+</p>
+
+<p>
+  <strong>Test option:</strong>
+  <%= @event_action.test_option_id %>
+</p>
+
+<p>
+  <strong>Execution order:</strong>
+  <%= @event_action.execution_order %>
+</p>
+
+<p>
+  <strong>Executed count:</strong>
+  <%= @event_action.executed_count %>
+</p>
+
+<p>
+  <strong>Executed last:</strong>
+  <%= @event_action.executed_last %>
+</p>
+
+<p>
+  <strong>Event condition:</strong>
+  <%= @event_action.event_condition_id %>
+</p>
+
+<%= link_to 'Edit', edit_event_action_path(@event_action) %> |
+<%= link_to 'Back', event_actions_path %>
