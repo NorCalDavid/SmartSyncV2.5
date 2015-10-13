@@ -1,0 +1,45 @@
+.badge {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: $size13px;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    // padding: 4px;
+    width: 20px;
+    height: 20px;
+}
+
+.badge-primary {
+    background-color: $primaryColor;
+
+}
+.badge-white {
+    background-color: #ffffff;
+}
+.badge-warning {
+    background-color: $warningColor;
+
+}
+.badge-success {
+    background-color: $successColor;
+
+}
+.badge-danger {
+    background-color: $dangerColor;
+
+}
+.badge-info {
+    background-color: $infoColor;
+
+}
+
+.label.label-circle {
+  border-radius: 50%;
+  background-clip: padding-box;
+  padding: 4px;
+    width: 20px;
+  height: 20px;
+}

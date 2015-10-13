@@ -1,0 +1,249 @@
+//property Status Widget
+.property-row {
+  width: 100%;
+  vertical-align: middle !important;
+  padding: 5px 0 5px 0;
+}
+.property-col-1 {
+  width: 20%;
+}
+.property-col-1 {
+  width: 60%;
+}
+.property-col-1 {
+  width: 20%;
+}
+.property-buttons {
+  padding: 0;
+  margin: 5px;
+}
+.property-name{
+  padding: 0;
+  margin: 0;
+  line-height: 1.2em;
+  font-size: 1.2em;
+}
+.property-text{
+  padding: 0 0 0 10px;
+  margin: 2px 0 0 10px;
+  line-height: 1.2em;
+  font-size: 0.875em;
+}
+.status-text {
+  margin: 10px 0 0 10px;
+}
+
+.property-status-block {
+  text-align: center;
+  vertical-align: middle;
+}
+.property-status-icon {
+  vertical-align: middle;
+  margin: 0;
+  width: 50px;
+  height: 50px;
+}
+
+//room Status Widget
+.room-row {
+  width: 100%;
+  vertical-align: middle !important;
+  padding: 5px 0 5px 0;
+}
+.room-col-1 {
+  width: 20%;
+}
+.room-col-1 {
+  width: 60%;
+}
+.room-col-1 {
+  width: 20%;
+}
+.room-buttons {
+  padding: 0;
+  margin: 5px;
+}
+.room-name{
+  padding: 0;
+  margin: 0;
+  line-height: 1.2em;
+  font-size: 1.2em;
+}
+.room-post {
+  padding: 7px 10px;
+  @include roundBorders(13px);
+  position: relative;
+}
+.room-post.default {
+  background-color: #E6E6E6;
+}
+.room-post.danger {
+  background-color: $dangerColor;
+  color: #fff;
+}
+.room-post.primary {
+  background-color: $primaryColor;
+  color: #fff;
+}
+.room-post.default .arrow {
+  border-right-color: rgba(0, 0, 0, 0.1);
+}
+.room-post.primary .arrow {
+  border-left-color: rgba($primaryColor, 1);
+}
+.room-post.danger .arrow {
+  border-left-color: rgba($dangerColor, 1);
+}
+.room-text{
+  padding: 0 0 0 10px;
+  margin: 2px 0 0 10px;
+  line-height: 1.2em;
+  font-size: 0.875em;
+}
+.status-text {
+  margin: 10px 0 0 10px;
+}
+
+.room-status-block {
+  text-align: center;
+  vertical-align: middle;
+}
+.room-status-icon {
+  vertical-align: middle;
+  margin: 0;
+  width: 50px;
+  height: 50px;
+}
+
+//Device Status Widget
+.device-row {
+  width: 100%;
+  vertical-align: middle !important;
+  padding: 5px 0 5px 0;
+}
+.device-col-1 {
+  width: 20%;
+}
+.device-col-1 {
+  width: 60%;
+}
+.device-col-1 {
+  width: 20%;
+}
+.device-buttons {
+  padding: 0;
+  margin: 5px;
+}
+.device-name{
+  padding: 0;
+  margin: 0;
+  line-height: 1.2em;
+  font-size: 1.2em;
+}
+.device-text{
+  padding: 0 0 0 10px;
+  margin: 2px 0 0 10px;
+  line-height: 1.2em;
+  font-size: 0.875em;
+}
+.status-text {
+  margin: 10px 0 0 10px;
+}
+
+.device-status-block {
+  text-align: center;
+  vertical-align: middle;
+}
+.device-status-icon {
+  vertical-align: middle;
+  margin: 5px 0 5px 0;
+  width: 50px;
+  height: 50px;
+}
+
+//chat
+.chat-widget {
+  .wrapper {
+    margin: 10px 0;
+    clear: both;
+    .avatar {
+
+      padding: 0;
+      margin: 0;
+    }
+    .avatar i {
+      border: solid 2px #fff;
+    }
+    .avatar img {
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+    }
+    .property-icon img {
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+    }
+    .post {
+      padding: 7px 10px;
+      @include roundBorders(13px);
+      position: relative;
+    }
+    .post.default {
+      background-color: #E6E6E6;
+    }
+    .post.danger {
+      background-color: $dangerColor;
+      color: #fff;
+    }
+    .post.primary {
+      background-color: $primaryColor;
+      color: #fff;
+    }
+    .post.default .arrow {
+      border-right-color: rgba(0, 0, 0, 0.1);
+    }
+    .post.primary .arrow {
+      border-left-color: rgba($primaryColor, 1);
+    }
+    .post.danger .arrow {
+      border-left-color: rgba($dangerColor, 1);
+    }
+  }
+}
+//Weather
+.widget-weather {
+  .title {
+    margin-bottom: 10px
+  }
+  .temp{
+    font-size: $size16px;
+    font-weight: bold;
+    margin-top:10px
+  }
+}
+body.fullscreen-widget-active{
+  overflow: hidden;
+  position: fixed;
+}
+body.fullscreen-widget-active .animated{
+  -webkit-animation-fill-mode: none;
+  animation-fill-mode: none;
+  animation-name:none;
+}
+body.fullscreen-widget-active .panel .panel-heading .actions > .fa-chevron-down,
+body.fullscreen-widget-active .panel .panel-heading .actions > .fa-times{
+  display: none;
+}
+.panel.widget-fullscreen{
+  display: block;
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+}

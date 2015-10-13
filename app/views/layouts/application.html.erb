@@ -2,19 +2,27 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Smart Sync V25" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Smart Sync V25" %>">
+    <title><%= content_for?(:title) ? yield(:title) : "Smart Sync V3" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "SmartSyncV2.5" %>">
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'base', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    <div class="container">
+      <div class="header">
+        <%= render 'layouts/navigation' %>
+      </div>
+
+      <%= render 'layouts/messages' %>
+       <div class="container">
+         <div class="page-header" id="banner">
+          <div class="row">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
