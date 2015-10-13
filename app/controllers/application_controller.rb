@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
+  before_filter :ensure_signup_complete, only: [:create, :update]
 
   
 
