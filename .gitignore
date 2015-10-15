@@ -80,5 +80,6 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/config/cloudinary.yml
 /config/omniauth.yml
 /config/secrets.yml

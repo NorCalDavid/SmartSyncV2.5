@@ -22,7 +22,7 @@ class Property < ActiveRecord::Base
   end
 
   def user_id
-    return self.user.id
+    return self.user.id unless self.user.nil?
   end
 
   private

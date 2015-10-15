@@ -1,28 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Smart Sync V3" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "SmartSyncV2.5" %>">
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_link_tag 'base', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <%= render 'layouts/navigation' %>
-      </div>
 
-      <%= render 'layouts/messages' %>
-       <div class="container">
-         <div class="page-header" id="banner">
-          <div class="row">
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SmartSync Version 2</title>
+    <meta name="Home Automation Controller" content="Version 2 - Built In Rails">
+    <meta name="Author: David Uli" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <%= stylesheet_link_tag 'base' %>
+  <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
+  <%= csrf_meta_tags %>
+</head>
+  <body data-config="<%= @config %>">
+    <!-- Page Wrapper-->
+     <section id="main-wrapper" class="theme-dark-blue-full">
+       <!-- Page wrapper -->
+        <header id="header"> <%= render partial: "layouts/partials/header" %> </header>
+        <!-- Left Sidebar Navigation -->
+        <aside class="sidebar sidebar-left"> <%= render partial: "layouts/partials/leftsidebar" %> </aside>
+        <!-- Content wraper -->
+         <section class="main-content-wrapper">
+            <!-- Main content view  -->
+                <div class="notice"><%= notice %></div>
+                <div class="alert"><%= alert %></div>
+                <%= yield %>
+
+
+
+            <!-- Footer -->
+            <div><%= render partial: "layouts/partials/footer" %></div>
+        </section>
+        <!-- /Content wraper-->
+    </section>
+    <!-- /Page wrapper-->
+
+
+    <!-- Right Sidebar Navigation -->
+    <aside><%= render partial: "layouts/partials/rightsidebar" %></aside>
+    <!-- /Right Sidebar Navigation -->
+
+
+     <%= javascript_include_tag 'base' %>
+     <%= javascript_include_tag 'application' %>
+
+</body>
 </html>
