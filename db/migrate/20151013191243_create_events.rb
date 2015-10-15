@@ -8,7 +8,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :published_on
       t.string :status
       t.boolean :favorite, null: false, default: false
-      t.integer, :executed_count, null: false, default: 0
+      t.integer :executed_count, null: false, default: 0
       t.datetime :executed_last
       t.integer :event_group_id
       

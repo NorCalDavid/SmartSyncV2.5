@@ -10,9 +10,10 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'devise'
 gem 'high_voltage'
 gem 'figaro'
+gem 'settingslogic'
+require 'yaml'
 
 gem 'omniauth'
-gem 'omniauth-oauth2'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
@@ -23,19 +24,23 @@ gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'bootstrap_form'
 gem 'bootstrap-slider-rails'
+gem 'bootstrap-social-rails'
 gem 'font-awesome-sass'
 
 gem 'jquery-rails'
 
+gem 'twilio-ruby'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem "workless"
+
 gem 'carrierwave'
 gem 'cloudinary'
-gem "twilio-ruby"
-
-
 
 group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'awesome_print'
 end
 
 group :development, :test do

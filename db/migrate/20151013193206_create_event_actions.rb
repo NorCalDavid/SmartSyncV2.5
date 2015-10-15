@@ -13,7 +13,7 @@ class CreateEventActions < ActiveRecord::Migration
       t.integer :execution_order
       t.integer :executed_count, null: false, default: 0
       t.datetime :executed_last
-      t.integer :event_condition_id, null, false
+      t.integer :event_condition_id, null: false
 
       t.timestamps null: false
     end

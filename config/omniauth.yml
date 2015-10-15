@@ -1,0 +1,29 @@
+facebook: { reference: "facebook",
+            name: "Facebook",
+            scope: "email, public_profile, user_birthday",
+            key_ref: "FACEBOOK_KEY",
+            secret_ref: "FACEBOOK_SECRET" }
+
+twitter:  { reference: "twitter",
+            name: "Twitter",
+            scope: "r_fullprofile, r_emailaddress",
+            key_ref: "TWITTER_KEY",
+            secret_ref: "TWITTER_SECRET" }
+
+linkedin: { reference: "linkedin",
+            name: "LinkedIn",
+            scope: "r_basicprofile r_emailaddress",
+            key_ref: "LINKEDIN_KEY",
+            secret_ref: "LINKEDIN_SECRET" }
+
+github: {   reference: "github",
+            name: "GitHub",
+            scope: "user, public_repo",
+            key_ref: "GITHUB_KEY",
+            secret_ref: "GITHUB_SECRET" }
+
+google:   { reference: "google_oauth2",
+            name: "Google",
+            scope: "email, profile",
+            key_ref: "GOOGLE_KEY",
+            secret_ref: "GOOGLE_SECRET" }

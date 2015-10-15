@@ -22,5 +22,9 @@ module SmartSyncV25
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.active_job.queue_adapter = :delayed_job
+
+    OMNIAUTH = YAML.load(File.read(File.expand_path('../omniauth.yml', __FILE__))).deep_symbolize_keys
+
   end
 end

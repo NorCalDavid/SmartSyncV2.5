@@ -14,7 +14,7 @@ class CreateDevices < ActiveRecord::Migration
       t.string :EDID
       t.string :version
       t.string :image
-      t.ingteger :property_id, null: false
+      t.integer :property_id, null: false
       t.integer :room_id, null: false
       t.boolean :controllable, :default => false
       t.string :api_id
