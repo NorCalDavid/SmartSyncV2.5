@@ -1,0 +1,40 @@
+<%= form_for @device_command, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :device_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :device_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :comamnd_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :comamnd_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :published, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :published, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :executed_last, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :executed_last, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :event_condition_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :event_condition_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  device_commands_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

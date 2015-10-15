@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014172454) do
+ActiveRecord::Schema.define(version: 20151015032148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20151014172454) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "comamnds", force: :cascade do |t|
+  create_table "commands", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.string   "resource"
@@ -60,16 +60,15 @@ ActiveRecord::Schema.define(version: 20151014172454) do
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",    default: 0, null: false
-    t.integer  "attempts",    default: 0, null: false
-    t.text     "handler",                 null: false
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.integer  "reminder_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -197,8 +196,10 @@ ActiveRecord::Schema.define(version: 20151014172454) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "token"
+    t.string   "token_secret"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
@@ -226,14 +227,14 @@ ActiveRecord::Schema.define(version: 20151014172454) do
   end
 
   create_table "reminders", force: :cascade do |t|
-    t.string   "name",                    null: false
+    t.string   "name",                   null: false
     t.text     "description"
     t.integer  "recipient_id"
-    t.string   "receipient_phone_number"
+    t.string   "recipient_phone_number"
     t.datetime "notification_time"
     t.string   "time_zone"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -268,13 +269,15 @@ ActiveRecord::Schema.define(version: 20151014172454) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "name"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "image"
+    t.boolean  "role",                   default: false, null: false
+    t.integer  "admin_user_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -283,8 +286,8 @@ ActiveRecord::Schema.define(version: 20151014172454) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

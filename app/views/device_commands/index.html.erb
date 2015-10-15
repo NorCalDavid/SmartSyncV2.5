@@ -1,0 +1,46 @@
+<%- model_class = DeviceCommand -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:device_id) %></th>
+      <th><%= model_class.human_attribute_name(:comamnd_id) %></th>
+      <th><%= model_class.human_attribute_name(:published) %></th>
+      <th><%= model_class.human_attribute_name(:executed_last) %></th>
+      <th><%= model_class.human_attribute_name(:event_condition_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @device_commands.each do |device_command| %>
+      <tr>
+        <td><%= device_command.id %></td>
+          <td><%= device_command.device_id %></td>
+          <td><%= device_command.comamnd_id %></td>
+          <td><%= device_command.published %></td>
+          <td><%= device_command.executed_last %></td>
+          <td><%= device_command.event_condition_id %></td>
+        <td><%=l device_command.created_at, format: :long %></td>
+        <td>
+          <%= link_to device_command_path(device_command), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+          <%- end -%>
+          <%= link_to edit_device_command_path(device_command), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to device_command_path(device_command), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_device_command_path,
+            :class => 'btn btn-primary' %>

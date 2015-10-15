@@ -1,49 +1,47 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = EventCondition -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event_condition.name %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.description %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:type) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.type %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:published) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.published %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:published_on) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.published_on %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:condition) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.condition %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:trigger_id) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.trigger_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:test_option_id) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.test_option_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:test_one) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.test_one %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:test_two) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.test_two %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:event_id) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.event_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:execution_order) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.execution_order %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:executed_last) %></dt>
+      <dd><pre class="prettyprint"><%= @event_condition.executed_last %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event_condition.description %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @event_condition.type %>
-</p>
-
-<p>
-  <strong>Published:</strong>
-  <%= @event_condition.published %>
-</p>
-
-<p>
-  <strong>Condition:</strong>
-  <%= @event_condition.condition %>
-</p>
-
-<p>
-  <strong>Trigger:</strong>
-  <%= @event_condition.trigger_id %>
-</p>
-
-<p>
-  <strong>Test option:</strong>
-  <%= @event_condition.test_option_id %>
-</p>
-
-<p>
-  <strong>Test value one:</strong>
-  <%= @event_condition.test_value_one %>
-</p>
-
-<p>
-  <strong>Test value two:</strong>
-  <%= @event_condition.test_value_two %>
-</p>
-
-<%= link_to 'Edit', edit_event_condition_path(@event_condition) %> |
-<%= link_to 'Back', event_conditions_path %>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              event_conditions_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_event_condition_path(@event_condition), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              event_condition_path(@event_condition),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

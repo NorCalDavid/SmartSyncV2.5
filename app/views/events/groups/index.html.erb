@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Event Groups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Favorite</th>
+      <th>Executed count</th>
+      <th>Executed last</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_groups.each do |event_group| %>
+      <tr>
+        <td><%= event_group.name %></td>
+        <td><%= event_group.description %></td>
+        <td><%= event_group.favorite %></td>
+        <td><%= event_group.executed_count %></td>
+        <td><%= event_group.executed_last %></td>
+        <td><%= event_group.status %></td>
+        <td><%= link_to 'Show', event_group %></td>
+        <td><%= link_to 'Edit', edit_event_group_path(event_group) %></td>
+        <td><%= link_to 'Destroy', event_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event group', new_event_group_path %>

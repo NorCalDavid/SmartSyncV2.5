@@ -1,53 +1,88 @@
-<%= form_for(@event_condition) do |f| %>
-  <% if @event_condition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event_condition.errors.count, "error") %> prohibited this event_condition from being saved:</h2>
-
-      <ul>
-      <% @event_condition.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @event_condition, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :name, :class => 'text_field form-control' %>
     </div>
-  <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :description, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :type, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :type, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :published, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :published, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :published_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :published_on, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :condition, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :condition, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :trigger_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :trigger_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :test_option_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :test_option_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :test_one, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :test_one, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :test_two, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :test_two, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :event_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :event_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :execution_order, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :execution_order, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :executed_last, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :executed_last, :class => 'text_field form-control' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
-  </div>
-  <div class="field">
-    <%= f.label :published %><br>
-    <%= f.check_box :published %>
-  </div>
-  <div class="field">
-    <%= f.label :condition %><br>
-    <%= f.text_field :condition %>
-  </div>
-  <div class="field">
-    <%= f.label :trigger_id %><br>
-    <%= f.number_field :trigger_id %>
-  </div>
-  <div class="field">
-    <%= f.label :test_option_id %><br>
-    <%= f.number_field :test_option_id %>
-  </div>
-  <div class="field">
-    <%= f.label :test_value_one %><br>
-    <%= f.text_field :test_value_one %>
-  </div>
-  <div class="field">
-    <%= f.label :test_value_two %><br>
-    <%= f.text_field :test_value_two %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  event_conditions_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>

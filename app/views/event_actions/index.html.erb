@@ -1,49 +1,60 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Event Actions</h1>
-
-<table>
+<%- model_class = EventAction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Published</th>
-      <th>Action</th>
-      <th>Target</th>
-      <th>Command</th>
-      <th>Test option</th>
-      <th>Execution order</th>
-      <th>Executed count</th>
-      <th>Executed last</th>
-      <th>Event condition</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:type) %></th>
+      <th><%= model_class.human_attribute_name(:published) %></th>
+      <th><%= model_class.human_attribute_name(:published_on) %></th>
+      <th><%= model_class.human_attribute_name(:action) %></th>
+      <th><%= model_class.human_attribute_name(:target_id) %></th>
+      <th><%= model_class.human_attribute_name(:command_id) %></th>
+      <th><%= model_class.human_attribute_name(:test_option_id) %></th>
+      <th><%= model_class.human_attribute_name(:execution_order) %></th>
+      <th><%= model_class.human_attribute_name(:executed_last) %></th>
+      <th><%= model_class.human_attribute_name(:event_condition_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @event_actions.each do |event_action| %>
       <tr>
-        <td><%= event_action.name %></td>
-        <td><%= event_action.description %></td>
-        <td><%= event_action.type %></td>
-        <td><%= event_action.published %></td>
-        <td><%= event_action.action %></td>
-        <td><%= event_action.target_id %></td>
-        <td><%= event_action.command_id %></td>
-        <td><%= event_action.test_option_id %></td>
-        <td><%= event_action.execution_order %></td>
-        <td><%= event_action.executed_count %></td>
-        <td><%= event_action.executed_last %></td>
-        <td><%= event_action.event_condition_id %></td>
-        <td><%= link_to 'Show', event_action %></td>
-        <td><%= link_to 'Edit', edit_event_action_path(event_action) %></td>
-        <td><%= link_to 'Destroy', event_action, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= event_action.id %></td>
+          <td><%= event_action.name %></td>
+          <td><%= event_action.description %></td>
+          <td><%= event_action.type %></td>
+          <td><%= event_action.published %></td>
+          <td><%= event_action.published_on %></td>
+          <td><%= event_action.action %></td>
+          <td><%= event_action.target_id %></td>
+          <td><%= event_action.command_id %></td>
+          <td><%= event_action.test_option_id %></td>
+          <td><%= event_action.execution_order %></td>
+          <td><%= event_action.executed_last %></td>
+          <td><%= event_action.event_condition_id %></td>
+        <td><%=l event_action.created_at, format: :long %></td>
+        <td>
+          <%= link_to event_action_path(event_action), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+          <%- end -%>
+          <%= link_to edit_event_action_path(event_action), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to event_action_path(event_action), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Event action', new_event_action_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_event_action_path,
+            :class => 'btn btn-primary' %>

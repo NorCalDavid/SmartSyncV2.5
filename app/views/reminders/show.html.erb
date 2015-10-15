@@ -3,21 +3,31 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @reminder.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
-  <dd><%= @reminder.phone_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:time) %>:</strong></dt>
-  <dd><%= ((@reminder.time).in_time_zone(@reminder.time_zone)).strftime("%I:%M%p") %></dd>
-</dl>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @reminder.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @reminder.description %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:recipient_id) %></dt>
+      <dd><pre class="prettyprint"><%= @reminder.recipient_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:recipient_phone_number) %></dt>
+      <dd><pre class="prettyprint"><%= number_to_phone(@reminder.recipient_phone_number, area_code: true) %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:notification_time) %></dt>
+      <dd><pre class="prettyprint"><%=l @reminder.notification_time, format: :long %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:time_zone) %></dt>
+      <dd><pre class="prettyprint"><%= @reminder.time_zone %></pre></dd>
+  </dl>
+</div>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
               reminders_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_reminder_path(@reminder), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               reminder_path(@reminder),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+</div>

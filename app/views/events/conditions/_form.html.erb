@@ -1,0 +1,53 @@
+<%= form_for(@event_condition) do |f| %>
+  <% if @event_condition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_condition.errors.count, "error") %> prohibited this event_condition from being saved:</h2>
+
+      <ul>
+      <% @event_condition.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :published %><br>
+    <%= f.check_box :published %>
+  </div>
+  <div class="field">
+    <%= f.label :condition %><br>
+    <%= f.text_field :condition %>
+  </div>
+  <div class="field">
+    <%= f.label :trigger_id %><br>
+    <%= f.number_field :trigger_id %>
+  </div>
+  <div class="field">
+    <%= f.label :test_option_id %><br>
+    <%= f.number_field :test_option_id %>
+  </div>
+  <div class="field">
+    <%= f.label :test_value_one %><br>
+    <%= f.text_field :test_value_one %>
+  </div>
+  <div class="field">
+    <%= f.label :test_value_two %><br>
+    <%= f.text_field :test_value_two %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

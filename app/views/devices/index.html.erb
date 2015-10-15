@@ -1,25 +1,90 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Devices</h1>
-
-<table>
+<%- model_class = Device -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:favorite) %></th>
+      <th><%= model_class.human_attribute_name(:status_code) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:status_icon) %></th>
+      <th><%= model_class.human_attribute_name(:status_level) %></th>
+      <th><%= model_class.human_attribute_name(:brand) %></th>
+      <th><%= model_class.human_attribute_name(:type) %></th>
+      <th><%= model_class.human_attribute_name(:location) %></th>
+      <th><%= model_class.human_attribute_name(:EDID) %></th>
+      <th><%= model_class.human_attribute_name(:version) %></th>
+      <th><%= model_class.human_attribute_name(:image) %></th>
+      <th><%= model_class.human_attribute_name(:property_id) %></th>
+      <th><%= model_class.human_attribute_name(:room_id) %></th>
+      <th><%= model_class.human_attribute_name(:controllable) %></th>
+      <th><%= model_class.human_attribute_name(:api_id) %></th>
+      <th><%= model_class.human_attribute_name(:api_house_id) %></th>
+      <th><%= model_class.human_attribute_name(:api_firmware_version) %></th>
+      <th><%= model_class.human_attribute_name(:dimmable) %></th>
+      <th><%= model_class.human_attribute_name(:dim_level) %></th>
+      <th><%= model_class.human_attribute_name(:ramp_rate) %></th>
+      <th><%= model_class.human_attribute_name(:led_level) %></th>
+      <th><%= model_class.human_attribute_name(:on_time) %></th>
+      <th><%= model_class.human_attribute_name(:off_time) %></th>
+      <th><%= model_class.human_attribute_name(:timer_enabled) %></th>
+      <th><%= model_class.human_attribute_name(:group) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @devices.each do |device| %>
       <tr>
-        <td><%= link_to 'Show', device %></td>
-        <td><%= link_to 'Edit', edit_device_path(device) %></td>
-        <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= device.id %></td>
+          <td><%= device.name %></td>
+          <td><%= device.description %></td>
+          <td><%= device.favorite %></td>
+          <td><%= device.status_code %></td>
+          <td><%= device.status %></td>
+          <td><%= device.status_icon %></td>
+          <td><%= device.status_level %></td>
+          <td><%= device.brand %></td>
+          <td><%= device.type %></td>
+          <td><%= device.location %></td>
+          <td><%= device.EDID %></td>
+          <td><%= device.version %></td>
+          <td><%= device.image %></td>
+          <td><%= device.property_id %></td>
+          <td><%= device.room_id %></td>
+          <td><%= device.controllable %></td>
+          <td><%= device.api_id %></td>
+          <td><%= device.api_house_id %></td>
+          <td><%= device.api_firmware_version %></td>
+          <td><%= device.dimmable %></td>
+          <td><%= device.dim_level %></td>
+          <td><%= device.ramp_rate %></td>
+          <td><%= device.led_level %></td>
+          <td><%= device.on_time %></td>
+          <td><%= device.off_time %></td>
+          <td><%= device.timer_enabled %></td>
+          <td><%= device.group %></td>
+        <td><%=l device.created_at, format: :long %></td>
+        <td>
+          <%= link_to device_path(device), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+          <%- end -%>
+          <%= link_to edit_device_path(device), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to device_path(device), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Device', new_device_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_device_path,
+            :class => 'btn btn-primary' %>

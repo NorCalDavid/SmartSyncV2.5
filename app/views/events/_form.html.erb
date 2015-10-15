@@ -1,57 +1,64 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @event, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :name, :class => 'text_field form-control' %>
     </div>
-  <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :description, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :type, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :type, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :published, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :published, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :published_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :published_on, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :status, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :favorite, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :favorite, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :executed_last, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :executed_last, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :event_group_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :event_group_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :favorite %><br>
-    <%= f.check_box :favorite %>
-  </div>
-  <div class="field">
-    <%= f.label :executed_count %><br>
-    <%= f.text_field :executed_count %>
-  </div>
-  <div class="field">
-    <%= f.label :default %><br>
-    <%= f.text_field :default %>
-  </div>
-  <div class="field">
-    <%= f.label :0, %><br>
-    <%= f.text_field :0, %>
-  </div>
-  <div class="field">
-    <%= f.label :null %><br>
-    <%= f.text_field :null %>
-  </div>
-  <div class="field">
-    <%= f.label :false %><br>
-    <%= f.text_field :false %>
-  </div>
-  <div class="field">
-    <%= f.label :executed_last %><br>
-    <%= f.datetime_select :executed_last %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  events_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>

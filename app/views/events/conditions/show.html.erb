@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_condition.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event_condition.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @event_condition.type %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @event_condition.published %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @event_condition.condition %>
+</p>
+
+<p>
+  <strong>Trigger:</strong>
+  <%= @event_condition.trigger_id %>
+</p>
+
+<p>
+  <strong>Test option:</strong>
+  <%= @event_condition.test_option_id %>
+</p>
+
+<p>
+  <strong>Test value one:</strong>
+  <%= @event_condition.test_value_one %>
+</p>
+
+<p>
+  <strong>Test value two:</strong>
+  <%= @event_condition.test_value_two %>
+</p>
+
+<%= link_to 'Edit', edit_event_condition_path(@event_condition) %> |
+<%= link_to 'Back', event_conditions_path %>

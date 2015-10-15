@@ -1,6 +1,6 @@
-class CreateComamnds < ActiveRecord::Migration
+class CreateCommands < ActiveRecord::Migration
   def change
-    create_table :comamnds do |t|
+    create_table :commands do |t|
       t.string :name, null: false
       t.text :description
       t.string :resource
