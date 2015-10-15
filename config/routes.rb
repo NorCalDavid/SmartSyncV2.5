@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :comamnds
     
   # defaults to dashboard
-  root :to => redirect('/dashboard')
+  root :to => 'visitors#index'
 
   # view routes
   get '/dashboard' => 'dashboard#index'

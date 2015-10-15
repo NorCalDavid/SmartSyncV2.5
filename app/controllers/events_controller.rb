@@ -1,4 +1,5 @@
 class EventsController < InheritedResources::Base
+  before_action :authenticate_user!
 
   private
 
