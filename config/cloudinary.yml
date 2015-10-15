@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hupgpadmb
+  api_key: '953117628844716'
+  api_secret: Yg3uusBp8DPRaqkRvE9exyxEj4I
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hupgpadmb
+  api_key: '953117628844716'
+  api_secret: Yg3uusBp8DPRaqkRvE9exyxEj4I
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hupgpadmb
+  api_key: '953117628844716'
+  api_secret: Yg3uusBp8DPRaqkRvE9exyxEj4I
+  enhance_image_tag: true
+  static_image_support: false
