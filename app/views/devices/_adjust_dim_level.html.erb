@@ -1,0 +1,25 @@
+<%= form_for(@device) do |f| %>
+
+    <div class="padding-top divider"></div><br/>
+
+    <div class=" row form-group text-center">
+        <div style="margin-bottom: 25px" class="slider-span slider-default">
+          <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+          <%= f.text_field :description, id: 'ex8', type: 'text',
+                 data: {'slider-id' => 'ex1Slider',
+                        'slider-min' => '0',
+                        'slider-max' => '20',
+                        'slider-step' => '1',
+                        'slider-value' => '14' } %>
+
+            <%= f.submit %>
+        </div>
+    </div>
+
+<% end %>
+
+<script>
+    $("#ex8").slider({
+    tooltip: 'always'
+    });
+</script>

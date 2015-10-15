@@ -1,6 +1,8 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
   before_action :set_configuration, only: [:index, :refresh, :new_property, :new_room, :new_device ]
+  skip_before_filter :verify_authenticity_token, :only => :refresh
+
 
   def index
   end
@@ -31,6 +33,7 @@ class DashboardController < ApplicationController
 
   def new_property
     @property = current_user.properties.new
+    add_breadcrumb :new_property, :dashboard_devices_new_path
   end
 
   def new_room

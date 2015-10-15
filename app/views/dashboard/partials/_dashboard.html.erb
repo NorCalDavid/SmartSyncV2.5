@@ -12,7 +12,7 @@
           </div>
           <% else %>
           <div class="col-xs-9">
-            <div class="property-icon"><%= thumbnail(@configuration[:active_property].picture) %></div>
+            <div class="property-icon"><%= thumbnail(@configuration[:active_property].image) %></div>
             <div class="panel-title-dashboard"><%= @configuration[:active_property].name %></div>
           </div>
           <% end %>
@@ -50,7 +50,7 @@
           <div class="row wrapper animated fadeInRight">
             <div class="col-xs-3 col-sm-3 col-md-3 ">
               <span class="avatar">
-                <%= thumbnail(property.picture) %>
+                <%= thumbnail(property.image) %>
                 <i class="on animated bounceIn"></i>
               </span>
             </div>

@@ -1,172 +1,58 @@
-<%= form_for @device, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :name, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :description, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :description, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :favorite, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :favorite, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :status_code, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :status_code, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :status, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :status, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :status_icon, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :status_icon, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :status_level, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :status_level, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :brand, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :brand, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :type, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :type, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :location, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :location, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :EDID, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :EDID, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :version, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :version, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :image, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :image, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :property_id, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :property_id, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :room_id, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :room_id, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :controllable, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :controllable, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :api_id, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :api_id, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :api_house_id, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :api_house_id, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :api_firmware_version, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :api_firmware_version, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :dimmable, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :dimmable, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :dim_level, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :dim_level, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :ramp_rate, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :ramp_rate, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :led_level, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :led_level, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :on_time, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :on_time, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :off_time, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :off_time, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :timer_enabled, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :timer_enabled, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :group, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :group, :class => 'text_field form-control' %>
-    </div>
-  </div>
+<div class="row">
+  <div class="col-md-offset-1 col-md-10 padding-top">
+    <div class="panel panel-primary">
 
-  <div class="form-group">
-    <div class='col-md-offset-2 col-md-10'>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  devices_path, :class => 'btn btn-default' %>
+      <div class="panel-heading">
+        <h3 class="panel-title">Location Options</h3>
+      </div>
+      <div class="panel-body">
+        <%= bootstrap_form_for(@device) do |f| %>
+          <% if @device.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+
+              <ul>
+              <% @device.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+            <%= f.text_field :name %>
+            <%= f.text_area :description %>
+            <%= f.check_box :favorite, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
+            <%= f.number_field :status_code %>
+            <%= f.number_field :status_level %>
+            <%= f.text_field :brand %>
+            <%= f.text_field :type %>
+            <%= f.text_field :location %>
+            <%= f.text_field :EDID %>
+            <%= f.text_field :version %>
+            <%= f.text_field :image %>
+            <%= f.check_box :controllable, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
+            <%= f.number_field :api_id %>
+            <%= f.text_field :api_firmware_version %>            
+            <%= f.check_box :dimmable, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
+            <%= f.number_field :dim_level %>
+            <%= f.number_field :ramp_rate %>
+            <%= f.number_field :led_level %>
+            <%= f.check_box :timer_enabled, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
+            <%= f.text_field :group %>
+
+            <%= f.submit %>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                devices_path, :class => 'btn btn-default' %>
+            <%= link_to dashboard_path, class: 'btn btn-default' do %>
+              <span class="glyphicon glyphicon-list-alt"></span>
+              Dashboard
+            <% end %>
+            <%= link_to devices_path, class: 'btn btn-primary' do %>
+              <span class="glyphicon glyphicon-info-sign"></span>
+              All Devices
+            <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
+</div>
