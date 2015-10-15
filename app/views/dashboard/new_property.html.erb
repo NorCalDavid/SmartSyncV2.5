@@ -1,0 +1,134 @@
+ <div class="pageheader">
+  <h1><i class="fa fa-home fa-2x primary"></i> Property <small>Create New Property</small></h1>
+  <div class="breadcrumb-wrapper hidden-xs">
+    <span class="label">You are here:</span>
+    <ol class="breadcrumb">
+      <li><a href="/">Dashboard</a>
+      </li>
+      <li>Properties</li>
+      <li class="active">New Property</li>
+    </ol>
+  </div>
+</div>
+<section id="main-content" class="animated fadeInUp">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">New Property Wizard</h3>
+          <div class="actions pull-right">
+           <i class="fa fa-expand"></i>
+           <i class="fa fa-chevron-down"></i>
+           <i class="fa fa-times"></i>
+         </div>
+       </div>
+       <div class="panel-body">
+        <section class="fuelux">
+          <div id="NewPropertyWizard" class="wizard">
+            <ul class="steps">
+              <li data-target="#step1" class="active">
+                <span class="badge badge-info">1</span>Property Info<span class="chevron"></span>
+              </li>
+            </ul>
+          </div>
+
+          <%= form_for(@property, class: "form-horizontal") do |f| %>
+          <% if @property.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@property.errors.count, "error") %> prohibited this device from being saved:</h2>
+
+            <ul>
+              <% @property.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+
+          <div class="step-content">
+            <div class="step-pane active" id="step1">
+
+              <div class="row padding-top">
+
+                <div class="row">
+                  <div class="form-group col-md-offset-1 col-md-5">
+                    <div class="input-group">
+                      <span class="input-group-addon">Name: </span>
+                      <%= f.text_field :name, class: 'form-control', placeholder: "Property Name" %>
+                    </div><br/>
+                  </div>
+
+                  <div class="form-group col-md-5">
+                    <div class="input-group">
+                      <span class="input-group-addon">Description: </span>
+                      <%= f.text_area :description, class: 'form-control' %>
+                    </div><br/>
+                  </div>
+
+                  <div class="form-group col-sm-offset-1 col-sm-5">
+                    <%= f.hidden_field(:image_cache, class: 'form-control') %>
+                    <div class="input-group">
+                      <span class="input-group-addon">Upload Image: </span>
+                      <%= f.file_field(:image, class: 'form-control') %>
+                    </div><br/>
+                  </div>
+                </div>
+
+              <div class="col-md-offset-1 col-md-10 divider"></div><br/>
+
+              <div class="row">
+                <div class="form-group col-md-offset-1 col-md-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">Address: </span>
+                    <%= f.text_field :address, class: 'form-control', placeholder: "Address" %>
+                  </div><br/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-offset-1 col-md-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">City: </span>
+                    <%= f.text_field :city, class: 'form-control', placeholder: "City" %>
+                  </div><br/>
+                </div>
+
+                <div class="form-group col-md-offset-1 col-md-2">
+                  <div class="input-group">
+                    <span class="input-group-addon">State: </span>
+                    <%= f.text_field :state, class: 'form-control', placeholder: "State" %>
+                  </div><br/>
+                </div>
+
+                <div class="form-group col-md-offset-1 col-md-2">
+                  <div class="input-group">
+                    <span class="input-group-addon">Zipcode: </span>
+                    <%= f.number_field :zipcode, class: 'form-control', placeholder: "Zipcode" %>
+                  </div><br/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group text-center">
+                  <span class="col-md-offset-1 col-md-4"><%= f.submit class: "btn btn-primary btn-block" %></span>
+                  <span class="col-md-offset-2 col-md-4"><%= link_to "Return To Dashboard", dashboard_path, class: "btn btn-default btn-block" %></span>
+                </div>
+              </div>
+
+              <% end %>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% content_for :javascript do %>
+<!--Load these page level functions-->
+<script>
+$(document).ready(function() {
+  app.formWizard();
+});
+</script>
+<% end %>

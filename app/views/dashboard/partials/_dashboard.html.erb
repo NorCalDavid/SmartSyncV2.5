@@ -1,0 +1,238 @@
+<div class="padding-top">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="panel panel-blue chat-widget" id="properties-panel">
+
+      <div class="panel-heading">
+        <div class="row">
+
+          <% if @configuration[:active_property].nil? %>
+          <div class="col-xs-9">
+            <div class="property-icon"><%= image_tag("icons/active/property-icon.png", class: "property-image2") %></div>
+            <div class="panel-title-dashboard">Properties <span class="badge badge-white primary-color"><%= "#{ @configuration[:property_count] }" %></span></div>
+          </div>
+          <% else %>
+          <div class="col-xs-9">
+            <div class="property-icon"><%= thumbnail(@configuration[:active_property].picture) %></div>
+            <div class="panel-title-dashboard"><%= @configuration[:active_property].name %></div>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="padding-top divider"></div><br/>
+
+        <div class="panel-options">
+          <i class="fa fa-bookmark pull-right"></i><small class="pull-right">Select Active Property </small><br/>
+          <i class="fa fa-bookmark-o pull-right"></i><small class="pull-right">Clear Active Property </small><br/>
+          <a href="/dashboard/properties/new" class="pull-right">
+            <small>New Property  </small><i class="fa fa-plus"></i>
+          </a>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="actions pull-right">
+          <i class="fa fa-expand"></i>
+          <i class="fa fa-chevron-down"></i>
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+
+      <div class="panel-body auto-collapse">
+
+        <!-- Property Details -->
+        <% unless @configuration[:properties].nil? %>
+        <% @configuration[:properties].each do |property| %>
+
+
+        <a href="#" class="selected-property" id="P<%= property.id %>">
+          <div class="row wrapper animated fadeInRight">
+            <div class="col-xs-3 col-sm-3 col-md-3 ">
+              <span class="avatar">
+                <%= thumbnail(property.picture) %>
+                <i class="on animated bounceIn"></i>
+              </span>
+            </div>
+
+            <div class="col-xs-9 col-sm-9 col-md-9">
+              <div class="post <%= class_color_for_property(property) %>">
+                <span class="arrow left"></span>
+                <span><b class="property-name"><%= property.name %></b><br/>
+                  <small><%= property.address %></small><br/>
+                  <small><%= "#{property.city}, #{property.state}  #{property.zipcode}" %></small>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <% end %>
+        <% end %>
+        <!-- End Property Details -->
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="panel panel-green chat-widget" id="rooms-panel">
+
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-9">
+            <div class="room-icon"><%= image_tag("icons/active/rooms-icon.png", class: "room-image") %></div>
+            <% if @configuration[:active_room].nil? %>
+            <div class="panel-title-dashboard">Rooms <span class="badge badge-white green-color"><%= "#{ @configuration[:room_count] }" %></span></div>
+          </div>
+          <% else %>
+          <div class="panel-title-dashboard"><%= @configuration[:active_room].name %></div>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="padding-top divider"></div><br/>
+
+      <div class="panel-options pull-right">
+        <i class="fa fa-bookmark pull-right"></i><small class="pull-right">Select Active Room </small><br/>
+        <i class="fa fa-bookmark-o pull-right"></i><small class="pull-right">Clear Active Room </small><br/>
+        <a href="/dashboard/rooms/new" class="pull-right">
+          <small>New Room  </small><i class="fa fa-plus"></i>
+        </a>
+
+      </div>
+
+      <div class="clearfix"></div>
+
+
+      <div class="actions pull-right">
+        <i class="fa fa-expand"></i>
+        <i class="fa fa-chevron-down"></i>
+        <i class="fa fa-times"></i>
+      </div>
+    </div>
+
+    <div class="panel-body auto-collapse">
+
+      <!-- Room Details -->
+      <table class="table" id="rooms-table">
+        <tbody>
+          <% unless @configuration[:rooms].nil? %>
+          <% @configuration[:rooms].each do |room| %>
+          <tr class="room-row">
+
+            <td class="room-col-1 room-status-block">
+              <span class="animated fadeInLeft">
+                <%= image_tag("icons/active/rooms-icon.png", class: "room-status-icon") %>
+                <i class="on animated bounceIn"></i>
+              </span>
+            </td>
+
+            <td class="room-col-2">
+            <a href="#" class="selected-room" id="P<%= room.id %>">
+              <div class="room-post animated fadeInRightBig <%= class_color_for_room(room) %>">
+                <span class="arrow left"></span>
+                <span><b class="room-name"><%= room.name %></b><br/>
+                   <blockquote class="room-text">
+                    <%= "Location: #{room.property.name + " - " if !active_property?}#{LocationOption.find(room.location).name}" %></br>
+                  </blockquote>
+                </span>
+              </div>
+            </a>
+            </td>
+
+            <td class="room-col-3 animated bounceInRight">
+              <%= link_to 'Edit', edit_room_path(room), class: "btn btn-default btn-xs btn-block" %>
+            </td>
+
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <!-- End Room Details -->
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="panel panel-yellow" id="devices-panel">
+
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-9">
+            <div class="property-icon"><i class="fa fa-lightbulb-o fa-5x"></i></div>
+            <div class="panel-title-dashboard">Devices <span class="badge badge-white yellow-color"><%= "#{ @configuration[:device_count] }" %></span></div>
+          </div>
+        </div>
+
+        <div class="padding-top divider"></div><br/>
+
+        <div class="panel-options pull-right">
+          <i class="fa fa-times-circle-o pull-right yellow-color"></i><small class="pull-right"> </small><br/>
+          <i class="fa fa-times-circle-o pull-right yellow-color"></i><small class="pull-right"> </small><br/>
+          <a href="/dashboard/devices/new" class="pull-right">
+            <small>New Device  </small><i class="fa fa-plus"></i>
+          </a>
+        </div>
+
+      <div class="clearfix"></div>
+
+      <div class="actions pull-right">
+        <i class="fa fa-expand"></i>
+        <i class="fa fa-chevron-down"></i>
+        <i class="fa fa-times"></i>
+      </div>
+    </div>
+
+
+   <div class="panel-body auto-collapse">
+    <!-- Room Details -->
+
+      <table class="table">
+        <thead>
+          <tr class="header-row">
+            <th class="device-col-1">Status</th>
+            <th class="device-col-2">Device</th>
+            <th class="device-col-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% unless @configuration[:devices].nil? %>
+          <% @configuration[:devices].each do |device| %>
+          <tr class="device-row">
+            <td class="device-status-block">
+              <span class="animated fadeInLeft">
+                <% if device.status_icon.nil? %>
+                  <%= image_tag("icons/active/0.png", class: "device-status-icon primary-color") %>
+                <% else %>
+                  <%= image_tag(device.status_icon, class: "device-status-icon primary-color") %>
+                <% end %>
+                <i class="on animated bounceIn"></i>
+              </span>
+            </td>
+            <td class="animated fadeInRightBig">
+              <b class="device-name"><%= device.name %></b>
+
+              <blockquote class="device-text">
+                <%= "Location: #{LocationOption.find(device.location).name}" %><br/>
+                <%= "#{device.property.name + " - " if !active_property?}#{device.room.name if !active_room?}" %></br>
+              </blockquote>
+
+              <b class="status-text">Status: <%= device.status || "Unknown" %></b>
+            </td>
+            <td class="animated bounceInRight">
+              <%= link_to 'Edit', edit_device_path(device), class: "btn btn-default btn-xs btn-block" %>
+              <%= link_to 'Dim Level', adjust_dim_level_path(device), class: "btn btn-warning btn-xs btn-block" if device.dimmable? %>
+            </td>
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+     <!--  -->
