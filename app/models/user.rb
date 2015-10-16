@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessor :connected_identities, :unconnected_identites
+  
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
@@ -62,11 +64,11 @@ class User < ActiveRecord::Base
   end
 
   def connected_identites
-    @connected_identities = Identity.find_by_user_id(self.id).select(:provider) || []
+    @connected_identites = self.identities.select(:provider).collect{|object| object.provider } || []
   end
 
-  def unconnected_identities
-    SmartSyncV25::Application::OMNIAUTH.keys.delete_if { |key, value| connected_identities.include?(key) }
+  def unconnected_identites
+    @unconnected_identites = SmartSyncV25::Application::OMNIAUTH.keys.delete_if { |key, value| connected_identites.include?(key) }
   end
 
   def to_s

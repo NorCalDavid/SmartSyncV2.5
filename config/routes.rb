@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
 
+  
+    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
+                                      sessions: 'users/sessions',
+                                      confirmations: 'users/confirmations',
+                                      passwords: 'users/passwords',
+                                      registrations: 'users/registrations',
+                                      unlocks: 'users/unlocks' }
+  
+  match '/users/:id/finish_signup' => 'users/omniauth_callbacks#finish_signup', via: [:get, :patch], :as => :finish_signup
+  
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   
-  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
-  
-  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-  
-  resources :users do
-    resources :reminders
-  end
+  # resources :users do
+  #   resources :reminders
+  # end
+
+  get '/dashboard' => 'dashboard#index'
+
 
   resources :properties do
     member { get :delete }
