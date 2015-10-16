@@ -21,6 +21,7 @@ gem 'omniauth-google-oauth2'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'
+gem 'devise-bootstrap-views'
 gem 'sass-rails'
 gem 'bootstrap_form'
 gem 'bootstrap-slider-rails'

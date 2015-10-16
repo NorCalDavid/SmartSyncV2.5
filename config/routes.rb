@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   # resources :users do
-  #   resources :reminders
+    resources :reminders
   # end
 
   get '/dashboard' => 'dashboard#index'
