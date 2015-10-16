@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :connected_identities, :unconnected_identites
+  attr_accessor :connected_social_logins, :available_social_logins, :connected_identites
   
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
   has_many :devices, through: :properties, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :event_logs, through: :events
+  has_many :identities, dependent: :destroy
 
   before_validation :set_name
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
-  has_many :identities, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 
@@ -63,12 +63,19 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
-  def connected_identites
+  def connected_identities
     @connected_identites = self.identities.select(:provider).collect{|object| object.provider } || []
   end
 
-  def unconnected_identites
-    @unconnected_identites = SmartSyncV25::Application::OMNIAUTH.keys.delete_if { |key, value| connected_identites.include?(key) }
+  def connected_social_logins
+    return nil if connected_identities.nil?
+    omniauth_providers = SmartSyncV25::Application::OMNIAUTH.values
+    @connected_social_logins = omniauth_providers.select { |object| connected_identities.include?(object[:reference]) }
+  end
+
+  def available_social_logins
+    omniauth_providers = SmartSyncV25::Application::OMNIAUTH.values
+    @available_social_logins = omniauth_providers.delete_if { |object| connected_identities.include?(object[:reference]) }
   end
 
   def to_s
@@ -89,25 +96,11 @@ class User < ActiveRecord::Base
     ActiveRecord::Base.connection.execute("SELECT NEXTVAL('users_id_seq')").first["nextval"].to_i + 1
   end
 
-  def split_name
-    splited_name ||= self.name.split
-
-    if splited_name.length == 2
-      self.firstname = splitted_name.first
-      self.lastname = splitted_name.lastname
-    else
-      self.lastname = splitted_name.slice!(-1)
-      self.firstname = splitted_name.join(" ")
-    end
-
-  end
-
   def join_name
     self.name = "#{self.firstname} #{self.lastname}"
   end
 
   def set_name
-    split_name if !self.name.nil? && self.firstname.nil? && self.lastname.nil?
     join_name if self.name.nil? && !self.firstname.nil? && !self.lastname.nil?
     
   end

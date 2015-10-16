@@ -11,6 +11,7 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :executed_count, null: false, default: 0
       t.datetime :executed_last
       t.integer :event_group_id
+      t.integer :user_id
       
       t.timestamps null: false
     end

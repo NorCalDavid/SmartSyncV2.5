@@ -1,4 +1,8 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  before_action :authenticate_user!
+  before_action :set_user, only: [:finish_signup]
+
+    
   def self.provides_callback_for(provider)
     class_eval %Q{
       def #{provider}
@@ -14,7 +18,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     }
   end
 
-  [:twitter, :facebook, :linkedin, :github, :google_oauth2].each do |provider|
+  omniauth_providers = SmartSyncV25::Application::OMNIAUTH.values.collect{|object| object[:reference] }
+
+  omniauth_providers.each do |provider|
     provides_callback_for provider
   end
 
@@ -25,4 +31,29 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       finish_signup_path(resource)
     end
   end
+
+  # GET/PATCH /users/:id/finish_signup
+  def finish_signup
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if @user.update(user_params)
+        @user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        redirect_to @user, notice: 'Your profile was successfully updated.'
+      else
+        @show_errors = true
+      end
+    end
+  end
+
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      p session
+      accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+      params.require(:user).permit(accessible)
+    end
 end

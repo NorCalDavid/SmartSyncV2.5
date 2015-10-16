@@ -46,6 +46,18 @@ module DashboardHelper
     end
   end
 
+   def header_image_config
+    {:radius=>50, :width=>40, :height=>40, :crop=>:thumb, :gravity=>:center, :class=>"header_image"}
+  end
+
+  def header_image(object)
+    if object.nil?
+      cl_image_tag("http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png", header_image_config)
+    else
+      cl_image_tag(object, header_image_config)
+    end
+  end
+
   def class_color_for_property(property)
     return "default" if @configuration[:active_property].nil?
 

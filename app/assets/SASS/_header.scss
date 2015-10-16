@@ -40,7 +40,7 @@
     }
      button.sidebar-toggle,
      button#toggle-profile,
-      button#toggle-fullscreen,
+     button#toggle-fullscreen,
      button.options{
         width: 60px;
         height: 60px;
@@ -122,6 +122,13 @@
         border: none;
         color: #13161C;
     }
+    button#dropdown-toggle {
+        height: 60px;
+        font-size: $size18px;
+        // padding: 20px;
+        vertical-align: middle;
+        cursor: pointer;        
+    }
      .navbar-right>.dropdown>.dropdown-menu {
         position: absolute;
         margin-top: 5px;
@@ -176,6 +183,24 @@
      .dropdown-menu>li.active>a:hover, .dropdown-menu>li:active>a:hover {
         background-color: #fbfbfb;
         color: #373737
+    }
+    .dropdown-menu-title {
+        margin: 0;
+        padding: 0;
+        text-shadow: 1px 1px #9A9A9A;
+    }
+    .dropdown-profile-header {
+        font-size: $size14px;
+        margin: 0;
+        padding: 0 5px;
+        text-transform: uppercase;
+    }
+    .dropdown-social-button-block {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .dropdown-social-btn {
+    width: 90%;
     }
      .profile ul>li:first-child {
         padding: 10px;

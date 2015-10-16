@@ -1,10 +1,12 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  before_action :authenticate_user!
   before_action :set_user, only: [:finish_signup]
 
   def self.provides_callback_for(provider)
     class_eval %Q{
       def #{provider}
         @user = User.find_for_oauth(env["omniauth.auth"], current_user)
+        ap env["omniauth.auth"]
         if @user.persisted?
           sign_in_and_redirect @user, event: :authentication
           set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
@@ -15,8 +17,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     }
   end
+  omniauth_providers = SmartSyncV25::Application::OMNIAUTH.values.collect{|object| object[:reference] }
 
-  [:twitter, :facebook, :linkedin, :github, :google_oauth2].each do |provider|
+  omniauth_providers.each do |provider|
     provides_callback_for provider
   end
 
@@ -34,7 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.update(user_params)
         @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
+        redirect_to dashboard_path
       else
         @show_errors = true
       end

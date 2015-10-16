@@ -42,39 +42,12 @@
 					  <% end %>
 					</li>
 
-				<% end %>
-
-				<% if user_signed_in? %>
-					<li class="nav-dropdown <%= 'active open' if controller?('devices')%>">
-						<a href="#">
-							<i class="fa fa-fw fa-lightbulb-o"></i> Social Logins
-						</a>
-						
-						<ul class="nav-sub">
-							<h6 class="sidebar-header">Connected Accounts</h6>
-							<% current_user.connected_identites.each do |provider| %>
-								<li class="<%= 'active' if controller?('devices') && action?('new') %>">
-									<%= button_to omniauth_authorize_path(current_user, provider), 
-															class: "btn btn-block btn-social btn-#{provider}" do %>
-
-										<i class="fa fa-twitter"></i> Connected with <%= provider.to_s.titleize %>
-									<% end %>
-								</li>
-							<% end %>
-						</ul>
-
-						<ul class="nav-sub">
-							<h6 class="sidebar-header">Available Accounts</h6>
-							<% current_user.unconnected_identites.each do |provider| %>
-							<% ap provider %>
-								<li>
-									<i class="fa fa-twitter"></i> Sign in with <%= provider.to_s.titleize %>
-								</li>
-							<% end %>
-						</ul>
-					
+					<li class="<%= 'active' if controller?('registrations') && action?('new') %>">
+					  <%= link_to new_user_registration_path do %>
+						<span class="icon"><i class="fa fa-user-plus"></i></span>Register
+					  <% end %>
 					</li>
-					
+
 				<% end %>
 				</ul>
 			</li>

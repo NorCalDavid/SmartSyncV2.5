@@ -1,0 +1,42 @@
+<div class="login-wrapper">
+  <div id="registerbox" style="margin-top:50px;" class="mainbox col-md-8 col-md-offset-2">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <%= bootstrap_devise_error_messages! %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4><%= t('.sign_up', :default => "Complete Registration") %></h4>
+          </div>
+          <div class="panel-body">
+            <%= bootstrap_form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f| %>
+              <div class="form-group">
+                <%= f.text_field :firstname, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.text_field :lastname, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.hidden_field(:image_cache, class: 'form-control') %>
+                <%= f.file_field(:image, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= f.email_field :email, value: "", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.password_field :password_confirmation, class: "form-control" %>
+              </div>
+              <div class="login-wrapper-group"> 
+                <div class="submit-btn-wrapper">
+                  <%= f.submit  t('.sign_up', :default => "Complete Registration"), class: "btn btn-lg btn-block btn-primary embossed" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div> 
+      </div> 
+    </div> 
+  </div> 
+</div> 

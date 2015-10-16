@@ -1,24 +1,40 @@
-<%= bootstrap_devise_error_messages! %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= t('.sign_up', :default => "Sign up") %></h4>
-  </div>
-  <div class="panel-body">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
-      </div>
-      <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-<%= render "devise/shared/links" %>
+<div class="login-wrapper">
+  <div id="registerbox" style="margin-top:50px;" class="mainbox col-md-8 col-md-offset-2">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <%= bootstrap_devise_error_messages! %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4><%= t('.sign_up', :default => "Sign up") %></h4>
+          </div>
+          <div class="panel-body">
+            <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
+              <%= f.text_field :firstname, autofocus: true, class: "form-control" %>
+              <%= f.text_field :lastname, class: "form-control" %>
+              <%= f.hidden_field(:image_cache, class: 'form-control') %>
+              <%= f.file_field(:image, class: 'form-control') %>
+              <%= f.email_field :email, class: "form-control" %>
+              <%= f.password_field :password, class: "form-control" %>
+              <%= f.password_field :password_confirmation, class: "form-control" %>
+              <div class="social-login-wrapper">
+                <%= f.submit  t('.sign_up', :default => "Sign up"), class: "btn btn-lg btn-block btn-primary embossed" %>
+              </div> 
+            <% end %>
+            
+            <div class="login-wrapper-group">
+              <div class="social-login-block embossed">
+                <% SmartSyncV25::Application::OMNIAUTH.each_value do |provider| %>
+                  <div class="col-md-4"
+                    <%= button_to omniauth_authorize_path(resource_name, provider[:reference].downcase), class: "btn btn-block btn-social btn-#{provider[:name].downcase} margin-all-sm embossed" do %>
+                      <i class="fa fa-<%= provider[:name].downcase %>"></i> Sign up with <%= provider[:name] %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div> 
+    </div> 
+  </div> 
+</div> 

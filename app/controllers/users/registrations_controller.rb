@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+before_action :authenticate_user!
 before_filter :configure_sign_up_params, only: [:create]
 before_filter :configure_account_update_params, only: [:update]
 
@@ -40,12 +41,16 @@ before_filter :configure_account_update_params, only: [:update]
 
   #If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.for(:sign_up) << :attribute
+    accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    devise_parameter_sanitizer.for(:sign_up) << accessible
   end
 
   #If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update) << :attribute
+    accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    devise_parameter_sanitizer.for(:account_update) << accessible
   end
 
   #The path used after sign up.
@@ -57,4 +62,16 @@ before_filter :configure_account_update_params, only: [:update]
   def after_inactive_sign_up_path_for(resource)
     super(resource)
   end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    p session
+    accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    params.require(:user).permit(accessible)
+  end
+
 end

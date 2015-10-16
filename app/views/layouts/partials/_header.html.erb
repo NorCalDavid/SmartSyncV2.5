@@ -1,35 +1,123 @@
 
-
 <ul class="nav navbar-nav navbar-left">
 
-    <li class="brand">
-        <%= image_tag("home-logo-tag-only-white.png") %>
-    </li>
+	<li class="brand">
+		<%= image_tag("home-logo-tag-only-white.png") %>
+	</li>
 
-    <li class="toggle-navigation toggle-left">
-        <button class="sidebar-toggle" id="toggle-left">
-            <i class="fa fa-bars fa-1x"></i>
-        </button>
-    </li>
-    <li class="toggle-profile hidden-xs">
-        <button type="button" class="btn btn-default" id="toggle-profile">
-            <i class="fa fa-user fa-1x"></i>
-        </button>
-    </li>
+	<li class="toggle-navigation toggle-left">
+		<button class="sidebar-toggle" id="toggle-left">
+			<i class="fa fa-bars fa-1x"></i>
+		</button>
+	</li>
+	<li class="toggle-profile hidden-xs">
+		<button type="button" class="btn btn-default" id="toggle-profile">
+			<i class="fa fa-user fa-1x"></i>
+		</button>
+	</li>
 
 </ul>
 
 <ul class="nav navbar-nav navbar-right">
+  <% unless controller_name == 'sessions' || controller_name == 'registrations' %>
+  <li class="dropdown profile hidden-xs">
+    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="meta">
+        <button type="button" class="btn btn-social btn-pinterest">
+		    		<i class="fa fa-plus"></i> Social Media Logins
+			  	</button>
+        </span>
+    </a>
+    
+    <ul class="dropdown-menu animated fadeInRight" role="menu">
+			<li class="text-center center-block">
+				<span class="arrow top"></span>
+				<h2 class="text-muted dropdown-menu-title">Social Logins</h2>
+			</li>
 
-    <li class="toggle-fullscreen hidden-xs">
-        <button type="button" class="btn btn-default expand" id="toggle-fullscreen">
-            <i class="fa fa-expand fa-1x"></i>
-        </button>
-    </li>
+			<li class="divider"></li>
+			<% if user_signed_in? %> 
+				<li><small class="dropdown-profile-header center-block">Connected Accounts</small></li>
+					<% if current_user.connected_social_logins.nil? %>
+						<li class="padding-top-md">
+							<small>No Connecttions</small>
+						</li>
+					<% else %>
+						<% current_user.connected_social_logins.each do |connected| %>
+						<li class="padding-top-md">
+							<%= button_to omniauth_authorize_path(current_user, connected[:reference]), 
+													class: "btn-xs btn-block btn-social btn-#{connected[:name].downcase} dropdown-social-btn center-block embossed" do %>
 
-    <li class="toggle-navigation toggle-right">
-        <button class="sidebar-toggle" id="toggle-right">
-            <i class="fa fa-indent fa-1x"></i>
-        </button>
-    </li>
+								<i class="fa fa-<%= connected[:name].downcase %>"></i> Remove <%= connected[:name] %>
+							<% end %>
+						</li>
+						<% end %>
+					<% end %>
+				
+				<li class="divider"></li>
+			
+				<li><small class="dropdown-profile-header center-block">Available Logins</small></li>
+				<% current_user.available_social_logins.each do |available| %>
+					<li>
+						<div class="padding-top-md">
+						<%= button_to omniauth_authorize_path(current_user, available[:reference]), 
+												class: "btn-xs btn-block btn-social btn-#{available[:name].downcase} dropdown-social-btn center-block embossed" do %>
+
+							<i class="fa fa-<%= available[:name].downcase %>"></i> Add <%= available[:name] %>
+						<% end %>
+						</div>
+					</li>
+				<% end %>
+				
+				<li class="divider"></li>
+
+			<% else %>
+
+				<li><small class="dropdown-profile-header center-block">Available Logins</small></li>
+				<% SmartSyncV25::Application::OMNIAUTH.values.each do |available| %>
+					<li>
+						<div class="padding-top-md">
+						<%= button_to "/users/auth/#{available[:reference]}", 
+												class: "btn-xs btn-block btn-social btn-#{available[:name].downcase} dropdown-social-btn center-block embossed" do %>
+
+							<i class="fa fa-<%= available[:name].downcase %>"></i> Login with <%= available[:name] %>
+						<% end %>
+						</div>
+					</li>
+				<% end %>
+				
+				<li class="divider"></li>
+
+			<% end %>
+		<!-- 	<li>
+				<a href="javascript:void(0);">
+					<span class="icon"><i class="fa fa-envelope"></i>
+					</span>Messages</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);">
+					<span class="icon"><i class="fa fa-cog"></i>
+					</span>Settings</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="javascript:void(0);">
+					<span class="icon"><i class="fa fa-sign-out"></i>
+					</span>Logout</a>
+			</li> -->
+		</ul>
+	</li>
+	<% end %>
+
+	<li class="toggle-fullscreen hidden-xs">
+		<button type="button" class="btn btn-default expand" id="toggle-fullscreen">
+			<i class="fa fa-expand fa-1x"></i>
+		</button>
+	</li>
+
+	<li class="toggle-navigation toggle-right">
+		<button class="sidebar-toggle" id="toggle-right">
+			<i class="fa fa-indent fa-1x"></i>
+		</button>
+	</li>
 </ul>

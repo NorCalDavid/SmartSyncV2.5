@@ -1,0 +1,32 @@
+.rails-bootstrap-forms-date-select select,
+.rails-bootstrap-forms-time-select select,
+.rails-bootstrap-forms-datetime-select select {
+  display: inline-block;
+  width: auto;
+}
+
+.rails-bootstrap-forms-error-summary {
+  margin-top: 10px;
+}
+/* line 1, /Users/DavidUli/Projects/SmartSync/SmartSyncV2.5/app/assets/stylesheets/devise_bootstrap_views.css.scss */
+.float-none {
+  float: none;
+}
+
+/* line 5, /Users/DavidUli/Projects/SmartSync/SmartSyncV2.5/app/assets/stylesheets/devise_bootstrap_views.css.scss */
+.panel-heading {
+  padding: 15px;
+}
+/* line 7, /Users/DavidUli/Projects/SmartSync/SmartSyncV2.5/app/assets/stylesheets/devise_bootstrap_views.css.scss */
+.panel-heading h4 {
+  margin: 0px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+
+
+
+
+
+ */

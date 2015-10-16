@@ -2,5 +2,4 @@
 // listed below.
 
 //= require src/app
-//= require bootstrap-slider
 //= require_tree .
