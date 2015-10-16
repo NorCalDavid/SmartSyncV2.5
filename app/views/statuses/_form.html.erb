@@ -1,28 +1,41 @@
-<%= form_for @status, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="form-group">
-    <%= f.label :code, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :code, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :name, :class => 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :icon, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :icon, :class => 'text_field form-control' %>
-    </div>
-  </div>
+<div class='container-body'>
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10 padding-top">
+      <div class="panel panel-primary">
 
-  <div class="form-group">
-    <div class='col-md-offset-2 col-md-10'>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  statuses_path, :class => 'btn btn-default' %>
+        <div class="panel-heading">
+          <h3 class="panel-title">Status</h3>
+        </div>
+        <div class="panel-body">
+          <%= bootstrap_form_for(@status) do |f| %>
+          <% if @status.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@status.errors.count, "error") %> prohibited this Status from being saved:</h2>
+
+            <ul>
+              <% @status.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+
+            <%= f.text_field :code %>
+            <%= f.text_field :name %>
+            <%= f.text_field :icon %>
+
+            <%= f.submit nil, :class => 'btn btn-primary' %>
+            <%= link_to statuses_path, class: 'btn btn-default' do %>
+              <span class="glyphicon glyphicon-info-sign"></span>
+              Cancel
+            <% end %>
+            <%= link_to dashboard_path, class: 'btn btn-success' do %>
+              <span class="glyphicon glyphicon-list-alt"></span>
+              Dashboard
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-<% end %>
+</div>

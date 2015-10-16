@@ -1,14 +1,14 @@
  <div class="sidebar-profile">
     <div class="profile-body">
         <span class="avatar">
-            <%= thumbnail(current_user.image) unless current_user.nil? %>
+            <%= thumbnail(current_user.image) if user_signed_in? %>
             <i class="on border-dark animated bounceIn"></i>
         </span>
     </div>
     <div class="body"
         <span class="text-left">
-            <h4 class=""><%= current_user.name unless current_user.nil? %></h4>
-            <small class="title"><%= current_user.email unless current_user.nil? %></small>
+            <h4 class=""><%= current_user.name if user_signed_in? %></h4>
+            <small class="title"><%= current_user.email if user_signed_in? %></small>
         </span>
     </div>
 </div>
@@ -22,7 +22,7 @@
                     <i class="fa fa-fw fa-user"></i> User
                 </a>
                 <ul class="nav-sub">
-                <% if logged_in? %>
+                <% if user_signed_in? %>
                     <li class="<%= 'active' if controller?('session') && action?('lock') %>">
                         <%= link_to destroy_user_session_path, :method=>'delete' do %>
                             <span class="icon"><i class="fa fa-user-secret"></i></span>Lock
@@ -120,22 +120,30 @@
 
             <h5 class="sidebar-header">Global Variables</h5>
 
-            <li class="nav-dropdown <%= 'active open' if controller?('location_options')%>">
+            <li class="nav-dropdown <%= 'active open' if controller?('location_options') || 
+                                                         controller?('status_options') || 
+                                                         controller?('statuses') %>">
                 <a href="#">
-                    <i class="fa fa-fw fa-lightbulb-o"></i> Location Options
+                    <i class="fa fa-fw fa-cog"></i> Configuration Options
                 </a>
                 <ul class="nav-sub">
-                    <li class="<%= 'active open' if controller?('location_options') && action?('new') %>">
-                        <a href="/location_options/new">
-                             New Location Option
+                    <li class="<%= 'active open' if controller?('location_options') && action?('index') %>">
+                        <a href="/location_options">
+                             Location Options
                         </a>
                     </li>
 
-                    <li class="<%= 'active open' if controller?('location_options') && action?('index') %>">
-                        <a href="/location_options">
-                             View Location Options
+                    <li class="<%= 'active open' if controller?('status_options') && action?('index') %>">
+                        <a href="/status_options">
+                             Status Options
                         </a>
                     </li>
+
+                    <li class="<%= 'active open' if controller?('statuses') && action?('index') %>">
+                        <a href="/statuses">
+                             Statuses
+                        </a>
+                    </li>                    
                 </ul>
             </li>
 
