@@ -1,0 +1,27 @@
+<div class="main-content">
+  <div class="pageheader">
+        <h1>Properties</h1>
+        <p class="description">Cancel Account</p>
+        <div class="breadcrumb-wrapper hidden-xs">
+            <span class="label">You are here:</span>
+            <ol class="breadcrumb">
+                <li class="active">Cancel Account</li>
+            </ol>
+        </div>
+    </div>
+
+  <div class='container-body'>
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h2 class="panel-title">Cancel You Account?</h2>
+          </div>
+          <div class="panel-body">
+            <%= link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), :data => { :confirm => t('.are_you_sure', :default => "Are you sure?") }, :method => :delete %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

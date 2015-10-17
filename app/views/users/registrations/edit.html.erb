@@ -1,44 +1,75 @@
-<div class="login-wrapper">
-  <div id="registerbox" style="margin-top:50px;" class="mainbox col-md-8 col-md-offset-2">
-    <div class="row">
-      <div class="col-md-offset-1 col-md-10 padding-top">
-        <%= bootstrap_devise_error_messages! %>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h4><%= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}") %></h4>
-          </div>
-          <div class="panel-body">
-            <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-              <%= f.text_field :firstname, autofocus: true %>
-              <%= f.text_field :lastname %>
-              <%= f.hidden_field(:image_cache) %>
-              <%= f.file_field(:image) %>
-              <%= f.email_field :email %>
-              <%= f.password_field :password %>
-              <%= f.password_field :password_confirmation %>
-              <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i>
-              <%= f.password_field :current_password, hide_label: true %>
-              <div class="social-login-wrapper">
-                <%= f.submit  t('.update', :default => "Update"), class: "btn btn-lg btn-block btn-primary embossed" %>
-              </div> 
-            <% end %>
-            
-            <div class="login-wrapper-group">
-              <div class="social-login-block embossed">
-                <% SmartSyncV25::Application::OMNIAUTH.each_value do |provider| %>
-                  <div class="col-md-4"
-                    <%= button_to omniauth_authorize_path(resource_name, provider[:reference].downcase), class: "btn btn-block btn-social btn-#{provider[:name].downcase} margin-all-sm embossed" do %>
-                      <i class="fa fa-<%= provider[:name].downcase %>"></i> Sign up with <%= provider[:name] %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div> 
-    </div> 
-  </div> 
+<div class="">
+	<div id="registerbox" style="margin-top:50px;" class="">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10 padding-top">
+				<%= bootstrap_devise_error_messages! %>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4><%= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}") %></h4>
+					</div>
+					<div class="panel-body">
+						<%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }, class: "form-inline") do |f| %>
+							<div class="input-group col-md-12">
+								<div class="col-md-6"><%= f.text_field :firstname, autofocus: true, class: "col-md-5 form-control" %></div>
+								<div class="col-md-6"><%= f.text_field :lastname, class: "col-md-5 form-control" %></div>
+							</div><br />
+					
+
+							<div class="input-group col-md-12">
+								<div class="col-md-6"><%= f.email_field :email, class: "col-md-5 form-control" %></div>
+								<%= f.hidden_field(:image_cache) %>
+								<div class="col-md-6"><%= f.file_field :image, class: "col-md-5 form-control" %></div>
+							</div><br />
+
+							<div class="input-group col-md-12">
+								<div class="col-md-6 form-group">
+					        <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %>)</i><br />
+					        <%= f.password_field :password, :autocomplete => "off", hide_label: true, class: "col-md-5 form-control", id: "password" %>
+					      </div>
+
+					      <div class="col-md-6 form-group">
+					        <%= f.label :password_confirmation %><br />
+					        <%= f.password_field :password_confirmation, hide_label: true, class: "col-md-5 form-control"  %>
+					      </div>
+					    </div><br />
+				      
+				      <div class="input-group col-md-12" id="current-password">
+					      <div class="col-md-offset-3 col-md-6 form-group">
+					        <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i>
+					        <%= f.password_field :current_password, hide_label: true, class: "col-md-5form-control" %>
+					      </div>
+							</div>
+
+							<div class="input-group col-md-12">	
+								<div class="col-md-6"> 
+									<%= f.submit  t('.Update', :default => "Update"), class: "padding-top col-md-5 btn-lg btn-block btn-primary embossed" %>
+								</div>
+								
+								<div class="col-md-6"> 
+									<%= button_to cancel_account_path, class: "btn-lg btn-block btn-danger margin-all-sm embossed" do %>
+											<i class="fa fa-exclamation-triangle %>"></i> Cancel Account
+										<% end %>
+								</div>
+							</div>
+			
+						<% end %>
+						
+						<div class="login-wrapper-group">
+							<div class="social-login-block embossed">
+								<% SmartSyncV25::Application::OMNIAUTH.each_value do |provider| %>
+									<div class="col-md-4"
+										<%= button_to omniauth_authorize_path(resource_name, provider[:reference].downcase), class: "btn btn-block btn-social btn-#{provider[:name].downcase} margin-all-sm embossed" do %>
+											<i class="fa fa-<%= provider[:name].downcase %>"></i> Sign up with <%= provider[:name] %>
+										<% end %>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div> 
+			</div> 
+		</div> 
+	</div> 
 </div> 
 
-<p><%= t('.unhappy', :default => 'Unhappy') %>? <%= link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), :data => { :confirm => t('.are_you_sure', :default => "Are you sure?") }, :method => :delete %>.</p>
+<% javascript_tag "autoToggleCurrentPassword()" %>

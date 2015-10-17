@@ -2,6 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 before_action :authenticate_user!
 before_filter :configure_sign_up_params, only: [:create]
 before_filter :configure_account_update_params, only: [:update]
+before_action :set_user, only: [:cancel_account]
 
   #GET /resource/sign_up
   def new
@@ -37,18 +38,21 @@ before_filter :configure_account_update_params, only: [:update]
     super
   end
 
+  def cancel_account
+  end
+
   protected
 
   #If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+    accessible = [ :firstname, :lastname, :name, :image ] # extend with your own params
     accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
     devise_parameter_sanitizer.for(:sign_up) << accessible
   end
 
   #If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+    accessible = [ :firstname, :lastname, :name, :image ] # extend with your own params
     accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
     devise_parameter_sanitizer.for(:account_update) << accessible
   end

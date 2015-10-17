@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     match '/users/:id/finish_signup' => 'users/omniauth_callbacks#finish_signup', via: [:get, :patch], :as => :finish_signup
+    get '/users/cancel_account' => 'users/registrations#cancel_account', via: [:get], :as => :cancel_account
   end
   
   ActiveAdmin.routes(self)
