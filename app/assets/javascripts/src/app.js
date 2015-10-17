@@ -20,29 +20,8 @@ var app = function() {
 		panelSelectProperty();
 		panelSelectRoom();
 		panelReset();
-		toggleCurrentPassword();
-		autoToggleCurrentPassword();
 	});
-
-	var toggleCurrentPassword = function() {	
-		var passwordValue = $("input#password").val();
-		if (passwordValue === undefined || passwordValue === null) {
-			$("div#current-password").hide();
-		}
-		else {
-			$("div#current-password").show();
-		}
-	};
-
-	var autoToggleCurrentPassword = function() {	
-		toggleCurrentPassword(); 
-		
-		$("input#password").change(function () {
-			toggleCurrentPassword();
-		});
-	};
 	
-
 	 //tooltips
 	 var tooltips = function() {
 		$('.tooltip-wrapper').tooltip({

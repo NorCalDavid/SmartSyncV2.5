@@ -1,5 +1,5 @@
 <div class="">
-	<div id="registerbox" style="margin-top:50px;" class="">
+	<div id="editFormBox" style="margin-top:50px;" class="">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10 padding-top">
 				<%= bootstrap_devise_error_messages! %>
@@ -33,24 +33,27 @@
 					      </div>
 					    </div><br />
 				      
-				      <div class="input-group col-md-12" id="current-password">
-					      <div class="col-md-offset-3 col-md-6 form-group">
-					        <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i>
-					        <%= f.password_field :current_password, hide_label: true, class: "col-md-5form-control" %>
-					      </div>
+				      <div class="panel panel-danger panel-heading col-md-offset-1 col-md-10" id="current-password">
+					      <div class="panel-heading">
+						        <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i>
+						      <div class="padding-top col-md-offset-3 col-md-6 form-group">
+						        <%= f.password_field :current_password, hide_label: true, class: "col-md-5form-control" %>
+						      </div>
+						    </div>
 							</div>
 
-							<div class="input-group col-md-12">	
-								<div class="col-md-6"> 
-									<%= f.submit  t('.Update', :default => "Update"), class: "padding-top col-md-5 btn-lg btn-block btn-primary embossed" %>
-								</div>
 								
-								<div class="col-md-6"> 
-									<%= button_to cancel_account_path, class: "btn-lg btn-block btn-danger margin-all-sm embossed" do %>
-											<i class="fa fa-exclamation-triangle %>"></i> Cancel Account
-										<% end %>
+								<div class="input-group col-md-12">	
+									<div class="col-md-6"> 
+										<%= f.submit  t('.Update', :default => "Update"), class: "padding-top col-md-5 btn-lg btn-block btn-primary embossed" %>
+									</div>
+									
+									<div class="col-md-6"> 
+										<%= button_to cancel_account_path, class: "btn-lg btn-block btn-danger margin-all-sm embossed" do %>
+												<i class="fa fa-exclamation-triangle %>"></i> Cancel Account
+											<% end %>
+									</div>
 								</div>
-							</div>
 			
 						<% end %>
 						
@@ -71,5 +74,3 @@
 		</div> 
 	</div> 
 </div> 
-
-<% javascript_tag "autoToggleCurrentPassword()" %>

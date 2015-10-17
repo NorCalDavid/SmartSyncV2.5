@@ -2,5 +2,4 @@
 // listed below.
 
 //= require src/app
-//= require src/formValidation
 //= require_tree .

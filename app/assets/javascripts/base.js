@@ -10,3 +10,5 @@
 //= require switchery/js/switchery.min
 //= require fullscreen/jquery.fullscreen-min
 //= require wizard/js/loader.min
+
+//= require src/formValidation
