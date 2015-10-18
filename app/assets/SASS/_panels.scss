@@ -108,6 +108,19 @@
     color: #fff
 }
 
+.panel-red>.panel-heading {
+    color: #fff;
+    background-color: $redColor;
+    border-color: $redColor;
+}
+
+.panel-red {
+    border-color: #DD4B39
+}
+
+.panel-red>.panel-heading a,.panel-red>.panel-heading a:hover {
+    color: #fff
+}
 .panel-blue>.panel-heading {
     color: #fff;
     background-color: $primaryColor;

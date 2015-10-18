@@ -18,6 +18,18 @@
   }
 }
 
+.well-red-color {
+  width: 95%;
+  min-height: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #fff;
+  background-color: $redColor;
+  border: 1px solid $well-border;
+  border-radius: 10%;
+  @include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+}
+
 // Sizes
 .well-lg {
   padding: 24px;

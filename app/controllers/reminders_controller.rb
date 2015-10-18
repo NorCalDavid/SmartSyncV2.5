@@ -5,7 +5,7 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-    @reminders = Reminder.all
+    @reminders = current_user.reminders.all
     if @reminders.length == 0
       flash[:alert] = "You have no reminders. Create one now to get started."
     end
@@ -18,7 +18,7 @@ class RemindersController < ApplicationController
 
   # GET /reminders/new
   def new
-    @reminder = Reminder.new
+    @reminder = current_user.reminders.new
     @min_date = DateTime.now
   end
 
@@ -30,41 +30,41 @@ class RemindersController < ApplicationController
   # POST /reminders.json
   def create
     Time.zone = reminder_params[:time_zone]
-    @reminder = Reminder.new(reminder_params)
+    @reminder = current_user.reminders.new(reminder_params)
     
-    respond_to do |format|
-      if @reminder.save
-        format.html { redirect_to @reminder, notice: 'Reminder was successfully created.' }
-        format.json { render :show, status: :created, location: @reminder }
-      else
-        format.html { render :new }
-        format.json { render json: @reminder.errors, status: :unprocessable_entity }
-      end
+    if @reminder.save
+      redirect_to @reminder, notice: 'Reminder was successfully created.'
+      @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+      # @time_str = (params["notification_time"].localtime).strftime("%I:%M%p on %b. %d, %Y")
+
+      @body = "Hi #{@reminder.name}.\nYour reminder from SmartSync Home is coming up at #{@time_str}.\nReminder Content: #{@reminder.description}"
+      
+      @client.messages.create(  from: ENV['TWILIO_NUMBER'],
+                                to: @reminder.recipient_phone_number,
+                                body: @body )
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /reminders/1
   # PATCH/PUT /reminders/1.json
   def update
-    respond_to do |format|
-      if @reminder.update(reminder_params)
-        format.html { redirect_to @reminder, notice: 'Reminder was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reminder }
-      else
-        format.html { render :edit }
-        format.json { render json: @reminder.errors, status: :unprocessable_entity }
-      end
+    
+    if @reminder.update(reminder_params)
+      redirect_to @reminder, notice: 'Reminder was successfully updated.'
+    else
+      render :edit
     end
+
   end
 
   # DELETE /reminders/1
   # DELETE /reminders/1.json
   def destroy
     @reminder.destroy
-    respond_to do |format|
-      format.html { redirect_to reminders_url, notice: 'Reminder was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to reminders_url, notice: 'Reminder was successfully destroyed.'
   end
 
   private

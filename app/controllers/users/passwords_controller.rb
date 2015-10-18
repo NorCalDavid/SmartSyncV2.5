@@ -1,5 +1,7 @@
 class Users::PasswordsController < Devise::PasswordsController
-  before_action :authenticate_user!
+  prepend_before_filter :require_no_authentication
+  append_before_filter :assert_reset_token_passed, only: :edit
+
 
   # GET /resource/password/new
   def new

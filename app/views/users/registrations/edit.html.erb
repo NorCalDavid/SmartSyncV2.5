@@ -1,4 +1,16 @@
-<div class="">
+<%- model_class = User -%>
+<div class="main-content">
+  <div class="pageheader">
+    <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+    <p class="description">Edit Profile</p>
+    <div class="breadcrumb-wrapper hidden-xs">
+      <span class="label">You are here:</span>
+      <ol class="breadcrumb">
+         <li class="active">Edit Profile</li>
+      </ol>
+    </div>
+	</div>
+
 	<div id="editFormBox" style="margin-top:50px;" class="">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10 padding-top">
@@ -29,48 +41,38 @@
 
 					      <div class="col-md-6 form-group">
 					        <%= f.label :password_confirmation %><br />
-					        <%= f.password_field :password_confirmation, hide_label: true, class: "col-md-5 form-control"  %>
+					        <%= f.password_field :password_confirmation, hide_label: true, class: "col-md-5 form-control", id:"password-confirmation"  %>
 					      </div>
 					    </div><br />
-				      
-				      <div class="panel panel-danger panel-heading col-md-offset-1 col-md-10" id="current-password">
-					      <div class="panel-heading">
-						        <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i>
-						      <div class="padding-top col-md-offset-3 col-md-6 form-group">
-						        <%= f.password_field :current_password, hide_label: true, class: "col-md-5form-control" %>
-						      </div>
-						    </div>
-							</div>
 
-								
-								<div class="input-group col-md-12">	
-									<div class="col-md-6"> 
-										<%= f.submit  t('.Update', :default => "Update"), class: "padding-top col-md-5 btn-lg btn-block btn-primary embossed" %>
-									</div>
-									
-									<div class="col-md-6"> 
-										<%= button_to cancel_account_path, class: "btn-lg btn-block btn-danger margin-all-sm embossed" do %>
-												<i class="fa fa-exclamation-triangle %>"></i> Cancel Account
-											<% end %>
-									</div>
+					    <div class="well-red-color well-sm center-block embossed" id="current-password">	 
+						    <div class="input-group col-md-12">
+							    <h2 class="col-md-6 text-center">Validate Current Password</h2>
+							    <div class="col-md-6">
+								    <%= f.label :current_password %> 
+							      <%= f.password_field :current_password, hide_label: true, class: "form-control", placeholder: ' We need your current password to confirm your changes'  %>
+							     </div>
 								</div>
+							</div>
+				      	
+							<div class="input-group col-md-12">	
+								<div class="col-md-6"> 
+									<%= f.submit  t('.Update', :default => "Update"), class: "padding-top col-md-5 btn-lg btn-block btn-primary embossed" %>
+								</div>
+								
+								<div class="col-md-6"> 
+									<%= button_to cancel_account_path, class: "btn-lg btn-block margin-all-sm embossed" do %>
+										<i class="fa fa-exclamation-triangle %>"></i> Cancel Account
+									<% end %>
+								</div>
+							</div>
 			
 						<% end %>
 						
-						<div class="login-wrapper-group">
-							<div class="social-login-block embossed">
-								<% SmartSyncV25::Application::OMNIAUTH.each_value do |provider| %>
-									<div class="col-md-4"
-										<%= button_to omniauth_authorize_path(resource_name, provider[:reference].downcase), class: "btn btn-block btn-social btn-#{provider[:name].downcase} margin-all-sm embossed" do %>
-											<i class="fa fa-<%= provider[:name].downcase %>"></i> Sign up with <%= provider[:name] %>
-										<% end %>
-									</div>
-								<% end %>
-							</div>
-						</div>
+						
 					</div>
 				</div> 
 			</div> 
 		</div> 
 	</div> 
-</div> 
+</div>

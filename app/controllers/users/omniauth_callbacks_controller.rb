@@ -51,7 +51,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     def user_params
       p session
-      accessible = [ :firstname, :lastname, :name, :email, :image ] # extend with your own params
+      accessible = [ :firstname, :lastname, :name, :email, :image, :phone, :mobile, :receive_sms ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end

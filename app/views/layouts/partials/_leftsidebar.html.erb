@@ -35,6 +35,19 @@
 							<span class="icon"><i class="fa fa-user"></i></span>Edit Profile
 						<% end %>
 					</li>
+
+					<li>
+						<%= link_to new_user_password_path(current_user) do %>
+							<span class="icon"><i class="fa fa-key"></i></span>New Password
+						<% end %>
+					</li>
+
+					<li>
+						<%= link_to edit_user_password_path(current_user) do %>
+							<span class="icon"><i class="fa fa-key"></i></span>Edit Password
+						<% end %>
+					</li>
+
 				<% else %>
 					<li class="<%= 'active' if controller?('session') && action?('new') %>">
 					  <%= link_to new_user_session_path do %>

@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   has_many :event_logs, through: :events
   has_many :identities, dependent: :destroy
+  has_many :reminders, dependent: :destroy
 
   before_validation :set_name
 
