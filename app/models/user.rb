@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :event_logs, through: :events
   has_many :identities, dependent: :destroy
   has_many :reminders, dependent: :destroy
+  has_many :schedules, dependent: :destroy
+  has_many :schedule_actions, through: :schedules
+  has_many :schedule_action_series, through: :schedule_actions
 
   before_validation :set_name
 

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @schedule.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @schedule.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @schedule.type %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @schedule.published %>
+</p>
+
+<p>
+  <strong>Published on:</strong>
+  <%= @schedule.published_on %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @schedule.status %>
+</p>
+
+<p>
+  <strong>Favorite:</strong>
+  <%= @schedule.favorite %>
+</p>
+
+<p>
+  <strong>Executed count:</strong>
+  <%= @schedule.executed_count %>
+</p>
+
+<p>
+  <strong>Executed last:</strong>
+  <%= @schedule.executed_last %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @schedule.user %>
+</p>
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

@@ -1,0 +1,65 @@
+<%= form_for(@schedule_action) do |f| %>
+  <% if @schedule_action.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@schedule_action.errors.count, "error") %> prohibited this schedule_action from being saved:</h2>
+
+      <ul>
+      <% @schedule_action.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :published %><br>
+    <%= f.check_box :published %>
+  </div>
+  <div class="field">
+    <%= f.label :published_on %><br>
+    <%= f.datetime_select :published_on %>
+  </div>
+  <div class="field">
+    <%= f.label :action %><br>
+    <%= f.text_field :action %>
+  </div>
+  <div class="field">
+    <%= f.label :target_id %><br>
+    <%= f.number_field :target_id %>
+  </div>
+  <div class="field">
+    <%= f.label :command_id %><br>
+    <%= f.text_field :command_id %>
+  </div>
+  <div class="field">
+    <%= f.label :executed_count %><br>
+    <%= f.number_field :executed_count %>
+  </div>
+  <div class="field">
+    <%= f.label :executed_last %><br>
+    <%= f.datetime_select :executed_last %>
+  </div>
+  <div class="field">
+    <%= f.label :schedule_id %><br>
+    <%= f.text_field :schedule_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

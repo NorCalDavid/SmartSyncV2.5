@@ -2,4 +2,6 @@
 // listed below.
 
 //= require src/app
+//= require /fullcalendar/fullcalendar
+
 //= require_tree .

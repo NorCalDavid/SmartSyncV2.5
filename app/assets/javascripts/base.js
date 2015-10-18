@@ -12,3 +12,4 @@
 //= require wizard/js/loader.min
 
 //= require src/formValidation
+//= require src/fullCalendar

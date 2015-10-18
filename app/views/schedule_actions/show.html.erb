@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @schedule_action.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @schedule_action.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @schedule_action.type %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @schedule_action.published %>
+</p>
+
+<p>
+  <strong>Published on:</strong>
+  <%= @schedule_action.published_on %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @schedule_action.action %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @schedule_action.target_id %>
+</p>
+
+<p>
+  <strong>Command:</strong>
+  <%= @schedule_action.command %>
+</p>
+
+<p>
+  <strong>Executed count:</strong>
+  <%= @schedule_action.executed_count %>
+</p>
+
+<p>
+  <strong>Executed last:</strong>
+  <%= @schedule_action.executed_last %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @schedule_action.schedule %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @schedule_action.status %>
+</p>
+
+<%= link_to 'Edit', edit_schedule_action_path(@schedule_action) %> |
+<%= link_to 'Back', schedule_actions_path %>

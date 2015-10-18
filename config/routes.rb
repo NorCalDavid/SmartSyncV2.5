@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
 
 
+  get 'index/show'
+
+  get 'index/new'
+
+  get 'index/create'
+
+  get 'index/edit'
+
+  get 'index/update'
+
+  get 'index/destroy'
+
+  resources :schedule_actions
+  resources :schedules
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
                                     sessions: 'users/sessions',
                                     confirmations: 'users/confirmations',

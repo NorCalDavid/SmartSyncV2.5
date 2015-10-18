@@ -1,0 +1,2 @@
+module ScheduleActionsHelper
+end
