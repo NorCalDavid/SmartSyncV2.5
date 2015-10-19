@@ -21,6 +21,7 @@ class Schedules::ActionsController < InheritedResources::Base
 
   # POST /schedules
   def create
+    Time.zone = action_params[:time_zone]
     @schedule_action = Schedule.find(params[:schedule_id]).schedule_actions.new(action_params)
 
     if @schedule_action.save

@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   end
 
   resources :schedules, controller: 'schedules/schedules' do
-    collection { get :get_actions }
+    get :get_actions, on: :collection
     
     resources :actions, controller: 'schedules/actions'
     resources :action_series, controller: 'schedules/action_series'

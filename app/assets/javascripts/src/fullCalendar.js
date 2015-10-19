@@ -7,7 +7,7 @@ $(document).ready(function() {
      defaultView: "month",
      height: 500,
      slotMinutes: 15,
-     events: "/events/calendar",
+     events: "/schedules/get_events",
      timeFormat: "h:mm t{ - h:mm t} ",
      dragOpacity: "0.5"
   });

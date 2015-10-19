@@ -60,7 +60,7 @@ class Schedules::SchedulesController < ApplicationController
     @actions.each do |action|
       scheduled_actions << {:id => action.id, :title => "#{action.name} : #{action.description}", :start => "#{action.start}",:end => "#{action.end}" }
     end
-    render :text => events.to_json
+    render :text => scheduled_actions.to_json
   end
 
 private
