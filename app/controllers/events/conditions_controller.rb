@@ -1,4 +1,4 @@
-class ConditionsController < InheritedResources::Base
+class Events::ConditionsController < InheritedResources::Base
   before_action :authenticate_user!
 
   private

@@ -1,4 +1,4 @@
-class SchedulesController < ApplicationController
+class Schedules::SchedulesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
   respond_to :json, only: [:get_actions]
@@ -22,11 +22,11 @@ class SchedulesController < ApplicationController
 
   # POST /schedules
   def create
-    Time.zone = reminder_params[:time_zone]
+    Time.zone = schedule_params[:time_zone]
     @schedule = current_user.schedules.new(schedule_params)
 
     if @schedule.save
-      redirect to @schedule_path, notice: 'New schedule was successfully created.'
+      redirect_to @schedule, notice: 'New schedule was successfully created.'
     else
       render :new
     end

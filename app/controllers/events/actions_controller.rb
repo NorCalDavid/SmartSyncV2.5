@@ -1,4 +1,4 @@
-class ActionsController < InheritedResources::Base
+class Events::ActionsController < InheritedResources::Base
   before_action :authenticate_user!
 
   private

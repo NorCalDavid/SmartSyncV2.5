@@ -15,9 +15,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   
-  # resources :users do
-    resources :reminders
-  # end
+  resources :reminders
+  get 'profile' => 'users/users#profile'
 
   get '/dashboard' => 'dashboard#index'
 
@@ -31,20 +30,23 @@ Rails.application.routes.draw do
     member { get :adjust_dim_level }
   end
 
-  resources :event_groups
+  resources :event_groups, controller: 'events/groups'
   
-  resources :events do
-    resources :actions
-    resources :conditions
+  resources :events, controller: 'events/events' do
+    resources :actions, controller: 'events/actions'
+    resources :conditions, controller: 'events/conditions'
   end
 
-  resources :schedules do
+  resources :schedules, controller: 'schedules/schedules' do
     collection { get :get_actions }
     
-    resources :schedule_actions do
-      resources :schedule_action_series
-    end
+    resources :actions, controller: 'schedules/actions'
+    resources :action_series, controller: 'schedules/action_series'
   end
+
+  scope module: 'admin' do
+  resources :articles, :comments
+end
   
   resources :statuses
   resources :status_options
