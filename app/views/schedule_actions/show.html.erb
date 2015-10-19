@@ -1,64 +1,51 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = ScheduleAction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @schedule_action.name %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.description %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:starttime) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.starttime %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:endtime) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.endtime %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:all_day) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.all_day %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:type) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.type %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:published) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.published %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:published_on) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.published_on %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:action) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.action %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:target_id) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.target_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:command_id) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.command_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:executed_last) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.executed_last %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:schedule_id) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.schedule_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:status) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.status %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:schedule_action_series_id) %></dt>
+      <dd><pre class="prettyprint"><%= @schedule_action.schedule_action_series_id %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @schedule_action.description %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @schedule_action.type %>
-</p>
-
-<p>
-  <strong>Published:</strong>
-  <%= @schedule_action.published %>
-</p>
-
-<p>
-  <strong>Published on:</strong>
-  <%= @schedule_action.published_on %>
-</p>
-
-<p>
-  <strong>Action:</strong>
-  <%= @schedule_action.action %>
-</p>
-
-<p>
-  <strong>Target:</strong>
-  <%= @schedule_action.target_id %>
-</p>
-
-<p>
-  <strong>Command:</strong>
-  <%= @schedule_action.command %>
-</p>
-
-<p>
-  <strong>Executed count:</strong>
-  <%= @schedule_action.executed_count %>
-</p>
-
-<p>
-  <strong>Executed last:</strong>
-  <%= @schedule_action.executed_last %>
-</p>
-
-<p>
-  <strong>Schedule:</strong>
-  <%= @schedule_action.schedule %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @schedule_action.status %>
-</p>
-
-<%= link_to 'Edit', edit_schedule_action_path(@schedule_action) %> |
-<%= link_to 'Back', schedule_actions_path %>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              schedule_actions_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_schedule_action_path(@schedule_action), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              schedule_action_path(@schedule_action),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

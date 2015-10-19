@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018064320) do
+ActiveRecord::Schema.define(version: 20151018205752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,54 @@ ActiveRecord::Schema.define(version: 20151018064320) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "schedule_action_series", force: :cascade do |t|
+    t.integer  "frequency", default: 1
+    t.string   "period"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.boolean  "all_day"
+  end
+
+  create_table "schedule_actions", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "starttime",                                 null: false
+    t.datetime "endtime",                                   null: false
+    t.boolean  "all_day",                   default: false
+    t.string   "type"
+    t.boolean  "published"
+    t.datetime "published_on"
+    t.string   "action"
+    t.integer  "target_id"
+    t.integer  "command_id"
+    t.integer  "executed_count"
+    t.datetime "executed_last"
+    t.integer  "schedule_id"
+    t.string   "status"
+    t.integer  "schedule_action_series_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "schedule_actions", ["schedule_id"], name: "index_schedule_actions_on_schedule_id", using: :btree
+
+  create_table "schedules", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "type"
+    t.boolean  "published"
+    t.datetime "published_on"
+    t.string   "status"
+    t.boolean  "favorite"
+    t.integer  "executed_count"
+    t.datetime "executed_last"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "schedules", ["user_id"], name: "index_schedules_on_user_id", using: :btree
+
   create_table "status_options", force: :cascade do |t|
     t.integer  "status_id"
     t.integer  "device_id"
@@ -323,4 +371,6 @@ ActiveRecord::Schema.define(version: 20151018064320) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "identities", "users"
+  add_foreign_key "schedule_actions", "schedules"
+  add_foreign_key "schedules", "users"
 end

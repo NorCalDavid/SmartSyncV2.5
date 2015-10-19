@@ -1,45 +1,54 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Schedules</h1>
-
-<table>
+<%- model_class = Schedule -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Published</th>
-      <th>Published on</th>
-      <th>Status</th>
-      <th>Favorite</th>
-      <th>Executed count</th>
-      <th>Executed last</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:type) %></th>
+      <th><%= model_class.human_attribute_name(:published) %></th>
+      <th><%= model_class.human_attribute_name(:published_on) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:favorite) %></th>
+      <th><%= model_class.human_attribute_name(:executed_last) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-        <td><%= schedule.name %></td>
-        <td><%= schedule.description %></td>
-        <td><%= schedule.type %></td>
-        <td><%= schedule.published %></td>
-        <td><%= schedule.published_on %></td>
-        <td><%= schedule.status %></td>
-        <td><%= schedule.favorite %></td>
-        <td><%= schedule.executed_count %></td>
-        <td><%= schedule.executed_last %></td>
-        <td><%= schedule.user %></td>
-        <td><%= link_to 'Show', schedule %></td>
-        <td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
-        <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= schedule.id %></td>
+          <td><%= schedule.name %></td>
+          <td><%= schedule.description %></td>
+          <td><%= schedule.type %></td>
+          <td><%= schedule.published %></td>
+          <td><%= schedule.published_on %></td>
+          <td><%= schedule.status %></td>
+          <td><%= schedule.favorite %></td>
+          <td><%= schedule.executed_last %></td>
+          <td><%= schedule.user_id %></td>
+        <td><%=l schedule.created_at, format: :long %></td>
+        <td>
+          <%= link_to schedule_path(schedule), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+          <%- end -%>
+          <%= link_to edit_schedule_path(schedule), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to schedule_path(schedule), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Schedule', new_schedule_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_schedule_path,
+            :class => 'btn btn-primary' %>
