@@ -1,4 +1,6 @@
 class Identity < ActiveRecord::Base  
+  audited allow_mass_assignment: true
+  
   belongs_to :user
   validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider

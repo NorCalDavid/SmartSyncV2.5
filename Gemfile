@@ -6,8 +6,11 @@ gem 'rails', '4.2.4'
 gem 'pg'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
+gem "audited-activerecord"
 
+gem 'warden'
 gem 'devise'
+gem 'devise_traceable'
 gem 'high_voltage'
 gem 'figaro'
 require 'yaml'

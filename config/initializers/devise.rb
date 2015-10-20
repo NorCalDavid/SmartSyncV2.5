@@ -107,7 +107,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming their account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming their account.
-  config.allow_unconfirmed_access_for = 30.days
+  config.allow_unconfirmed_access_for = 10.days
 
   # A period that the user is allowed to confirm their account before their
   # token becomes invalid. For example, if set to 3.days, the user can confirm
@@ -242,12 +242,6 @@ Devise.setup do |config|
   OMNIAUTH.each_value do |provider|
     config.omniauth provider[:reference].to_sym, ENV[provider[:key_ref]], ENV[provider[:secret_ref]], { :scope => provider[:scope] }
   end
-
-  # config.omniauth :facebook, ENV["FACEBOOK_KEY"], ENV["FACEBOOK_SECRET"], { :scope => 'email, public_profile, user_birthday' }
-  # config.omniauth :twitter, ENV["TWITTER_KEY"], ENV["TWITTER_SECRET"], { :scope => 'r_fullprofile, r_emailaddress' }
-  # config.omniauth :linkedin, ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"], { :scope => 'r_basicprofile r_emailaddress' }
-  # config.omniauth :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], { :scope => "user, public_repo" }
-  # config.omniauth :google_oauth2, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET'], { :scope => "email, profile"}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

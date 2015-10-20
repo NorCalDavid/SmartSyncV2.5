@@ -1,4 +1,4 @@
-<div class='container-body'>
+<div class='container-body' id="form-for-reminders">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10 padding-top">
 			<div class="panel panel-primary">
@@ -15,12 +15,14 @@
 								<%= f.text_field :name %>
 							</div> 
 
-							<div class="col-md-4">
+							<div class="col-md-4" id="select-property-div">
 	              <%= f.label "Property" %>
+	              <%= prompt_message1 = "No Properties Available" if current_user.properties.count == 0 %>
 	              <%= collection_select(:reminder,
 	                                    :property_id, current_user.properties, 
-	                                    :id, :name, {},
-	                                    { class: "form-control" }) %>
+	                                    :id, :name, { :prompt => "#{prompt_message1 || 'Select Property'}" },
+	                                    { class: "form-control",
+	                                    	id: "selected-property-field" }) %>
 							</div> 
 						</div>
 
@@ -33,14 +35,19 @@
 						<div class="row">
 							<div class="col-md-4">
 	              <%= f.label "Recipient Name" %>
+	              <% prompt_message2 = "No Recipients Available" if recipient_options_for_reminders(@property).count == 0 %>
 	              <%= collection_select(:reminder,
-	                                    :recipient_id, current_user.followers, 
-	                                    :id, :name, {},
-	                                    { class: "form-control" }) %>
+	                                    :recipient_id, recipient_options_for_reminders(@property),
+	                                    :id, :name, { :prompt => "#{prompt_message2}" },
+	                                    { class: "form-control",
+	                                    	id: "selected-recipient-field" }) %>
 							</div> 
-
 							<div class="col-md-4">
-								<%= f.phone_field :recipient_phone_number, class: "form-control-static" %>
+								<%= f.phone_field :recipient_phone_number, value: @recipient_phone_number, 
+																													 class: "form-control-static", 
+	                                    										 id: "recipient-phone-number-field",
+	                                    										 required: "",
+	                                    										 placeholder: "(999) 999-9999" %>
 							</div>
 						</div> 
 

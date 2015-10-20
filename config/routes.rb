@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   resources :reminders
+  post '/reminders/refresh_form' => 'reminders#refresh_form'
+  
   get 'profile' => 'users/users#profile'
 
   get '/dashboard' => 'dashboard#index'

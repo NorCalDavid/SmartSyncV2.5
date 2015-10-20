@@ -58,6 +58,11 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
+    audited (4.2.0)
+      rails-observers (~> 0.1.2)
+    audited-activerecord (4.2.0)
+      activerecord (~> 4.0)
+      audited (= 4.2.0)
     autoprefixer-rails (6.0.3)
       execjs
       json
@@ -111,6 +116,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-bootstrap-views (0.0.6)
+    devise_traceable (0.0.5)
+      devise
+      warden
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -249,6 +257,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -320,6 +330,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  audited-activerecord
   awesome_print
   bootstrap-sass
   bootstrap-sass-extras
@@ -332,6 +343,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   devise-bootstrap-views
+  devise_traceable
   figaro
   font-awesome-sass
   fullcalendar-rails
@@ -354,6 +366,7 @@ DEPENDENCIES
   sass-rails
   twilio-ruby
   unicorn
+  warden
   workless
 
 BUNDLED WITH

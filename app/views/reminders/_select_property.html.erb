@@ -1,0 +1,5 @@
+<%= collection_select(:reminder,
+                      :recipient_id, recipient_options_for_reminders(@property),
+                      :id, :name, { :prompt => "Select Recipient" },
+                      { class: "form-control",
+                      	id: "selected-recipient-field" }) %>

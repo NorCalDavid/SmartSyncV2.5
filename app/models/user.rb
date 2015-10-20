@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  audited allow_mass_assignment: true
   attr_accessor :connected_social_logins, :available_social_logins, :connected_identites
   
   TEMP_EMAIL_PREFIX = 'change@me'
@@ -8,8 +9,11 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable
 
   devise :database_authenticatable, :registerable, :confirmable, 
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :traceable
 
+  has_many :sessions, class_name: "UserTracing",
+                      foreign_key: "user_id"
+  
   has_many :identities, dependent: :destroy
 
   has_many :active_relationships, class_name:  "Relationship",

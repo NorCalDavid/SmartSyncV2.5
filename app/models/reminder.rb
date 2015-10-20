@@ -1,4 +1,5 @@
 class Reminder < ActiveRecord::Base
+  audited allow_mass_assignment: true
   
   belongs_to :property
   has_many :users, through: :property
@@ -8,8 +9,25 @@ class Reminder < ActiveRecord::Base
   validates :notification_time, presence: true
 
   after_create :message
+  after_update :published_changes
 
   @@REMINDER_TIME = 30.minutes # minutes before appointment
+
+  def executed
+    self.executed_count += 1
+    self.executed_last = Time.now 
+    self.save
+  end
+
+  def published_changes
+    if self.attribute_changed?(:published)
+      if self.published_at
+        self.published_at = Time.now
+      else
+        self.published_at = nil
+      end
+    end
+  end
 
   # Notify our appointment attendee X minutes before the appointment time
   def message

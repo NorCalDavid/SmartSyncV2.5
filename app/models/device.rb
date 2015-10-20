@@ -1,4 +1,6 @@
 class Device < ActiveRecord::Base
+  audited allow_mass_assignment: true
+  
   belongs_to :room
   has_one :property, through: :room
   has_many :user_devices, dependent: :destroy
