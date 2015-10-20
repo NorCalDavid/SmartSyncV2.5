@@ -1,4 +1,4 @@
-.panel {
+    .panel {
     border: none;
     @include roundBorders(0);
     width: 100%;
@@ -76,10 +76,14 @@
 
 .panel-default>.panel-footer {
     border-color: #eff2f7;
-    background: #fff;
+    background: #DADADA;
     color: #767676
 }
-
+.panel-primary>.panel-footer {
+    border-color: #eff2f7;
+    background: #DADADA;
+    color: #767676
+}
 .panel-yellow>.panel-heading {
     color: #fff;
     background-color: $yellowColor;

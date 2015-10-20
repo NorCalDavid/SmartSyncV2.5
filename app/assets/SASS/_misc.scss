@@ -59,6 +59,21 @@
 .text-muted {
     color: #a2a2a2!important;
 }
+.fixed-height-5em {
+    height: 5em;
+}
+.fixed-height-6em {
+    height: 6em;
+}
+.fixed-height-8em {
+    height: 9em;
+    margin: 5px 0;
+}
+.fix-bottom-right {
+    position: absolute;
+    bottom: 5px;
+    right: 2em;
+}
 .padding-none{
 	padding:0!important;
 }

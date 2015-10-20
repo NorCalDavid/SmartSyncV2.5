@@ -1,46 +1,69 @@
 <%- model_class = ScheduleActionSeries -%>
-<div class="page-header">
+<div class="main-content">
+  <div class="pageheader">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:frequency) %></th>
-      <th><%= model_class.human_attribute_name(:period) %></th>
-      <th><%= model_class.human_attribute_name(:starttime) %></th>
-      <th><%= model_class.human_attribute_name(:endtime) %></th>
-      <th><%= model_class.human_attribute_name(:all_day) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @schedule_action_series.each do |schedule_action_series| %>
-      <tr>
-        <td><%= schedule_action_series.id %></td>
-          <td><%= schedule_action_series.frequency %></td>
-          <td><%= schedule_action_series.period %></td>
-          <td><%= schedule_action_series.starttime %></td>
-          <td><%= schedule_action_series.endtime %></td>
-          <td><%= schedule_action_series.all_day %></td>
-        <td><%=l schedule_action_series.created_at, format: :long %></td>
-        <td>
-          <%= link_to schedule_action_series_path(schedule_action_series), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
-            <%= glyph 'info-sign' %>
-          <%- end -%>
-          <%= link_to edit_schedule_action_series_path(schedule_action_series), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
-            <%= glyph 'pencil' %>
-          <%- end -%>
-          <%= link_to schedule_action_series_path(schedule_action_series), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
-            <%= glyph 'remove' %>
-          <%- end -%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <p class="description">Manage your SmartSync Home Scheduled Actions</p>
+    <div class="breadcrumb-wrapper hidden-xs">
+      <span class="label">You are here:</span>
+      <ol class="breadcrumb">
+          <li class="active"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1></li>
+      </ol>
+    </div>
+  </div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_schedule_action_series_path,
-            :class => 'btn btn-primary' %>
+  <div class='container-body'>
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <%= link_to 'New Smart Scheduled Actions',new_schedule_action_series_path, :class => 'btn btn-primary' %>
+          </div>
+
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th><%= model_class.human_attribute_name(:id) %></th>
+                    <th><%= model_class.human_attribute_name(:frequency) %></th>
+                    <th><%= model_class.human_attribute_name(:period) %></th>
+                    <th><%= model_class.human_attribute_name(:starttime) %></th>
+                    <th><%= model_class.human_attribute_name(:endtime) %></th>
+                    <th><%= model_class.human_attribute_name(:all_day) %></th>
+                    <th><%= model_class.human_attribute_name(:created_at) %></th>
+                    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @schedule_action_series.each do |schedule_action_series| %>
+                    <tr>
+                      <td><%= schedule_action_series.id %></td>
+                        <td><%= schedule_action_series.frequency %></td>
+                        <td><%= schedule_action_series.period %></td>
+                        <td><%= schedule_action_series.starttime %></td>
+                        <td><%= schedule_action_series.endtime %></td>
+                        <td><%= schedule_action_series.all_day %></td>
+                      <td><%=l schedule_action_series.created_at, format: :long %></td>
+                      <td>
+                        <%= link_to schedule_action_series_path(schedule_action_series), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+                          <%= glyph 'info-sign' %>
+                        <%- end -%>
+                        <%= link_to edit_schedule_action_series_path(schedule_action_series), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+                          <%= glyph 'pencil' %>
+                        <%- end -%>
+                        <%= link_to schedule_action_series_path(schedule_action_series), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+                          <%= glyph 'remove' %>
+                        <%- end -%>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div> 
+        </div>
+      </div>   
+    </div>
+  </div> 
+</div> 

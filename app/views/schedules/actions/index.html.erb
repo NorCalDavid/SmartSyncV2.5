@@ -1,70 +1,77 @@
 <%- model_class = ScheduleAction -%>
-<div class="page-header">
+<div class="main-content">
+  <div class="pageheader">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
+    <p class="description">Manage your SmartSync Home Scheduled Actions</p>
+    <div class="breadcrumb-wrapper hidden-xs">
+      <span class="label">You are here:</span>
+      <ol class="breadcrumb">
+          <li class="active"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1></li>
+      </ol>
+    </div>
+  </div>
 
-<div id="calendar">
+  <div class='container-body'>
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <div class="panel panel-primary">
 
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:starttime) %></th>
-      <th><%= model_class.human_attribute_name(:endtime) %></th>
-      <th><%= model_class.human_attribute_name(:all_day) %></th>
-      <th><%= model_class.human_attribute_name(:type) %></th>
-      <th><%= model_class.human_attribute_name(:published) %></th>
-      <th><%= model_class.human_attribute_name(:published_on) %></th>
-      <th><%= model_class.human_attribute_name(:action) %></th>
-      <th><%= model_class.human_attribute_name(:target_id) %></th>
-      <th><%= model_class.human_attribute_name(:command_id) %></th>
-      <th><%= model_class.human_attribute_name(:executed_last) %></th>
-      <th><%= model_class.human_attribute_name(:schedule_id) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:schedule_action_series_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @schedule_actions.each do |schedule_action| %>
-      <tr>
-        <td><%= schedule_action.id %></td>
-          <td><%= schedule_action.name %></td>
-          <td><%= schedule_action.description %></td>
-          <td><%= schedule_action.starttime %></td>
-          <td><%= schedule_action.endtime %></td>
-          <td><%= schedule_action.all_day %></td>
-          <td><%= schedule_action.type %></td>
-          <td><%= schedule_action.published %></td>
-          <td><%= schedule_action.published_on %></td>
-          <td><%= schedule_action.action %></td>
-          <td><%= schedule_action.target_id %></td>
-          <td><%= schedule_action.command_id %></td>
-          <td><%= schedule_action.executed_last %></td>
-          <td><%= schedule_action.schedule_id %></td>
-          <td><%= schedule_action.status %></td>
-          <td><%= schedule_action.schedule_action_series_id %></td>
-        <td><%=l schedule_action.created_at, format: :long %></td>
-        <td>
-          <%= link_to schedule_action_path(schedule_action), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
-            <%= glyph 'info-sign' %>
-          <%- end -%>
-          <%= link_to edit_schedule_action_path(schedule_action), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
-            <%= glyph 'pencil' %>
-          <%- end -%>
-          <%= link_to schedule_action_path(schedule_action), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
-            <%= glyph 'remove' %>
-          <%- end -%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <div class="panel-heading">
+            <%= link_to 'New Smart Scheduled Actions',new_schedule_action_path, :class => 'btn btn-primary' %>
+          </div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_schedule_action_path,
-            :class => 'btn btn-primary' %>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th><%= model_class.human_attribute_name(:id) %></th>
+                    <th><%= model_class.human_attribute_name(:name) %></th>
+                    <th><%= model_class.human_attribute_name(:description) %></th>
+                    <th><%= model_class.human_attribute_name(:starttime) %></th>
+                    <th><%= model_class.human_attribute_name(:endtime) %></th>
+                    <th><%= model_class.human_attribute_name(:all_day) %></th>
+                    <th><%= model_class.human_attribute_name(:type) %></th>
+                    <th><%= model_class.human_attribute_name(:published) %></th>
+                    <th><%= model_class.human_attribute_name(:published_on) %></th>
+                    <th><%= model_class.human_attribute_name(:status) %></th>
+                    <th><%= model_class.human_attribute_name(:created_at) %></th>
+                    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @schedule_actions.each do |schedule_action| %>
+                    <tr>
+                      <td><%= schedule_action.id %></td>
+                        <td><%= schedule_action.name %></td>
+                        <td><%= schedule_action.description %></td>
+                        <td><%= schedule_action.starttime %></td>
+                        <td><%= schedule_action.endtime %></td>
+                        <td><%= schedule_action.all_day %></td>
+                        <td><%= schedule_action.type %></td>
+                        <td><%= schedule_action.published %></td>
+                        <td><%= schedule_action.published_on %></td>
+                        <td><%= schedule_action.status %></td>
+                      <td><%=l schedule_action.created_at, format: :long %></td>
+                      <td>
+                        <%= link_to schedule_action_path(schedule_action), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+                          <%= glyph 'info-sign' %>
+                        <%- end -%>
+                        <%= link_to edit_schedule_action_path(schedule_action), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
+                          <%= glyph 'pencil' %>
+                        <%- end -%>
+                        <%= link_to schedule_action_path(schedule_action), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+                          <%= glyph 'remove' %>
+                        <%- end -%>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div> 
+        </div>
+      </div>   
+    </div>
+  </div> 
+</div> 

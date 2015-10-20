@@ -1,5 +1,16 @@
 <%- model_class = ScheduleActionSeries -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="main-content">
+	<div class="pageheader">
+		<h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+		<p class="description">Manage your Smart Scheduled Action Series</p>
+		<div class="breadcrumb-wrapper hidden-xs">
+			<span class="label">You are here:</span>
+			<ol class="breadcrumb">
+				 <li class="active"><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></li>
+			</ol>
+		</div>
+	</div>
+	<div class='container-body' id="new-reminders">
+		<%= render :partial => 'form' %>
+	</div>
 </div>
-<%= render :partial => 'form' %>
