@@ -5,7 +5,7 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-    @reminders = current_user.reminders.all
+    @reminders = get_user_reminders
     if @reminders.length == 0
       flash[:alert] = "You have no reminders. Create one now to get started."
     end
@@ -18,7 +18,11 @@ class RemindersController < ApplicationController
 
   # GET /reminders/new
   def new
-    @reminder = current_user.reminders.new
+    if session[:active_property].nil?
+      @reminder = Reminder.new
+    else
+      @reminder = Reminder.new(property_id: session[:active_property])
+    end
     @min_date = DateTime.now
   end
 
@@ -30,7 +34,7 @@ class RemindersController < ApplicationController
   # POST /reminders.json
   def create
     Time.zone = reminder_params[:time_zone]
-    @reminder = current_user.reminders.new(reminder_params)
+    @reminder = Reminder.new(reminder_params)
     
     if @reminder.save
       redirect_to @reminder, notice: 'Reminder was successfully created.'
@@ -76,6 +80,6 @@ class RemindersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reminder_params
-      params.require(:reminder).permit(:name, :description, :recipient_id, :recipient_phone_number, :notification_time, :time_zone)
+      params.require(:reminder).permit(:name, :description, :recipient_id, :recipient_phone_number, :notification_time, :time_zone, :property_id)
     end
 end

@@ -15,4 +15,39 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  private
+
+  def get_user_schedules
+    schedules =[]
+    return nil if current_user.properties.nil?
+    
+    current_user.properties.each do |property|
+      schedules.concat(property.schedules)
+    end
+    
+    return schedules
+  end
+
+  def get_user_events
+    events =[]
+    return nil if current_user.properties.nil?
+    
+    current_user.properties.each do |property|
+      events.concat(property.events)
+    end
+    
+    return events
+  end
+
+  def get_user_reminders
+    reminders =[]
+    return nil if current_user.properties.nil?
+    
+    current_user.properties.each do |property|
+      reminders.concat(property.reminders)
+    end
+    
+    return reminders
+  end
+
 end

@@ -1,48 +1,46 @@
 <%- model_class = LocationOption -%>
 <div class="main-content">
-  <div class="pageheader">
-    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-    <p class="description"></p>
-    <div class="breadcrumb-wrapper hidden-xs">
-      <span class="label">You are here:</span>
-      <ol class="breadcrumb">
-          <li class="active">Location Option: <%= @location_option.name %></li>
-      </ol>
-    </div>
-  </div>
+	<div class="pageheader">
+		<h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+		<p class="description"></p>
+		<div class="breadcrumb-wrapper hidden-xs">
+			<span class="label">You are here:</span>
+			<ol class="breadcrumb">
+					<li class="active">Location Option: <%= @location_option.name %></li>
+			</ol>
+		</div>
+	</div>
 
-  <div class='container-body'>
-    <div class="row">
-      <div class="col-md-offset-1 col-md-10 padding-top">
-        <div class="panel panel-primary">
-          <div class="panel-body">  
-            <div class="fieldset">
-              <dl>
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
-                  <dd><pre class="prettyprint"><%= @location_option.name %></pre></dd>
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
-                  <dd><pre class="prettyprint"><%= @location_option.description %></pre></dd>
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:location_type) %></dt>
-                  <dd><pre class="prettyprint"><%= @location_option.location_type %></pre></dd>
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:dashboard_display) %></dt>
-                  <dd><pre class="prettyprint"><%= @location_option.dashboard_display %></pre></dd>
-              </dl>
-            </div>
+	<div class='container-body'>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10 padding-top">
+				<div class="panel panel-primary">
+					<div class="panel-body">  
+						<div class="fieldset">
+							<dl>
+									<dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+									<dd><pre class="prettyprint"><%= @location_option.name %></pre></dd>
+									<dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+									<dd><pre class="prettyprint"><%= @location_option.description %></pre></dd>
+									<dt class="label label-default"><%= model_class.human_attribute_name(:location_type) %></dt>
+									<dd><pre class="prettyprint"><%= @location_option.location_type %></pre></dd>
+							</dl>
+						</div>
 
-            <div class="form-group">
-              <%= link_to t('.back', :default => t("helpers.links.back")),
-                          location_options_path, :class => 'btn btn-default'  %>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_location_option_path(@location_option), :class => 'btn btn-default' %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          location_option_path(@location_option),
-                          :method => 'delete',
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                          :class => 'btn btn-danger' %>
-            </div>
-          </div>
-        </div> 
-      </div> 
-    </div> 
-  </div> 
+						<div class="form-group">
+							<%= link_to t('.back', :default => t("helpers.links.back")),
+													location_options_path, :class => 'btn btn-default'  %>
+							<%= link_to t('.edit', :default => t("helpers.links.edit")),
+													edit_location_option_path(@location_option), :class => 'btn btn-default' %>
+							<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+													location_option_path(@location_option),
+													:method => 'delete',
+													:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+													:class => 'btn btn-danger' %>
+						</div>
+					</div>
+				</div> 
+			</div> 
+		</div> 
+	</div> 
 </div> 

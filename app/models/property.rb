@@ -27,10 +27,6 @@ class Property < ActiveRecord::Base
     return "Property#{next_model_id}"
   end
 
-  def user_id
-    return self.user.id unless self.user.nil?
-  end
-
   private
 
   def next_model_id

@@ -139,9 +139,9 @@ class User < ActiveRecord::Base
       false
     end
 
-        clean_up_passwords
-        result
-    end
+      clean_up_passwords
+      result
+  end
 
   private
 
@@ -155,7 +155,6 @@ class User < ActiveRecord::Base
 
   def set_name
     join_name if self.name.nil? && !self.firstname.nil? && !self.lastname.nil?
-    
   end
 
 end

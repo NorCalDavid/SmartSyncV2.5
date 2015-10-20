@@ -5,7 +5,7 @@ class Schedules::SchedulesController < ApplicationController
 
   # GET /schedules
   def index
-    @schedules = current_user.schedules.all
+    @schedules = get_user_schedules
     if @schedules.length == 0
       flash[:alert] = "You have no schedules. Create one now to get started."
     end  
@@ -17,13 +17,17 @@ class Schedules::SchedulesController < ApplicationController
 
   # GET /schedules/new
   def new
-    @schedule = current_user.schedules.new
+    if session[:active_property].nil?
+      @schedule = Schedule.new
+    else
+      @schedule = Schedule.new(property_id: session[:active_property])
+    end
   end
 
   # POST /schedules
   def create
     Time.zone = schedule_params[:time_zone]
-    @schedule = current_user.schedules.new(schedule_params)
+    @schedule = Schedule.new(schedule_params)
 
     if @schedule.save
       redirect_to @schedule, notice: 'New schedule was successfully created.'
@@ -70,7 +74,7 @@ private
   end
   
   def schedule_params
-    params.require(:schedule).permit(:name, :description, :type, :published, :published_on, :status, :favorite, :executed_count, :executed_last, :user_id)
+    params.require(:schedule).permit(:name, :description, :type, :published, :published_on, :status, :favorite, :executed_count, :executed_last, :property_id)
   end
 
 

@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col-md-4">
-                      <%= f.select :favorite, [[true, "Yes"], [false, "No"]], { label: "Favorite:" }, { class: "selectpicker" } %>
+                      <%= f.select :favorite, [["Yes", true], ["No", false]], { label: "Favorite:" }, { class: "selectpicker" } %>
                     </div>
                   </div>
                 </div>
@@ -43,11 +43,17 @@
                   <div class="col-md-7">
                     <%= f.text_area :description %>
                     <%= f.text_field :status %>
+
+                    <%= f.label "Created By" %>
+                    <%= collection_select(:schedule,
+                                          :property_id, current_user.properties, 
+                                          :id, :name, {},
+                                          { class: "form-control" }) %>
                   </div>
                   
                   <div class="col-md-5">
                     <div class="col-md-5">
-                      <%= f.select :published, [[true, "Yes"], [false, "No"]], { label: "Published:" }, { class: "selectpicker" } %>
+                      <%= f.select :published, [["Yes", true], ["No", false]], { label: "Published:" }, { class: "selectpicker" } %>
                     </div>
                     
                     <div class="col-md-7">
@@ -61,22 +67,17 @@
                     <div class="col-md-7">
                       <%= f.datetime_field :executed_last, :format => :long, :label => "Date Executed Last:", class: "form-input-static", :disabled => "disabled", :value => @schedule.try(:executed_last).try(:strftime,'%m/%d/%Y at %I:%M %P') %>
                     </div>
-                    <div class="col-md-5">
-                      <%= f.label "Created By" %>
-                      <%= collection_select(:schedule,
-                                            :user_id, User.all, 
-                                            :id, :name, {},
-                                            { class: "form-control", :disabled => "disabled" }) %>
-                    </div>
+                    
                     
                     <div class="col-md-7">
                       <%= f.datetime_field :created_at, :format => :long, :label => "Date Created", class: "form-input-static", :disabled => "disabled", :value => @schedule.try(:created_at).try(:strftime,'%m/%d/%Y at %I:%M %P') %>
                     </div>
                   </div>
+                
                 </div>
 
-                <div class="row">
-                  <div class="col-md-7">
+                <div class="row padding-top">
+                  <div class="col-md-7 padding-top">
                     <div class="panel panel-primary">
                       <div class="panel-heading text-center ">
                         <b class="panel-title">Create Schedule Actions and Schedule Action Series</b>

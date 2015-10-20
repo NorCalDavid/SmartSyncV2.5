@@ -19,5 +19,9 @@ module ApplicationHelper
   def current_user_id
     current_user.id
   end
+
+  def find_user(user_id)
+    User.find(user_id)
+  end
   
 end

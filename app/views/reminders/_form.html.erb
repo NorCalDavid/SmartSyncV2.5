@@ -10,58 +10,68 @@
 				<div class="panel-body">
 					<%= bootstrap_form_for(@reminder) do |f| %>
 						
-						<div class="col-md-12">
-							<%= f.text_field :name %>
+						<div class="row">
+							<div class="col-md-8">
+								<%= f.text_field :name %>
+							</div> 
+
+							<div class="col-md-4">
+	              <%= f.label "Property" %>
+	              <%= collection_select(:reminder,
+	                                    :property_id, current_user.properties, 
+	                                    :id, :name, {},
+	                                    { class: "form-control" }) %>
+							</div> 
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<%= f.text_field :description %>
+							</div>
 						</div> 
 
-						<div class="col-md-12">
-							<%= f.text_field :description %>
-						</div>
-						
-						<div class="col-md-4">
-							<%= f.label 'Recipient' %>	
-							<%= collection_select(:reminder,
-																		:recipient_id, User.all, 
-																		:id, :name, 
-																		{ :prompt => 'Please select the user to send a reminder to: '}, 
-																		class: "form-control")  %>
+						<div class="row">
+							<div class="col-md-4">
+	              <%= f.label "Recipient Name" %>
+	              <%= collection_select(:reminder,
+	                                    :recipient_id, current_user.followers, 
+	                                    :id, :name, {},
+	                                    { class: "form-control" }) %>
+							</div> 
+
+							<div class="col-md-4">
+								<%= f.phone_field :recipient_phone_number, class: "form-control-static" %>
+							</div>
 						</div> 
-					
-						<div class="col-md-4">
-							<%= f.text_field :recipient_name, class: "form-control-static" %>
-						</div>
 
-						<div class="col-md-4">
-							<%= f.phone_field :recipient_phone_number, class: "form-control-static" %>
-						</div><br />
+						<div class="row">
+							<div class="col-md-4">
+								<%= f.date_select :notification_time, :order => [:month, :day, :year], :label => "Notification Date", class: "padding-left padding-right" %>
+							</div>
 
-						
-						<div class="col-md-4">
-							<%= f.date_select :notification_time, :order => [:month, :day, :year], :label => "Notification Date", class: "padding-left padding-right" %>
-						</div>
-
-						<div class="col-md-2">
-							<%= f.time_select :notification_time, :ampm => true, class: "form-input padding-left" %>
-						</div>
-						
-						<div class="col-md-4">
-							<%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
-						</div><br />
-
-						<div class="col-md-12">
-							<%= f.submit nil, :class => 'btn btn-primary' %>
+							<div class="col-md-2">
+								<%= f.time_select :notification_time, :ampm => true, class: "form-input padding-left" %>
+							</div>
 							
-							<%= link_to reminders_path, class: 'btn btn-default' do %>
-		            <span class="glyphicon glyphicon-info-sign"></span> Cancel
-	            <% end %>
-	            
-	            <%= link_to dashboard_path, class: 'btn btn-primary' do %>
-	              <span class="glyphicon glyphicon-list-alt"></span> Dashboard
-	            <% end %>
-	          <div>
-	        <% end %>
+							<div class="col-md-4">
+								<%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
+							</div>
+						</div> 
+					</div>
+	        
+	        <div class="panel-footer text-right">
+						<%= f.submit nil, :class => 'btn btn-primary embossed' %>
+						
+						<%= link_to reminders_path, class: 'btn btn-default embossed' do %>
+	            <span class="glyphicon glyphicon-info-sign"></span> Cancel
+	          <% end %>
+	          
+	          <%= link_to dashboard_path, class: 'btn btn-primary embossed' do %>
+	            <span class="glyphicon glyphicon-list-alt"></span> Dashboard
+	          <% end %>
+	        </div>
 				</div>
-			</div>
+	    <% end %>
 		</div>
 	</div>
 </div>

@@ -32,7 +32,6 @@
                     <th><%= model_class.human_attribute_name(:name) %></th>
                     <th><%= model_class.human_attribute_name(:description) %></th>
                     <th><%= model_class.human_attribute_name(:location_type) %></th>
-                    <th><%= model_class.human_attribute_name(:dashboard_display) %></th>
                     <th><%= model_class.human_attribute_name(:created_at) %></th>
                     <th><%=t '.actions', :default => t("helpers.actions") %></th>
                   </tr>
@@ -44,7 +43,6 @@
                         <td><%= location_option.name %></td>
                         <td><%= location_option.description %></td>
                         <td><%= location_option.location_type %></td>
-                        <td><%= location_option.dashboard_display %></td>
                       <td><%=l location_option.created_at, format: :long %></td>
                       <td>
                         <%= link_to location_option_path(location_option), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>

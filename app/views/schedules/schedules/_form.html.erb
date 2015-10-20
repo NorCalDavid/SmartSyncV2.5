@@ -22,8 +22,16 @@
               <%= f.select :favorite, [[true, "Yes"], [false, "No"]], { label: "Favorite:" }, { class: "selectpicker" } %>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-md-7">
               <%= f.text_area :description %>
+            </div>
+
+            <div class="col-md-5">
+              <%= f.label "Property" %>
+              <%= collection_select(:schedule,
+                                    :property_id, current_user.properties, 
+                                    :id, :name, {},
+                                    { class: "form-control" }) %>
             </div>
             
             <div class="col-md-2">

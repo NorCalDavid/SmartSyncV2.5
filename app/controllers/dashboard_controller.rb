@@ -37,11 +37,11 @@ class DashboardController < ApplicationController
   end
 
   def new_room
-    @room = current_user.rooms.new
+    @room = Room.new
   end
 
   def new_device
-    @device = current_user.devices.new({status_code: 999, status: "Configure Device"})
+    @device = Device.new({status_code: 999, status: "Configure Device"})
   end
 
   private
@@ -53,24 +53,42 @@ class DashboardController < ApplicationController
       room_location_options: LocationOption.where(location_type: "Room") || ["No Location Options"],
       device_location_options: LocationOption.where(location_type: "Device") || ["No Location Options"]   }
 
-      if session[:active_room] != nil
-        @configuration[:active_property] = Room.find(session[:active_room]).property
-        @configuration[:active_room] = Room.find(session[:active_room])
-        @configuration[:rooms] = Property.find(session[:active_property]).rooms || current_user.rooms
-        @configuration[:devices] = Room.find(session[:active_room]).devices
-        @configuration[:device_count] = @configuration[:devices].count
-      elsif session[:active_property] != nil
-        @configuration[:active_property] = Property.find(session[:active_property])
-        @configuration[:rooms] = Property.find(session[:active_property]).rooms || current_user.rooms
-        @configuration[:room_count] = @configuration[:rooms].count || current_user.rooms.count
-        @configuration[:devices] = current_user.devices
-        @configuration[:device_count] = current_user.devices.count
-      else
-        @configuration[:rooms] = current_user.rooms
-        @configuration[:room_count] = current_user.rooms.count
-        @configuration[:devices] = current_user.devices
-        @configuration[:device_count] = current_user.devices.count
-      end
+    if session[:active_room] != nil
+      @configuration[:active_property] = Room.find(session[:active_room]).property
+      @configuration[:active_room] = Room.find(session[:active_room])
+      @configuration[:rooms] = Property.find(session[:active_property]).rooms || get_rooms
+      @configuration[:devices] = Room.find(session[:active_room]).devices
+      @configuration[:device_count] = @configuration[:devices].count
+    elsif session[:active_property] != nil
+      @configuration[:active_property] = Property.find(session[:active_property])
+      @configuration[:rooms] = Property.find(session[:active_property]).rooms || get_rooms
+      @configuration[:room_count] = @configuration[:rooms].count || get_rooms.count
+      @configuration[:devices] = get_devices
+      @configuration[:device_count] = @configuration[:devices].count
+    else
+      @configuration[:rooms] = get_rooms
+      @configuration[:room_count] = @configuration[:rooms].count
+      @configuration[:devices] = get_devices
+      @configuration[:device_count] = @configuration[:devices].count
     end
-
   end
+
+  def get_rooms
+    rooms = []
+    return nil if current_user.properties.nil?
+    current_user.properties.each do |property|
+      rooms.concat(property.rooms)
+    end
+    return rooms
+  end
+
+  def get_devices
+    devices = []
+    return nil if get_rooms.nil?
+    get_rooms.each do |room|
+      devices.concat(room.devices)
+    end
+    return devices
+  end
+
+end
