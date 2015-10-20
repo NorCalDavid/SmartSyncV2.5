@@ -43,43 +43,6 @@
                   <div class="col-md-7">
                     <%= f.text_area :description %>
                     <%= f.text_field :status %>
-
-                    <div class="panel panel-primary">
-                      <div class="panel-heading text-center ">
-                        <b class="panel-title">Create Schedule Actions and Schedule Action Series</b>
-                      </div>
-                      
-                      <div class="panel-body">
-                        <div class="col-md-6 text-center">
-                          <b>Scheduled Actions</b>
-                        </div>
-
-                        <div class="col-md-6 text-center">
-                          <b>Scheduled Action Series</b>
-                        </div>
-                      
-                        <div class="col-md-6 text-center">
-                          <%= link_to schedule_actions_path(@schedule), :class => 'btn btn-sm btn-info' do %>
-                            <i class="fa fa-list-ul"></i> View All
-                          <% end %>
-
-                          <%= link_to new_schedule_action_path(@schedule), :class => 'btn btn-sm btn-warning' do %>
-                            <i class="fa fa-plus-square"></i> Create New
-                          <% end %>
-                        </div>
-
-                        <div class="col-md-6 text-center">
-                          <%= link_to schedule_action_series_index_path(@schedule), :class => 'btn btn-sm btn-info' do %>
-                            <i class="fa fa-list-ul"></i></span> View All
-                          <% end %>
-
-                          <%= link_to new_schedule_action_series_path(@schedule), :class => 'btn btn-sm btn-warning' do %>
-                            <i class="fa fa-plus-square"></i> Create New
-                          <% end %>
-                        </div>
-                      </div>
-
-                    </div>
                   </div>
                   
                   <div class="col-md-5">
@@ -111,16 +74,56 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading text-center ">
+                        <b class="panel-title">Create Schedule Actions and Schedule Action Series</b>
+                      </div>
+                      
+                      <div class="panel-body">
+                        <div class="col-md-6 text-center">
+                          <b>Scheduled Actions</b>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <b>Scheduled Action Series</b>
+                        </div>
+                      
+                        <div class="col-md-6 text-center">
+                          <%= link_to schedule_actions_path(@schedule), :class => 'btn btn-sm btn-info embossed' do %>
+                            <i class="fa fa-list-ul"></i> View All
+                          <% end %>
+
+                          <%= link_to new_schedule_action_path(@schedule), :class => 'btn btn-sm btn-warning embossed' do %>
+                            <i class="fa fa-plus-square"></i> Create New
+                          <% end %>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <%= link_to schedule_action_series_index_path(@schedule), :class => 'btn btn-sm btn-info embossed' do %>
+                            <i class="fa fa-list-ul"></i></span> View All
+                          <% end %>
+
+                          <%= link_to new_schedule_action_series_path(@schedule), :class => 'btn btn-sm btn-warning embossed' do %>
+                            <i class="fa fa-plus-square"></i> Create New
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
               <div class="panel-footer text-right">
-                <%= f.submit nil, :class => 'btn btn-primary' %>
+                <%= f.submit nil, :class => 'btn btn-primary embossed' %>
                 
-                <%= link_to schedules_path, class: 'btn btn-default' do %>
+                <%= link_to schedules_path, class: 'btn btn-default embossed' do %>
                   <span class="glyphicon glyphicon-info-sign"></span> Cancel
                 <% end %>
                 
-                <%= link_to dashboard_path, class: 'btn btn-primary' do %>
+                <%= link_to dashboard_path, class: 'btn btn-primary embossed' do %>
                   <span class="glyphicon glyphicon-list-alt"></span> Dashboard
                 <% end %>
               </div>

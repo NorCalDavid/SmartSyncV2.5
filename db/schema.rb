@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019055113) do
+ActiveRecord::Schema.define(version: 20151020041154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,22 +42,34 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",        default: 0,  null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "admin_users", ["confirmation_token"], name: "index_admin_users_on_confirmation_token", unique: true, using: :btree
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true, using: :btree
 
   create_table "commands", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
-    t.string   "resource"
     t.string   "type",        null: false
-    t.string   "endpoint",    null: false
+    t.string   "action"
+    t.string   "route"
+    t.integer  "device_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "commands", ["device_id"], name: "index_commands_on_device_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -77,34 +89,35 @@ ActiveRecord::Schema.define(version: 20151019055113) do
 
   create_table "device_commands", force: :cascade do |t|
     t.integer  "device_id"
-    t.string   "comamnd_id"
-    t.boolean  "published"
-    t.integer  "executed_count"
+    t.integer  "command_id"
+    t.boolean  "published",      default: false
+    t.datetime "published_on"
+    t.integer  "executed_count", default: 0,     null: false
     t.datetime "executed_last"
-    t.integer  "event_condition_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
+  add_index "device_commands", ["command_id"], name: "index_device_commands_on_command_id", using: :btree
+  add_index "device_commands", ["device_id", "command_id"], name: "index_device_commands_on_device_id_and_command_id", unique: true, using: :btree
+  add_index "device_commands", ["device_id"], name: "index_device_commands_on_device_id", using: :btree
+
   create_table "devices", force: :cascade do |t|
-    t.string   "name",                                 null: false
+    t.string   "name",                                                                                                            null: false
     t.text     "description"
     t.boolean  "favorite"
     t.integer  "status_code",          default: 999
     t.string   "status"
-    t.string   "status_icon"
     t.integer  "status_level"
+    t.string   "status_icon"
     t.string   "brand"
     t.string   "type"
     t.string   "location"
     t.string   "EDID"
     t.string   "version"
-    t.string   "image"
-    t.integer  "property_id",                          null: false
-    t.integer  "room_id",                              null: false
+    t.string   "image",                default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultDevice.png"
     t.boolean  "controllable",         default: false
     t.string   "api_id"
-    t.string   "api_house_id"
     t.integer  "api_firmware_version"
     t.boolean  "dimmable",             default: false
     t.integer  "dim_level",            default: 100
@@ -114,9 +127,14 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.time     "off_time"
     t.boolean  "timer_enabled",        default: false
     t.integer  "group"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "property_id"
+    t.integer  "room_id"
+    t.datetime "created_at",                                                                                                      null: false
+    t.datetime "updated_at",                                                                                                      null: false
   end
+
+  add_index "devices", ["property_id"], name: "index_devices_on_property_id", using: :btree
+  add_index "devices", ["room_id"], name: "index_devices_on_room_id", using: :btree
 
   create_table "event_actions", force: :cascade do |t|
     t.string   "name",                               null: false
@@ -127,14 +145,15 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.string   "action"
     t.integer  "target_id"
     t.integer  "command_id"
-    t.integer  "test_option_id"
     t.integer  "execution_order"
     t.integer  "executed_count",     default: 0,     null: false
     t.datetime "executed_last"
-    t.integer  "event_condition_id",                 null: false
+    t.integer  "event_condition_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
+
+  add_index "event_actions", ["event_condition_id"], name: "index_event_actions_on_event_condition_id", using: :btree
 
   create_table "event_conditions", force: :cascade do |t|
     t.string   "name",                            null: false
@@ -147,34 +166,21 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.integer  "test_option_id"
     t.string   "test_one"
     t.string   "test_two"
-    t.integer  "event_id",                        null: false
     t.integer  "execution_order"
     t.integer  "executed_count",  default: 0,     null: false
     t.datetime "executed_last"
+    t.integer  "event_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
 
-  create_table "event_groups", force: :cascade do |t|
-    t.string   "name",                           null: false
-    t.text     "description"
-    t.boolean  "favorite",       default: false, null: false
-    t.integer  "executed_count", default: 0,     null: false
-    t.datetime "executed_last"
-    t.string   "status"
-    t.integer  "user_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
+  add_index "event_conditions", ["event_id"], name: "index_event_conditions_on_event_id", using: :btree
 
-  create_table "event_logs", force: :cascade do |t|
-    t.integer  "event_id",       null: false
-    t.string   "entry_type"
-    t.string   "reference_type"
-    t.integer  "status_code"
-    t.text     "event_status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "event_groups", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -188,53 +194,36 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.integer  "executed_count", default: 0,     null: false
     t.datetime "executed_last"
     t.integer  "event_group_id"
-    t.integer  "user_id"
+    t.integer  "property_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
 
-  create_table "fullcalendar_engine_event_series", force: :cascade do |t|
-    t.integer  "frequency",  default: 1
-    t.string   "period",     default: "monthly"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.boolean  "all_day",    default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "fullcalendar_engine_events", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.boolean  "all_day",         default: false
-    t.text     "description"
-    t.integer  "event_series_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "fullcalendar_engine_events", ["event_series_id"], name: "index_fullcalendar_engine_events_on_event_series_id", using: :btree
+  add_index "events", ["event_group_id"], name: "index_events_on_event_group_id", using: :btree
+  add_index "events", ["property_id"], name: "index_events_on_property_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "provider"
+    t.string   "provider",         null: false
     t.string   "uid"
     t.string   "token"
     t.string   "token_secret"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "image"
+    t.string   "provider_email"
+    t.string   "provider_profile"
+    t.datetime "provider_DOB"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "location_options", force: :cascade do |t|
-    t.string   "name",              null: false
+    t.string   "name",          null: false
     t.text     "description"
-    t.string   "location_type",     null: false
-    t.boolean  "dashboard_display"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.string   "location_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "properties", force: :cascade do |t|
@@ -245,40 +234,64 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.string   "state"
     t.string   "zipcode"
     t.string   "image",       default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png"
-    t.integer  "user_id",                                                                                                  null: false
     t.datetime "created_at",                                                                                               null: false
     t.datetime "updated_at",                                                                                               null: false
   end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
 
   create_table "reminders", force: :cascade do |t|
     t.string   "name",                   null: false
     t.text     "description"
     t.integer  "recipient_id"
+    t.string   "recipient_name"
     t.string   "recipient_phone_number"
     t.datetime "notification_time"
     t.string   "time_zone"
-    t.integer  "user_id",                null: false
+    t.integer  "property_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.string   "recipient_name"
   end
+
+  add_index "reminders", ["property_id"], name: "index_reminders_on_property_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
-    t.string   "location"
-    t.integer  "property_id", null: false
+    t.string   "location",    null: false
+    t.integer  "property_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "rooms", ["property_id"], name: "index_rooms_on_property_id", using: :btree
+
   create_table "schedule_action_series", force: :cascade do |t|
-    t.integer  "frequency", default: 1
-    t.string   "period"
+    t.integer  "frequency",      default: 1
+    t.string   "period",         default: "monthly"
     t.datetime "starttime"
     t.datetime "endtime"
-    t.boolean  "all_day"
-    t.string   "time_zone"
+    t.string   "time_zone",                          null: false
+    t.boolean  "all_day",        default: false
+    t.string   "type"
+    t.boolean  "published",      default: false
+    t.datetime "published_on"
+    t.string   "status"
+    t.integer  "target_id"
+    t.integer  "command_id"
+    t.string   "action"
+    t.integer  "executed_count", default: 0,         null: false
+    t.datetime "executed_last"
+    t.integer  "schedule_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "schedule_actions", force: :cascade do |t|
@@ -286,41 +299,40 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.text     "description"
     t.datetime "starttime",                                 null: false
     t.datetime "endtime",                                   null: false
+    t.string   "time_zone",                                 null: false
     t.boolean  "all_day",                   default: false
     t.string   "type"
-    t.boolean  "published"
+    t.boolean  "published",                 default: false
     t.datetime "published_on"
-    t.string   "action"
+    t.string   "status"
     t.integer  "target_id"
     t.integer  "command_id"
-    t.integer  "executed_count"
+    t.string   "action"
+    t.integer  "executed_count",            default: 0,     null: false
     t.datetime "executed_last"
-    t.integer  "schedule_id"
-    t.string   "status"
     t.integer  "schedule_action_series_id"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.string   "time_zone"
   end
 
-  add_index "schedule_actions", ["schedule_id"], name: "index_schedule_actions_on_schedule_id", using: :btree
+  add_index "schedule_actions", ["schedule_action_series_id"], name: "index_schedule_actions_on_schedule_action_series_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "type"
-    t.boolean  "published"
+    t.string   "type",                           null: false
+    t.boolean  "published",      default: false
     t.datetime "published_on"
     t.string   "status"
-    t.boolean  "favorite"
-    t.integer  "executed_count"
+    t.boolean  "favorite",       default: false
+    t.integer  "executed_count", default: 0,     null: false
     t.datetime "executed_last"
-    t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "property_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
-  add_index "schedules", ["user_id"], name: "index_schedules_on_user_id", using: :btree
+  add_index "schedules", ["property_id"], name: "index_schedules_on_property_id", using: :btree
 
   create_table "status_options", force: :cascade do |t|
     t.integer  "status_id"
@@ -341,19 +353,48 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_devices", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "device_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_devices", ["device_id"], name: "index_user_devices_on_device_id", using: :btree
+  add_index "user_devices", ["user_id", "device_id"], name: "index_user_devices_on_user_id_and_device_id", unique: true, using: :btree
+  add_index "user_devices", ["user_id"], name: "index_user_devices_on_user_id", using: :btree
+
+  create_table "user_properties", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "property_id"
+    t.boolean  "favorite",              default: false
+    t.boolean  "receive_notifications", default: false
+    t.boolean  "authorized_control",    default: false
+    t.boolean  "authorized_change",     default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "user_properties", ["property_id"], name: "index_user_properties_on_property_id", using: :btree
+  add_index "user_properties", ["user_id", "property_id"], name: "index_user_properties_on_user_id_and_property_id", unique: true, using: :btree
+  add_index "user_properties", ["user_id"], name: "index_user_properties_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.string   "name"
-    t.string   "email",                             default: "",    null: false
-    t.string   "encrypted_password",                default: "",    null: false
-    t.string   "image"
-    t.boolean  "role",                              default: false, null: false
+    t.string   "email",                             default: "",                                                                             null: false
+    t.string   "encrypted_password",                default: "",                                                                             null: false
+    t.string   "image",                             default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultUser.png"
+    t.string   "phone",                  limit: 50
+    t.string   "mobile",                 limit: 50
+    t.boolean  "receive_sms",                       default: false,                                                                          null: false
+    t.boolean  "role",                              default: false,                                                                          null: false
     t.integer  "admin_user_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,     null: false
+    t.integer  "sign_in_count",                     default: 0,                                                                              null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -362,17 +403,35 @@ ActiveRecord::Schema.define(version: 20151019055113) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "phone",                  limit: 50
-    t.string   "mobile",                 limit: 50
-    t.boolean  "receive_sms",                       default: false, null: false
+    t.integer  "failed_attempts",                   default: 0,                                                                              null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at",                                                                                                                 null: false
+    t.datetime "updated_at",                                                                                                                 null: false
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "commands", "devices"
+  add_foreign_key "device_commands", "commands"
+  add_foreign_key "device_commands", "devices"
+  add_foreign_key "devices", "properties"
+  add_foreign_key "devices", "rooms"
+  add_foreign_key "event_actions", "event_conditions"
+  add_foreign_key "event_conditions", "events"
+  add_foreign_key "events", "event_groups"
+  add_foreign_key "events", "properties"
   add_foreign_key "identities", "users"
-  add_foreign_key "schedule_actions", "schedules"
-  add_foreign_key "schedules", "users"
+  add_foreign_key "reminders", "properties"
+  add_foreign_key "rooms", "properties"
+  add_foreign_key "schedules", "properties"
+  add_foreign_key "status_options", "devices"
+  add_foreign_key "status_options", "statuses"
+  add_foreign_key "user_devices", "devices"
+  add_foreign_key "user_devices", "users"
+  add_foreign_key "user_properties", "properties"
+  add_foreign_key "user_properties", "users"
 end

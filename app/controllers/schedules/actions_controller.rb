@@ -2,7 +2,7 @@ class Schedules::ActionsController < InheritedResources::Base
   before_action :authenticate_user!
   before_action :set_action, only: [:show, :edit, :update, :destroy]
 
-  # GET /schedules
+  # GET /schedule_actions
   def index
     @schedule_actions = Schedule.find(params[:schedule_id]).schedule_actions.all
     if @schedule_actions.length == 0

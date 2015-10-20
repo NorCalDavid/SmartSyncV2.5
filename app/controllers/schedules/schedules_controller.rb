@@ -55,7 +55,7 @@ class Schedules::SchedulesController < ApplicationController
   end
 
   def get_actions
-    @actions = current_user.schedule_actions
+    @actions = current_user.schedule_actions_series
     scheduled_actions = []
     @actions.each do |action|
       scheduled_actions << {:id => action.id, :title => "#{action.name} : #{action.description}", :start => "#{action.start}",:end => "#{action.end}" }

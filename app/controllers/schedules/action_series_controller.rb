@@ -2,8 +2,12 @@ class Schedules::ActionSeriesController < InheritedResources::Base
 before_action :authenticate_user!
   before_action :set_action, only: [:show, :edit, :update, :destroy]
 
-  # GET /schedules
+ # GET /schedule_actions
   def index
+    @schedule_action_series = Schedule.find(params[:schedule_id]).schedule_action_series.all
+    if @schedule_action_series.length == 0
+      flash[:alert] = "You have no schedule action series. Create one now to get started."
+    end 
   end
 
   # GET /schedules/:id

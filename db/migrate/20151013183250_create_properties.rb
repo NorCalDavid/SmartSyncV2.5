@@ -8,8 +8,7 @@ class CreateProperties < ActiveRecord::Migration
       t.string :state
       t.string :zipcode
       t.string :image, :default => "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png"
-      t.integer :user_id, null: false
-
+      
       t.timestamps null: false
     end
   end

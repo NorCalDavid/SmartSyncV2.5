@@ -11,10 +11,10 @@ class CreateEventConditions < ActiveRecord::Migration
       t.integer :test_option_id
       t.string :test_one
       t.string :test_two
-      t.integer :event_id, null: false
       t.integer :execution_order
       t.integer :executed_count, null: false, default: 0
       t.datetime :executed_last
+      t.references :event, index: true, foreign_key: true
       
       t.timestamps null: false
     end

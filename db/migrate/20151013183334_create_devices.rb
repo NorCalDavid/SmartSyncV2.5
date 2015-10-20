@@ -6,19 +6,16 @@ class CreateDevices < ActiveRecord::Migration
       t.boolean :favorite
       t.integer :status_code, default: 999
       t.string :status
-      t.string :status_icon
       t.integer :status_level
+      t.string :status_icon
       t.string :brand
       t.string :type
       t.string :location
       t.string :EDID
       t.string :version
-      t.string :image
-      t.integer :property_id, null: false
-      t.integer :room_id, null: false
+      t.string :image, :default => "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultDevice.png"
       t.boolean :controllable, :default => false
       t.string :api_id
-      t.string :api_house_id
       t.integer :api_firmware_version
       t.boolean :dimmable, :default => false
       t.integer :dim_level, :default => 100
@@ -28,6 +25,9 @@ class CreateDevices < ActiveRecord::Migration
       t.time :off_time
       t.boolean :timer_enabled, :default => false
       t.integer :group
+
+      t.references :property, index: true, foreign_key: true
+      t.references :room, index: true, foreign_key: true
 
       t.timestamps null: false
     end

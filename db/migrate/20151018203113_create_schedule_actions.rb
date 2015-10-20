@@ -5,20 +5,22 @@ class CreateScheduleActions < ActiveRecord::Migration
       t.text :description
       t.datetime :starttime, null: false
       t.datetime :endtime, null: false
+      t.string :time_zone, null: false
       t.boolean :all_day, :default => false
       t.string :type
-      t.boolean :published
+      t.boolean :published, :default => false
       t.datetime :published_on
-      t.string :action
+      t.string :status
       t.integer :target_id
       t.integer :command_id
-      t.integer :executed_count
+      t.string :action
+      t.integer :executed_count, null: false, default: 0
       t.datetime :executed_last
-      t.references :schedule, index: true, foreign_key: true
-      t.string :status
       t.integer :schedule_action_series_id
       
       t.timestamps null: false
     end
+    add_index :schedule_actions, :schedule_action_series_id
   end
 end
+

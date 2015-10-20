@@ -40,6 +40,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <% unless @schedule_actions.nil? %>
                   <% @schedule_actions.each do |schedule_action| %>
                     <tr>
                       <td><%= schedule_action.id %></td>
@@ -65,6 +66,7 @@
                         <%- end -%>
                       </td>
                     </tr>
+                  <% end %>
                   <% end %>
                 </tbody>
               </table>

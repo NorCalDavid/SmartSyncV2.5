@@ -1,4 +1,8 @@
 class Reminder < ActiveRecord::Base
+  
+  belongs_to :property
+  has_many :users, through: :property
+
   validates :name, presence: true
   validates :recipient_phone_number, presence: true
   validates :notification_time, presence: true

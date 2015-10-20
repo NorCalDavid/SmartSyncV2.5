@@ -4,7 +4,6 @@ class CreateLocationOptions < ActiveRecord::Migration
       t.string :name, null: false
       t.text :description
       t.string :location_type, null: false
-      t.boolean :dashboard_display
 
       t.timestamps null: false
     end

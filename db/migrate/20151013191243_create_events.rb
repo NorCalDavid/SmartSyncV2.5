@@ -10,8 +10,8 @@ class CreateEvents < ActiveRecord::Migration
       t.boolean :favorite, null: false, default: false
       t.integer :executed_count, null: false, default: 0
       t.datetime :executed_last
-      t.integer :event_group_id
-      t.integer :user_id
+      t.references :event_group, index: true, foreign_key: true
+      t.references :property, index: true, foreign_key: true
       
       t.timestamps null: false
     end

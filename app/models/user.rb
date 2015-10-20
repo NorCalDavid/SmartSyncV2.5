@@ -10,25 +10,53 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable, 
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  has_many :properties, dependent: :destroy
-  has_many :rooms, through: :properties, dependent: :destroy
-  has_many :devices, through: :properties, dependent: :destroy
-  has_many :events, dependent: :destroy
-  has_many :event_logs, through: :events
   has_many :identities, dependent: :destroy
-  has_many :reminders, dependent: :destroy
-  has_many :schedules, dependent: :destroy
-  has_many :schedule_actions, through: :schedules
-  has_many :schedule_action_series, through: :schedule_actions
+
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  has_many :user_properties, dependent: :destroy
+  has_many :properties, through: :user_properties
+  has_many :rooms, through: :properties, source: :user_properties
+  
+  has_many :user_devices, dependent: :destroy
+  has_many :devices, through: :user_devices
+  
+  has_many :reminders, through: :properties, source: :user_properties 
+  has_many :events, through: :properties, source: :user_properties
+  has_many :schedules, through: :properties, source: :user_properties
 
   before_validation :set_name
+  before_save :default_thumbnail
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
-
   mount_uploader :image, ImageUploader
 
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
 
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  # Omniauth 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     ap auth
     # Get the identity and user if they exist
@@ -86,7 +114,7 @@ class User < ActiveRecord::Base
     "#{firstname} #{lastname}"
   end
 
-  def image_thumbnail
+  def default_thumbnail
     self.image ||= "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultUsser.png"
   end
 

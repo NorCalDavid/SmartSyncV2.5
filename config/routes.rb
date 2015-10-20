@@ -40,8 +40,8 @@ Rails.application.routes.draw do
   resources :schedules, controller: 'schedules/schedules' do
     get :get_actions, on: :collection
     
-    resources :actions, controller: 'schedules/actions'
     resources :action_series, controller: 'schedules/action_series'
+    resources :actions, controller: 'schedules/actions'
   end
 
   scope module: 'admin' do
