@@ -25,6 +25,8 @@ gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'
 gem 'devise-bootstrap-views'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'sass-rails'
 gem 'bootstrap_form'
 gem 'bootstrap-slider-rails'
@@ -37,11 +39,11 @@ gem 'twilio-ruby'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem "workless"
+gem 'rabl', '~> 0.9.3'
+
 
 gem 'carrierwave'
 gem 'cloudinary'
-
-gem 'fullcalendar-rails'
 
 group :development do
   gem 'quiet_assets'

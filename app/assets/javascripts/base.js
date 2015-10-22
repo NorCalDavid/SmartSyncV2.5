@@ -13,3 +13,5 @@
 
 //= require src/formValidation
 //= require src/fullCalendar
+//= require src/events
+

@@ -30,6 +30,8 @@ class CreateDevices < ActiveRecord::Migration
       t.references :room, index: true, foreign_key: true
 
       t.timestamps null: false
+      t.integer :created_by
+      t.integer :updated_by
     end
   end
 end

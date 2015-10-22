@@ -34,13 +34,12 @@ Rails.application.routes.draw do
 
   resources :event_groups, controller: 'events/groups'
   
-  resources :events, controller: 'events/events' do
-    resources :actions, controller: 'events/actions'
-    resources :conditions, controller: 'events/conditions'
+  resources :events, except: :show do
+    get :delete
   end
 
   resources :schedules, controller: 'schedules/schedules' do
-    get :get_actions, on: :collection
+    get :calendar, on: :collection, as: :schedule_calendar
     
     resources :action_series, controller: 'schedules/action_series'
     resources :actions, controller: 'schedules/actions'

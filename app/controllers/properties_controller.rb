@@ -25,7 +25,7 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
-    @property = Property.new(property_params)
+    @property = Property.new(create_params)
 
     respond_to do |format|
       if @property.save
@@ -43,7 +43,7 @@ class PropertiesController < ApplicationController
   # PATCH/PUT /properties/1.json
   def update
     respond_to do |format|
-      if @property.update(property_params)
+      if @property.update(update_params)
         format.html { redirect_to @property, notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else
@@ -67,13 +67,22 @@ class PropertiesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = Property.find(params[:id])
-      @user = current_user
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def property_params
-      params.require(:property).permit(:name, :description, :address, :city, :state, :zipcode, :image, :image_cache)
-    end
+  def set_property
+    @property = Property.find(params[:id])
+    @user = current_user
   end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def property_params
+    params.require(:property).permit(:name, :description, :address, :city, :state, :zipcode, :image, :image_cache)
+  end
+
+  def create_params
+    property_params.merge(created_by: current_user.id)
+  end
+
+  def update_params
+    property_params.merge(updated_by: current_user.id)
+  end
+end
+

@@ -1,0 +1,121 @@
+<div class='container-body' id="edit-reminders">
+  <div class='container-body'>
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <h3 class="panel-title">Smart Schedules</h3>
+          </div>
+          
+          <div class="panel-body">
+            <%= bootstrap_form_for @schedule do |f| %>
+            
+              <div class="row">
+                <div class="col-md-7">
+                  <%= f.text_field :title %>
+                </div> 
+
+                <div class="col-md-5">
+                  <div class="col-md-8">
+                    <%= f.text_field :type %>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= f.select :favorite, [["Yes", true], ["No", false]], { label: "Favorite:" }, { class: "selectpicker" } %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-7">
+                  <%= f.text_area :description %>
+
+                  <%= f.label "Property" %>
+                  <%= collection_select(:schedule,
+                                        :property_id, current_user.properties, 
+                                        :id, :name, {},
+                                        { class: "form-control" }) %>
+                </div>
+                
+                <div class="col-md-5">
+                  <div class="col-md-5">
+                    <%= f.select :published, [["Yes", true], ["No", false]], { label: "Published:" }, { class: "selectpicker" } %>
+                  </div>
+                  
+                  <div class="col-md-7">
+                    <%= f.datetime_field :published_on, :format => :long, :label => "Date Published", class: "form-input-static", :disabled => "disabled", :value => @schedule.try(:published_on).try(:strftime,'%m/%d/%Y at %I:%M %P') %>
+                  </div>
+
+                  <div class="col-md-5">
+                    <%= f.number_field :executed_count, label: "Executed Count:", class: "form-input-static", :disabled => "disabled" %>
+                  </div>
+                  
+                  <div class="col-md-7">
+                    <%= f.datetime_field :executed_last, :format => :long, :label => "Date Executed Last:", class: "form-input-static", :disabled => "disabled", :value => @schedule.try(:executed_last).try(:strftime,'%m/%d/%Y at %I:%M %P') %>
+                  </div>
+                  
+                  <div class="col-md-5"></div>
+                  <div class="col-md-7">
+                    <%= f.datetime_field :created_at, :format => :long, :label => "Date Created", class: "form-input-static", :disabled => "disabled", :value => @schedule.try(:created_at).try(:strftime,'%m/%d/%Y at %I:%M %P') %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.date_select :start_time, :order => [:month, :day, :year], :label => "Start Date", class: "padding-left padding-right" %>
+                </div>
+
+                <div class="col-md-2">
+                  <%= f.time_select :start_time, :ampm => true, label: "Start Time", class: "form-input padding-left" %>
+                </div>
+                
+                <div class="col-md-2">
+                  <%= f.select :all_day, [["Yes", true], ["No", false]], { label: "All Day Event" }, { class: "selectpicker" } %>
+                </div>
+              </div> 
+
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.date_select :end_time, :order => [:month, :day, :year], :label => "End Date", class: "padding-left padding-right" %>
+                </div>
+
+                <div class="col-md-2">
+                  <%= f.time_select :end_time, :ampm => true, label: "End Time", class: "form-input padding-left" %>
+                </div>
+                
+                <div class="col-md-4">
+                  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
+                </div>
+              </div> 
+
+              <div class="row">
+                <div class="col-md-2">
+                  <%= f.text_field :frequency, class: "form-input" %>
+                </div>
+
+                <div class="col-md-2">
+                  <%= f.text_field :period, class: "form-input" %>
+                </div>
+              </div> 
+              
+          </div>
+
+          <div class="panel-footer text-right">
+            <%= f.submit nil, :class => 'btn btn-primary embossed' %>
+          
+            <%= link_to schedules_path, class: 'btn btn-default embossed' do %>
+              <span class="glyphicon glyphicon-info-sign"></span> Cancel
+            <% end %>
+            
+            <%= link_to dashboard_path, class: 'btn btn-primary embossed' do %>
+              <span class="glyphicon glyphicon-list-alt"></span> Dashboard
+            <% end %>
+          </div>
+
+          <%end %>
+        </div>
+      </div> 
+    </div> 
+  </div>

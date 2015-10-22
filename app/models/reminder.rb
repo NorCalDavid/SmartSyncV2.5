@@ -48,4 +48,5 @@ class Reminder < ActiveRecord::Base
   end
 
   handle_asynchronously :message, :run_at => Proc.new { |i| i.when_to_run }
+
 end

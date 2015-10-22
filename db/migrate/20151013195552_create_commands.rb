@@ -9,6 +9,8 @@ class CreateCommands < ActiveRecord::Migration
       t.references :device, index: true, foreign_key: true
 
       t.timestamps null: false
+      t.integer :created_by
+      t.integer :updated_by      
     end
   end
 end

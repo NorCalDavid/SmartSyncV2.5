@@ -5,6 +5,8 @@ class CreateEventGroups < ActiveRecord::Migration
       t.text :description
 
       t.timestamps null: false
+      t.integer :created_by
+      t.integer :updated_by    
     end
   end
 end

@@ -38,7 +38,7 @@
                   <dt class="label label-default"><%= model_class.human_attribute_name(:recipient_id) %></dt>
                   <dd><pre class="prettyprint"><%= @reminder.recipient_id %></pre></dd>
                   <dt class="label label-default"><%= model_class.human_attribute_name(:recipient_phone_number) %></dt>
-                  <dd><pre class="prettyprint"><%= number_to_phone(@reminder.recipient_phone_number, area_code: true) %></pre></dd>
+                  <dd><pre class="prettyprint phone-input"><%= number_to_phone(@reminder.recipient_phone_number, area_code: true) %></pre></dd>
                   <dt class="label label-default"><%= model_class.human_attribute_name(:notification_time) %></dt>
                   <dd><pre class="prettyprint"><%=l @reminder.notification_time, format: :long %></pre></dd>
                   <dt class="label label-default"><%= model_class.human_attribute_name(:time_zone) %></dt>

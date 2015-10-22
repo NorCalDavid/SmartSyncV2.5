@@ -4,8 +4,8 @@ class Schedule < ActiveRecord::Base
   belongs_to :property
   has_many :users, through: :property
   
-  has_many :schedule_action_series, dependent: :destroy
-  has_many :schedule_actions, through: :schedule_action_series
+  has_many :schedule_conditions, dependent: :destroy
+  has_many :schedule_actions, dependent: :destroy
 
   after_update :published_changes
 

@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
-    @room = Room.new(room_params)
+    @room = Room.new(create_params)
 
     respond_to do |format|
       if @room.save
@@ -42,7 +42,7 @@ class RoomsController < ApplicationController
   # PATCH/PUT /rooms/1.json
   def update
     respond_to do |format|
-      if @room.update(room_params)
+      if @room.update(update_params)
         format.html { redirect_to @room, notice: 'Room was successfully updated.' }
         format.json { render :show, status: :ok, location: @room }
       else
@@ -72,4 +72,13 @@ class RoomsController < ApplicationController
     def room_params
       params.require(:room).permit(:name, :description, :location, :property_id)
     end
+
+    def create_params
+      room_params.merge(created_by: current_user.id)
+    end
+
+    def update_params
+      room_params.merge(updated_by: current_user.id)
+    end
+
   end

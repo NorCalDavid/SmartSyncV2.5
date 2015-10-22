@@ -1,7 +1,7 @@
 class ScheduleAction < ActiveRecord::Base
   audited allow_mass_assignment: true
   
-  belongs_to :schedule_action_series
+  belongs_to :schedule
 
   after_update :published_changes
 

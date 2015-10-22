@@ -1,9 +1,8 @@
 class EventAction < ActiveRecord::Base
 	audited allow_mass_assignment: true
 	
-	belongs_to :event_condition
-	has_one :event, through: :event_condition
-	has_many :event_logs, through: :event	
+	# belongs_to :event_condition
+	# has_one :event, through: :event_condition
 
 	after_update :published_changes
 

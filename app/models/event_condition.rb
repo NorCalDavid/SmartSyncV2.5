@@ -1,8 +1,8 @@
 class EventCondition < ActiveRecord::Base
 	audited allow_mass_assignment: true
 	
-	belongs_to :event
-	has_many :event_actions, dependent: :destroy
+	# belongs_to :event
+	# has_many :event_actions, dependent: :destroy
 
 	after_update :published_changes
 

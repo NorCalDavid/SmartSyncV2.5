@@ -43,11 +43,8 @@
 	                                    	id: "selected-recipient-field" }) %>
 							</div> 
 							<div class="col-md-4">
-								<%= f.phone_field :recipient_phone_number, value: @recipient_phone_number, 
-																													 class: "form-control-static", 
-	                                    										 id: "recipient-phone-number-field",
-	                                    										 required: "",
-	                                    										 placeholder: "(999) 999-9999" %>
+								<%= f.phone_field :recipient_phone_number, class: "form-control-static", 
+	                                    										 id: "recipient-phone-number-field" %>
 							</div>
 						</div> 
 

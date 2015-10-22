@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.integer  "device_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "commands", ["device_id"], name: "index_commands_on_device_id", using: :btree
@@ -154,6 +156,8 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.integer  "room_id"
     t.datetime "created_at",                                                                                                      null: false
     t.datetime "updated_at",                                                                                                      null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "devices", ["property_id"], name: "index_devices_on_property_id", using: :btree
@@ -174,6 +178,8 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.integer  "event_condition_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "event_actions", ["event_condition_id"], name: "index_event_actions_on_event_condition_id", using: :btree
@@ -195,6 +201,8 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.integer  "event_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "event_conditions", ["event_id"], name: "index_event_conditions_on_event_id", using: :btree
@@ -204,26 +212,24 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",                           null: false
-    t.text     "description"
-    t.string   "type",                           null: false
-    t.boolean  "published",      default: false, null: false
-    t.datetime "published_on"
-    t.string   "status"
-    t.boolean  "favorite",       default: false, null: false
-    t.integer  "executed_count", default: 0,     null: false
-    t.datetime "executed_last"
-    t.integer  "event_group_id"
-    t.integer  "property_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "name",                            null: false
+    t.datetime "start"
+    t.datetime "finish"
+    t.text     "description",                     null: false
+    t.boolean  "all_day",     default: false,     null: false
+    t.integer  "frequency",   default: 1
+    t.string   "period",      default: "monthly"
+    t.string   "time_zone",                       null: false
   end
 
-  add_index "events", ["event_group_id"], name: "index_events_on_event_group_id", using: :btree
-  add_index "events", ["property_id"], name: "index_events_on_property_id", using: :btree
+  add_index "events", ["name"], name: "index_events_on_name", using: :btree
 
   create_table "identities", force: :cascade do |t|
     t.string   "provider",         null: false
@@ -259,6 +265,8 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.string   "image",       default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png"
     t.datetime "created_at",                                                                                               null: false
     t.datetime "updated_at",                                                                                               null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -281,6 +289,8 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.integer  "property_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "reminders", ["property_id"], name: "index_reminders_on_property_id", using: :btree
@@ -292,67 +302,72 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.integer  "property_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "rooms", ["property_id"], name: "index_rooms_on_property_id", using: :btree
 
-  create_table "schedule_action_series", force: :cascade do |t|
-    t.integer  "frequency",      default: 1
-    t.string   "period",         default: "monthly"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.string   "time_zone",                          null: false
-    t.boolean  "all_day",        default: false
+  create_table "schedule_actions", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
     t.string   "type"
-    t.boolean  "published",      default: false
-    t.datetime "published_on"
     t.string   "status"
     t.integer  "target_id"
     t.integer  "command_id"
     t.string   "action"
-    t.integer  "executed_count", default: 0,         null: false
+    t.integer  "schedule_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
+  end
+
+  add_index "schedule_actions", ["schedule_id"], name: "index_schedule_actions_on_schedule_id", using: :btree
+
+  create_table "schedule_conditions", force: :cascade do |t|
+    t.string   "name",                            null: false
+    t.text     "description"
+    t.string   "type",                            null: false
+    t.boolean  "published",       default: false, null: false
+    t.datetime "published_on"
+    t.string   "condition"
+    t.integer  "trigger_id"
+    t.integer  "test_option_id"
+    t.string   "test_one"
+    t.string   "test_two"
+    t.integer  "execution_order"
+    t.integer  "executed_count",  default: 0,     null: false
     t.datetime "executed_last"
     t.integer  "schedule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
-  create_table "schedule_actions", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "starttime",                                 null: false
-    t.datetime "endtime",                                   null: false
-    t.string   "time_zone",                                 null: false
-    t.boolean  "all_day",                   default: false
-    t.string   "type"
-    t.boolean  "published",                 default: false
-    t.datetime "published_on"
-    t.string   "status"
-    t.integer  "target_id"
-    t.integer  "command_id"
-    t.string   "action"
-    t.integer  "executed_count",            default: 0,     null: false
-    t.datetime "executed_last"
-    t.integer  "schedule_action_series_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-  end
-
-  add_index "schedule_actions", ["schedule_action_series_id"], name: "index_schedule_actions_on_schedule_action_series_id", using: :btree
+  add_index "schedule_conditions", ["schedule_id"], name: "index_schedule_conditions_on_schedule_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.text     "description"
-    t.string   "type",                           null: false
+    t.integer  "frequency",      default: 1
+    t.string   "period",         default: "monthly"
+    t.datetime "start_time",                         null: false
+    t.datetime "end_time",                           null: false
+    t.string   "time_zone",                          null: false
+    t.boolean  "all_day",        default: false
+    t.string   "type",                               null: false
     t.boolean  "published",      default: false
     t.datetime "published_on"
-    t.string   "status"
     t.boolean  "favorite",       default: false
-    t.integer  "executed_count", default: 0,     null: false
+    t.integer  "executed_count", default: 0,         null: false
     t.datetime "executed_last"
     t.integer  "property_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "created_by"
+    t.integer  "updated_by"
   end
 
   add_index "schedules", ["property_id"], name: "index_schedules_on_property_id", using: :btree
@@ -453,11 +468,11 @@ ActiveRecord::Schema.define(version: 20151020163014) do
   add_foreign_key "devices", "rooms"
   add_foreign_key "event_actions", "event_conditions"
   add_foreign_key "event_conditions", "events"
-  add_foreign_key "events", "event_groups"
-  add_foreign_key "events", "properties"
   add_foreign_key "identities", "users"
   add_foreign_key "reminders", "properties"
   add_foreign_key "rooms", "properties"
+  add_foreign_key "schedule_actions", "schedules"
+  add_foreign_key "schedule_conditions", "schedules"
   add_foreign_key "schedules", "properties"
   add_foreign_key "status_options", "devices"
   add_foreign_key "status_options", "statuses"

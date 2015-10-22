@@ -1,3 +1,39 @@
+$('form').ready(function() {
+	jQuery(function($) {
+		$(".phone-input").mask('(999) 999-9999');
+	});
+
+	jQuery(function($) {
+		$('.draggable').draggable({ scroll: true,
+      													cursor: 'crosshair' });
+	});
+	  
+
+	// jQuery(function($) {
+	// 	$('#event-modal').html("#{ j render 'modal' }");
+	// 	$('#event-modal').modal('show');
+	// 	debugger;
+	// 	var config = {  url: '/events/new',
+	// 						    	type: 'get',
+	// 						    	dataType: 'html' };
+	// 						    	debugger;
+	//     $.ajax(config)
+	//     .done(function(response) { $("#new-modal-landing").append(response) })
+	//     .fail(function(response) { console.log("Error: Response - " + response) }); 
+	// });
+
+	jQuery(function($) {
+		$('#event-modal').html("#{ j render 'modal' }");
+		$('#hidden-delete').show();
+		$('#event-modal').modal('show').is(':visible');
+	});
+
+	// jQuery(function dynamicSave() {
+	//   $('#calendar').fullCalendar( 'refetchEvents' );
+	//   $('#event-modal').modal('hide');
+	// }
+
+});
 
 $('#for-for-reminders').ready(function() {
 	jQuery(function($) {

@@ -37,8 +37,8 @@ class RemindersController < ApplicationController
   # POST /reminders
   # POST /reminders.json
   def create
-    Time.zone = reminder_params[:time_zone]
-    @reminder = Reminder.new(reminder_params)
+    Time.zone = create_params[:time_zone]
+    @reminder = Reminder.new(create_params)
     
     if @reminder.save
       redirect_to @reminder, notice: 'Reminder was successfully created.'
@@ -60,7 +60,7 @@ class RemindersController < ApplicationController
   # PATCH/PUT /reminders/1.json
   def update
     
-    if @reminder.update(reminder_params)
+    if @reminder.update(update_params)
       redirect_to @reminder, notice: 'Reminder was successfully updated.'
     else
       render :edit
@@ -104,6 +104,14 @@ class RemindersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def reminder_params
       params.require(:reminder).permit(:name, :description, :recipient_id, :recipient_phone_number, :notification_time, :time_zone, :property_id)
+    end
+
+    def create_params
+      reminder_params.merge(created_by: current_user.id)
+    end
+
+    def update_params
+      reminder_params.merge(updated_by: current_user.id)
     end
 
 end

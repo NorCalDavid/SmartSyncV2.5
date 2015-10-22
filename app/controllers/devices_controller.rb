@@ -25,7 +25,7 @@ class DevicesController < ApplicationController
   # POST /devices
   # POST /devices.json
   def create
-    @device = User.find(current_user).devices.new(device_params)
+    @device = User.find(current_user).devices.new(create_params)
 
     respond_to do |format|
       if @device.save
@@ -46,7 +46,7 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1.json
   def update
     respond_to do |format|
-      if @device.update(device_params)
+      if @device.update(update_params)
         format.html { redirect_to @device, notice: 'Device was successfully updated.' }
         format.json { render :show, status: :ok, location: @device }
       else
@@ -76,4 +76,13 @@ class DevicesController < ApplicationController
     def device_params
       params.require(:device).permit(:name, :description, :status_code, :brand, :type, :location, :EDID, :version, :image, :property_id, :room_id, :status_code, :status, :favorite)
     end
+
+    def create_params
+      device_params.merge(created_by: current_user.id)
+    end
+
+    def update_params
+      device_params.merge(updated_by: current_user.id)
+    end
+
 end

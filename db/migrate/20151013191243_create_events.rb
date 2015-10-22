@@ -1,19 +1,39 @@
 class CreateEvents < ActiveRecord::Migration
   def change
-    create_table :events do |t|
-      t.string :name, null: false
-      t.text :description
-      t.string :type, null: false
-      t.boolean :published, null: false, default: false
-      t.datetime :published_on
-      t.string :status
-      t.boolean :favorite, null: false, default: false
-      t.integer :executed_count, null: false, default: 0
-      t.datetime :executed_last
-      t.references :event_group, index: true, foreign_key: true
-      t.references :property, index: true, foreign_key: true
+    # create_table :events do |t|
+    #   t.string :title, null: false
+    #   t.text :description
+    #   t.integer :frequency, :default => 1
+    #   t.string :period, :default => 'monthly'
+    #   t.datetime :start_time, null: false
+    #   t.datetime :end_time, null: false
+    #   t.string :time_zone, null: false
+    #   t.boolean :all_day, :default => false
+    #   t.string :type, null: false
+    #   t.boolean :published, null: false, default: false
+    #   t.datetime :published_on
+    #   t.string :status
+    #   t.boolean :favorite, null: false, default: false
+    #   t.integer :executed_count, null: false, default: 0
+    #   t.datetime :executed_last
+    #   t.references :event_group, index: true, foreign_key: true
+    #   t.references :property, index: true, foreign_key: true
       
+    #   t.timestamps null: false
+    #   t.integer :created_by
+    #   t.integer :updated_by
+    create_table :events do |t|
       t.timestamps null: false
+
+      t.string   :name,        null: false
+      t.datetime :start
+      t.datetime :finish
+      t.text     :description, null: false
+      t.boolean  :all_day,     null: false, default: false
+      t.integer :frequency, :default => 1
+      t.string :period, :default => 'monthly'
+      t.string :time_zone, null: false
     end
+    add_index :events, :name
   end
 end
