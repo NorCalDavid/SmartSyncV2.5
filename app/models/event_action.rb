@@ -1,5 +1,5 @@
 class EventAction < ActiveRecord::Base
-	audited allow_mass_assignment: true
+	# audited allow_mass_assignment: true
 	
 	# belongs_to :event_condition
 	# has_one :event, through: :event_condition

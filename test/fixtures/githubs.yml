@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  screen_name: MyString
+  location: MyString
+  image_url: MyString
+  profile_url: MyString
+  personal_website_url: MyString
+  uid: MyString
+  user_id: 
+  public_repos_count: 1
+  public_repos_url: MyString
+  private_repos_count: 1
+  public_gists_count: 1
+  public_gists_url: MyString
+  private_gists_count: 1
+  personal_private_repos_count: 1
+  total_data_stored: 
+  followers_count: 1
+  followers_url: MyString
+  following_count: 1
+  following_url: MyString
+  starred_url: MyString
+  subscriptions_url: MyString
+  organizations_url: MyString
+  events_url: MyString
+
+two:
+  screen_name: MyString
+  location: MyString
+  image_url: MyString
+  profile_url: MyString
+  personal_website_url: MyString
+  uid: MyString
+  user_id: 
+  public_repos_count: 1
+  public_repos_url: MyString
+  private_repos_count: 1
+  public_gists_count: 1
+  public_gists_url: MyString
+  private_gists_count: 1
+  personal_private_repos_count: 1
+  total_data_stored: 
+  followers_count: 1
+  followers_url: MyString
+  following_count: 1
+  following_url: MyString
+  starred_url: MyString
+  subscriptions_url: MyString
+  organizations_url: MyString
+  events_url: MyString

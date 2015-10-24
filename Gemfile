@@ -6,11 +6,9 @@ gem 'rails', '4.2.4'
 gem 'pg'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem "audited-activerecord"
+# gem "audited-activerecord"
 
-gem 'warden'
 gem 'devise'
-gem 'devise_traceable'
 gem 'high_voltage'
 gem 'figaro'
 require 'yaml'
@@ -20,7 +18,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
 gem 'omniauth-linkedin-oauth2'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', github: 'zquestz/omniauth-google-oauth2'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'

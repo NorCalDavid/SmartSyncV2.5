@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-	audited allow_mass_assignment: true
+	# audited allow_mass_assignment: true
 
 	belongs_to :property
 	has_many :user_properties, through: :property

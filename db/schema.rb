@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020163014) do
+ActiveRecord::Schema.define(version: 20151023215444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,29 +57,6 @@ ActiveRecord::Schema.define(version: 20151020163014) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   add_index "admin_users", ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true, using: :btree
-
-  create_table "audits", force: :cascade do |t|
-    t.integer  "auditable_id"
-    t.string   "auditable_type"
-    t.integer  "associated_id"
-    t.string   "associated_type"
-    t.integer  "user_id"
-    t.string   "user_type"
-    t.string   "username"
-    t.string   "action"
-    t.text     "audited_changes"
-    t.integer  "version",         default: 0
-    t.string   "comment"
-    t.string   "remote_address"
-    t.string   "request_uuid"
-    t.datetime "created_at"
-  end
-
-  add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
-  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
-  add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
-  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
-  add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "commands", force: :cascade do |t|
     t.string   "name",        null: false
@@ -231,18 +208,42 @@ ActiveRecord::Schema.define(version: 20151020163014) do
 
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
 
-  create_table "identities", force: :cascade do |t|
-    t.string   "provider",         null: false
+  create_table "githubs", force: :cascade do |t|
+    t.string   "screen_name"
+    t.string   "location"
+    t.string   "image_url"
+    t.string   "profile_url"
+    t.string   "personal_website_url"
+    t.integer  "public_repos_count"
+    t.string   "public_repos_url"
+    t.integer  "private_repos_count"
+    t.integer  "public_gists_count"
+    t.string   "public_gists_url"
+    t.integer  "private_gists_count"
+    t.integer  "personal_private_repos_count"
+    t.integer  "total_data_stored",            limit: 8
+    t.integer  "followers_count"
+    t.string   "followers_url"
+    t.integer  "following_count"
+    t.string   "following_url"
+    t.string   "starred_url"
+    t.string   "subscriptions_url"
+    t.string   "organizations_url"
+    t.string   "events_url"
     t.string   "uid"
-    t.string   "token"
-    t.string   "token_secret"
-    t.string   "image"
-    t.string   "provider_email"
-    t.string   "provider_profile"
-    t.datetime "provider_DOB"
     t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "githubs", ["user_id"], name: "index_githubs_on_user_id", using: :btree
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "provider",   null: false
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
@@ -391,6 +392,19 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "twitters", force: :cascade do |t|
+    t.string   "screen_name"
+    t.string   "location"
+    t.string   "image_url"
+    t.string   "profile_url"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "twitters", ["user_id"], name: "index_twitters_on_user_id", using: :btree
+
   create_table "user_devices", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "device_id"
@@ -417,14 +431,6 @@ ActiveRecord::Schema.define(version: 20151020163014) do
   add_index "user_properties", ["user_id", "property_id"], name: "index_user_properties_on_user_id_and_property_id", unique: true, using: :btree
   add_index "user_properties", ["user_id"], name: "index_user_properties_on_user_id", using: :btree
 
-  create_table "user_tracings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "sign_in_at"
-    t.datetime "sign_out_at"
-  end
-
-  add_index "user_tracings", ["user_id"], name: "index_user_tracings_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -449,17 +455,12 @@ ActiveRecord::Schema.define(version: 20151020163014) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",                   default: 0,                                                                              null: false
-    t.string   "unlock_token"
-    t.datetime "locked_at"
     t.datetime "created_at",                                                                                                                 null: false
     t.datetime "updated_at",                                                                                                                 null: false
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "commands", "devices"
   add_foreign_key "device_commands", "commands"
@@ -468,6 +469,7 @@ ActiveRecord::Schema.define(version: 20151020163014) do
   add_foreign_key "devices", "rooms"
   add_foreign_key "event_actions", "event_conditions"
   add_foreign_key "event_conditions", "events"
+  add_foreign_key "githubs", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "reminders", "properties"
   add_foreign_key "rooms", "properties"
@@ -476,6 +478,7 @@ ActiveRecord::Schema.define(version: 20151020163014) do
   add_foreign_key "schedules", "properties"
   add_foreign_key "status_options", "devices"
   add_foreign_key "status_options", "statuses"
+  add_foreign_key "twitters", "users"
   add_foreign_key "user_devices", "devices"
   add_foreign_key "user_devices", "users"
   add_foreign_key "user_properties", "properties"

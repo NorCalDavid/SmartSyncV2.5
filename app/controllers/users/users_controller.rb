@@ -6,6 +6,20 @@ class Users::UsersController < ApplicationController
   def profile
   end
   
+  # # GET /users/:id/github
+  def github
+    @github = current_user.github
+
+    if @github.nil?
+      flash[:alert] = "You have not linked your Github Account."
+    end
+  end
+
+  # # GET /users/:id/twitter
+  def twitter
+  end
+
+
   private
     def set_user
       @user = User.find(params[:id])

@@ -1,5 +1,5 @@
 class Device < ActiveRecord::Base
-  audited allow_mass_assignment: true
+  # audited allow_mass_assignment: true
   
   belongs_to :room
   has_one :property, through: :room

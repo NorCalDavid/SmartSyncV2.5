@@ -1,5 +1,5 @@
 class ScheduleCondition < ActiveRecord::Base
-  audited allow_mass_assignment: true
+  # audited allow_mass_assignment: true
   
   belongs_to :schedule
 

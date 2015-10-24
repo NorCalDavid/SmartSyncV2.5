@@ -44,10 +44,15 @@
 					<% else %>
 						<% current_user.connected_social_logins.each do |connected| %>
 						<li class="padding-top-md">
-							<%= button_to omniauth_authorize_path(current_user, connected[:reference]), 
-													class: "btn-xs btn-block btn-social btn-#{connected[:name].downcase} dropdown-social-btn center-block embossed" do %>
-
-								<i class="fa fa-<%= connected[:name].downcase %>"></i> Remove <%= connected[:name] %>
+							<% if connected[:reference] == "github" %>
+								<%= button_to user_github_path(current_user), :method => :get, class: "btn-xs btn-block btn-social btn-github dropdown-social-btn center-block embossed" do %>
+									<i class="fa fa-github"></i> Github Profile
+								<% end %>
+							<% else %>
+								<%= button_to omniauth_authorize_path(current_user, connected[:reference]), 
+										class: "btn-xs btn-block btn-social btn-#{connected[:name].downcase} dropdown-social-btn center-block embossed" do %>
+									<i class="fa fa-<%= connected[:name].downcase %>"></i> Remove <%= connected[:name] %>
+								<% end %>
 							<% end %>
 						</li>
 						<% end %>

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  audited allow_mass_assignment: true
+  # audited allow_mass_assignment: true
   attr_accessor :connected_social_logins, :available_social_logins, :connected_identites
   
   TEMP_EMAIL_PREFIX = 'change@me'
@@ -9,12 +9,12 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable
 
   devise :database_authenticatable, :registerable, :confirmable, 
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :traceable
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  has_many :sessions, class_name: "UserTracing",
-                      foreign_key: "user_id"
-  
   has_many :identities, dependent: :destroy
+  has_one :twitter, dependent: :destroy
+  has_one :github, dependent: :destroy
+
 
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 
   # Omniauth 
   def self.find_for_oauth(auth, signed_in_resource = nil)
-    ap auth
+    # ap auth
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
     user = signed_in_resource ? signed_in_resource : identity.user
@@ -90,6 +90,23 @@ class User < ActiveRecord::Base
     if identity.user != user
       identity.user = user
       identity.save!
+    end
+
+    # Find or Create a Local Provider Specific Record for Social Media Accounts 
+    if auth["provider"] == "github"
+      ap "GITHUB"
+      Github.find_for_oauth(auth, user) 
+    else
+      ap "NOT GITHUB"
+      ap auth["provider"]
+    end
+
+    if auth["provider"] == "twitter"
+      ap "TWITTER"
+      Twitter.find_for_oauth(auth, user) 
+    else
+      ap "NOT TWITTER"
+      ap auth["provider"]
     end
 
     return user

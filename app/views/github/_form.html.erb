@@ -1,0 +1,106 @@
+<%= form_for @github, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :screen_name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :screen_name, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :location, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :location, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :image_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :image_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :profile_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :profile_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :personal_website_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :personal_website_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :public_repos_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :public_repos_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :public_gists_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :public_gists_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :total_data_stored, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :total_data_stored, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :followers_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :followers_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :following_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :following_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :starred_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :starred_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :subscriptions_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :subscriptions_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :organizations_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :organizations_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :events_url, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :events_url, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :uid, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :uid, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :user_id, :class => 'text_field form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  github_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

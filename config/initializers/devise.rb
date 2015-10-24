@@ -237,6 +237,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  require "omniauth-google-oauth2"
+
   OMNIAUTH = YAML.load(File.read(File.expand_path('../../omniauth.yml', __FILE__))).deep_symbolize_keys
 
   OMNIAUTH.each_value do |provider|
@@ -264,5 +266,5 @@ Devise.setup do |config|
   #
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-  # config.omniauth_path_prefix = '/my_engine/users/auth'
+  # config.omniauth_path_prefix = '/users/auth'
 end

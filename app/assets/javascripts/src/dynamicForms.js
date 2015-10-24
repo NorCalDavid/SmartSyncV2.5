@@ -1,3 +1,9 @@
+$(document).ready(function() {
+	function resetForm(id) {
+		$(id)[0].reset();
+	}
+});
+
 $('form').ready(function() {
 	jQuery(function($) {
 		$(".phone-input").mask('(999) 999-9999');
@@ -35,9 +41,10 @@ $('form').ready(function() {
 
 });
 
-$('#for-for-reminders').ready(function() {
+$('#form-for-reminders').ready(function() {
 	jQuery(function($) {
   // when the #search field changes
+  	console.log("Form Ready");
 	  $("#selected-recipient-field").change(function() {
 	    var config = {  url: '/reminders/refresh_form',
 								    	type: 'post',

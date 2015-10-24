@@ -53,14 +53,20 @@
 
       <div class="row"></div>
     </div>
-    <div class="panel-footer">
-      <%= f.submit :class => 'btn btn-primary embossed' %>
-      
-      <span id="hidden-delete" style="display: none;">
-        <%= link_to @event, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, id: 'destroy', class: 'btn btn-danger embossed' do %>
-          <span class="glyphicon glyphicon-exclamation"></span> Delete
-        <% end %>
-      </span>
+    <div class="panel-footer block-center">
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.submit :class => 'btn btn-block btn-primary embossed' %>
+          <% end %>
+        </div> 
+        
+        <% if action?('edit') %>
+        <div class="col-md-6">
+          <%= button_to @event, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, id: 'destroy', class: 'btn btn-block btn-danger embossed' do %>
+            <span class="glyphicon glyphicon-exclamation"></span> Delete
+          <% end %>  
+        </div> 
+        <% end %> 
+      </div> 
     </div>
-  <% end %>
 </div>

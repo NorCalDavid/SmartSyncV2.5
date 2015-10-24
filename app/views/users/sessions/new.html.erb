@@ -10,7 +10,7 @@
             <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
               <div class="form-group">
                 <%= f.label :email %>
-                <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                <%= f.email_field :email, class: "form-control", placeholder: "Enter Your Email" %>
               </div>
               <div class="form-group">
                 <%= f.label :password %>
@@ -42,7 +42,7 @@
                 <% end %>
               </div>
             </div>
-
+            <% javascript_tag "resetForm('form#new_user')" %>
           </div> 
         </div> 
       </div> 

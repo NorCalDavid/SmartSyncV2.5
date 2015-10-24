@@ -18,6 +18,8 @@ class Devise::OmniauthCallbacksController < DeviseController
 
   def failure_message
     exception = env["omniauth.error"]
+    ap "Failure Message:"
+    ap exception
     error   = exception.error_reason if exception.respond_to?(:error_reason)
     error ||= exception.error        if exception.respond_to?(:error)
     error ||= env["omniauth.error.type"].to_s

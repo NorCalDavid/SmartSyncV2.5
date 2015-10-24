@@ -1,11 +1,14 @@
 class Identity < ActiveRecord::Base  
-  audited allow_mass_assignment: true
+  # audited allow_mass_assignment: true
   
   belongs_to :user
+  # has_one :twitter, :foreign_key => 'uid', :primary_key => 'uid', dependent: :destroy
+  # has_one :github, :foreign_key => 'uid', :primary_key => 'uid', dependent: :destroy
   validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
 
   def self.find_for_oauth(auth)
     find_or_create_by(uid: auth.uid, provider: auth.provider)
   end
+
 end

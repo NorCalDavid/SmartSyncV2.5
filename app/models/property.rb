@@ -1,5 +1,5 @@
 class Property < ActiveRecord::Base
-  audited allow_mass_assignment: true
+  # audited allow_mass_assignment: true
   
   has_many :user_properties
   has_many :users, through: :user_properties

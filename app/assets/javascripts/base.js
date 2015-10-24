@@ -13,5 +13,7 @@
 
 //= require src/formValidation
 //= require src/fullCalendar
+//= require src/dynamicForms
+//= require src/remindersForm
 //= require src/events
 

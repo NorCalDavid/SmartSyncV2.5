@@ -17,7 +17,7 @@ $(document).ready(function() {
      events: "/events",
      timeFormat: "h:mm A to h:mm A ",
      timezone: true,
-     dragOpacity: "0.5",
+     dragOpacity: "0  .5",
      eventRender: function(event, element) {
       $('a.fc-event-draggable').attr('data-remote', true);
      },
@@ -50,7 +50,7 @@ $(document).ready(function() {
       url: event.update,
       contentType: 'application/json',
       data: JSON.stringify({
-        event: { id: event.id, start: event.start, finish: event.finish },
+        event: { id: event.id, start: event.start, finish: event.end },
         _method:'POST'
       })
     });

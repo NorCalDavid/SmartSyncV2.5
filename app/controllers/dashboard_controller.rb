@@ -33,7 +33,6 @@ class DashboardController < ApplicationController
 
   def new_property
     @property = current_user.properties.new
-    add_breadcrumb :new_property, :dashboard_devices_new_path
   end
 
   def new_room
@@ -46,49 +45,6 @@ class DashboardController < ApplicationController
 
   private
 
-  def set_configuration
-    @configuration = {  user: current_user,
-      properties: current_user.properties,
-      property_count: current_user.properties.count,
-      room_location_options: LocationOption.where(location_type: "Room") || ["No Location Options"],
-      device_location_options: LocationOption.where(location_type: "Device") || ["No Location Options"]   }
-
-    if session[:active_room] != nil
-      @configuration[:active_property] = Room.find(session[:active_room]).property
-      @configuration[:active_room] = Room.find(session[:active_room])
-      @configuration[:rooms] = Property.find(session[:active_property]).rooms || get_rooms
-      @configuration[:devices] = Room.find(session[:active_room]).devices
-      @configuration[:device_count] = @configuration[:devices].count
-    elsif session[:active_property] != nil
-      @configuration[:active_property] = Property.find(session[:active_property])
-      @configuration[:rooms] = Property.find(session[:active_property]).rooms || get_rooms
-      @configuration[:room_count] = @configuration[:rooms].count || get_rooms.count
-      @configuration[:devices] = get_devices
-      @configuration[:device_count] = @configuration[:devices].count
-    else
-      @configuration[:rooms] = get_rooms
-      @configuration[:room_count] = @configuration[:rooms].count
-      @configuration[:devices] = get_devices
-      @configuration[:device_count] = @configuration[:devices].count
-    end
-  end
-
-  def get_rooms
-    rooms = []
-    return nil if current_user.properties.nil?
-    current_user.properties.each do |property|
-      rooms.concat(property.rooms)
-    end
-    return rooms
-  end
-
-  def get_devices
-    devices = []
-    return nil if get_rooms.nil?
-    get_rooms.each do |room|
-      devices.concat(room.devices)
-    end
-    return devices
-  end
+  
 
 end

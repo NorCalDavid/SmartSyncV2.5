@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_configuration, only: [:new]
+
 
   # GET /rooms
   # GET /rooms.json
@@ -15,6 +17,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/new
   def new
+
     @room = Room.new
   end
 
@@ -66,6 +69,7 @@ class RoomsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
+      set_configuration 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

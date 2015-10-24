@@ -1,0 +1,73 @@
+<%- model_class = Github -%>
+<div class="main-content">
+  <div class="pageheader">
+    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+    <p class="description">View Your Github Profile</p>
+    <div class="breadcrumb-wrapper hidden-xs">
+      <span class="label">You are here:</span>
+      <ol class="breadcrumb">
+          <li class="active"><%=t '.title', :default => model_class.model_name.human.titleize %></h1></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class='container-body'>
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10 padding-top">
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <%= link_to t('.back', :default => t("helpers.links.back")),
+                          dashboard_path, :class => 'btn btn-default btn-xs'  %>
+          </div>
+
+          <div class="panel-body">
+            <div class="fieldset">
+              <dl>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:screen_name) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.screen_name %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:location) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.location %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:image_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.image_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:profile_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.profile_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:personal_website_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.personal_website_url %></pre></dd>
+                  <dt class="label label-default">GitHub Repositories</dt>
+                  <dd>
+                    <%= link_to @github.public_repos_url do %>
+                      <pre class="prettyprint">Public Repositories: <%= @github.public_repos_count %></pre>
+                    <% end %>
+
+                    <%= link_to @github.public_gists_url do %>
+                      <pre class="prettyprint">Public Gists: <%= @github.public_gists_count %></pre>
+                    <% end %>
+                  </dd>
+
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:total_data_stored) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.total_data_stored %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:followers_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.followers_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:following_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.following_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:starred_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.starred_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:subscriptions_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.subscriptions_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:organizations_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.organizations_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:events_url) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.events_url %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:uid) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.uid %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:user_id) %></dt>
+                  <dd><pre class="prettyprint"><%= @github.user_id %></pre></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

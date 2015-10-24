@@ -5,6 +5,7 @@
 //= require fullcalendar/fullcalendar
 //= require fullcalendar/lang-all
 //= require fullcalendar/gcal
+//= require maskedinput
 //= require jquery-ui
 
 
