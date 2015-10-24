@@ -1,29 +1,62 @@
  <!--sidebar right start-->
-    <aside id="sidebar-right">
-        <h4 class="sidebar-title">contact List</h4>
-        <div id="contact-list-wrapper">
-            <div class="heading">
-                <ul>
-                    <li class="new-contact"><a href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-                    </li>
-                    <li>
-                        <input type="text" class="search" placeholder="Search">
-                        <button type="submit" class="btn btn-sm btn-search"><i class="fa fa-search"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div id="contact-list">
+	<aside id="sidebar-right">
+		<h4 class="sidebar-title">Favorites</h4>
+		<div id="contact-list-wrapper">
+			<div class="heading">
+	<!-- 			<ul>
+					<li class="new-contact"><a href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+					</li>
+					<li>
+						<input type="text" class="search" placeholder="Search">
+						<button type="submit" class="btn btn-sm btn-search"><i class="fa fa-search"></i>
+						</button>
+					</li>
+				</ul> -->
+			</div>
+			<div id="contact-list">
+				<table class="table">
+        <thead>
+          <tr class="header-row">
+            <th class="device-col-1">Status</th>
+            <th class="device-col-2">Device</th>
+          </tr>
+        </thead>
+        <tbody>
+				<% unless @configuration[:devices].nil? %>
+          <% @configuration[:devices].each do |device| %>
+          <tr class="device-row">
+            <td class="device-sidebar-block">
+              <span class="animated fadeInLeft">
+                <% if device.status_icon.nil? %>
+                  <%= image_tag("icons/active/0.png", class: "device-sidebar-icon primary-color") %>
+                <% else %>
+                  <%= image_tag(device.status_icon, class: "device-sidebar-icon primary-color") %>
+                <% end %>
+                <i class="on animated bounceIn"></i>
+              </span>
+            </td>
+            <td class="animated fadeInRightBig">
+              <b class="device-name"><%= device.name %></b>
 
-            </div>
-            <div id="contact-user">
-                <div class="chat-user active"><span><i class="icon-bubble"></i></span>
-                </div>
-                <div class="email-user"><span><i class="icon-envelope-open"></i></span>
-                </div>
-                <div class="call-user"><span><i class="icon-call-out"></i></span>
-                </div>
-            </div>
-        </div>
-    </aside>
-    <!--/sidebar right end-->
+              <blockquote class="device-text">
+                <b class="status-text">Status: <%= device.status || "Unknown" %></b>
+              </blockquote>
+
+              
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
+
+			</div>
+			<div id="contact-user">
+				<div class="chat-user active"><span><i class="icon-bubble"></i></span>
+				</div>
+				<div class="email-user"><span><i class="icon-envelope-open"></i></span>
+				</div>
+				<div class="call-user"><span><i class="icon-call-out"></i></span>
+				</div>
+			</div>
+		</div>
+	</aside>
+	<!--/sidebar right end-->
