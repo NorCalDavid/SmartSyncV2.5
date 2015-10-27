@@ -1,0 +1,31 @@
+<%- model_class = Property -%>
+<div class="main-content padding-all-lg">
+  <div class='container-body'>
+    <div class="row">
+      <div class="padding-top col-md-offset-1 col-md-10">
+        <div class="panel panel-red">
+          <div class="panel-heading">
+            <div class="property-icon">
+              <%= thumbnail(@property.image) %>
+              <span class="white-color titleprint">
+                Delete <%= @property.name %> ?
+              </span>
+            </div>
+          </div>
+          <div class="panel-body">  
+            <div class="main-content">
+              <%= bootstrap_form_for @property, html: {method: :delete} do |f| %>
+                <h2>Are you sure you want to delete this property?</h2>
+            </div>
+          </div>
+          <div class="panel-footer text-right">
+              <%= f.submit "Delete", class: "btn btn-default embossed" %>
+              <%= link_to "Cancel", properties_path, class: "btn btn-default embossed" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

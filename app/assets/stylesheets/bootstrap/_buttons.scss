@@ -5,7 +5,14 @@
 
 // Base styles
 // --------------------------------------------------
-
+.button_to,
+.button_to div {
+  display: inline;
+}
+.file-input {
+  color: #ffffff;
+  background-color: $defaultColor;
+}
 .btn {
   display: inline-block;
   margin-bottom: 0; // For input.btn

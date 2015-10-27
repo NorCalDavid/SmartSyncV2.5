@@ -187,11 +187,14 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   create_table "event_groups", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
+    t.integer  "property_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "created_by"
     t.integer  "updated_by"
   end
+
+  add_index "event_groups", ["property_id"], name: "index_event_groups_on_property_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.datetime "created_at",                      null: false
@@ -230,6 +233,7 @@ ActiveRecord::Schema.define(version: 20151023215444) do
     t.string   "subscriptions_url"
     t.string   "organizations_url"
     t.string   "events_url"
+    t.date     "member_since"
     t.string   "uid"
     t.integer  "user_id"
     t.datetime "created_at",                             null: false
@@ -394,13 +398,18 @@ ActiveRecord::Schema.define(version: 20151023215444) do
 
   create_table "twitters", force: :cascade do |t|
     t.string   "screen_name"
+    t.string   "description"
     t.string   "location"
     t.string   "image_url"
     t.string   "profile_url"
+    t.integer  "followers_count"
+    t.integer  "friends_count"
+    t.integer  "favorites_count"
+    t.date     "member_since"
     t.string   "uid"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "twitters", ["user_id"], name: "index_twitters_on_user_id", using: :btree
@@ -469,6 +478,7 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   add_foreign_key "devices", "rooms"
   add_foreign_key "event_actions", "event_conditions"
   add_foreign_key "event_conditions", "events"
+  add_foreign_key "event_groups", "properties"
   add_foreign_key "githubs", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "reminders", "properties"

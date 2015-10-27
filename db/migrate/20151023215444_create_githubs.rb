@@ -22,6 +22,7 @@ class CreateGithubs < ActiveRecord::Migration
       t.string :subscriptions_url
       t.string :organizations_url
       t.string :events_url
+      t.date :member_since
       
       t.string :uid
       t.references :user, index: true, foreign_key: true

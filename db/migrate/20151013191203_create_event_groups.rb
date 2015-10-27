@@ -3,6 +3,7 @@ class CreateEventGroups < ActiveRecord::Migration
     create_table :event_groups do |t|
       t.string :name, null: false
       t.text :description
+      t.references :property, index: true, foreign_key: true
 
       t.timestamps null: false
       t.integer :created_by

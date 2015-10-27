@@ -1,14 +1,14 @@
 class Property < ActiveRecord::Base
   # audited allow_mass_assignment: true
   
-  has_many :user_properties
+  has_many :user_properties, dependent: :destroy
   has_many :users, through: :user_properties
 
   has_many :rooms, dependent: :destroy
   has_many :devices, through: :rooms
 
   has_many :reminders, dependent: :destroy
-  has_many :events, dependent: :destroy
+  has_many :events
   has_many :schedules, dependent: :destroy
 
   validates :name, :presence => true

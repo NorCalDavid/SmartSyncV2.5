@@ -17,6 +17,11 @@ class Users::UsersController < ApplicationController
 
   # # GET /users/:id/twitter
   def twitter
+    @twitter = current_user.twitter
+
+    if @twitter.nil?
+      flash[:alert] = "You have not linked your Twitter Account."
+    end
   end
 
 

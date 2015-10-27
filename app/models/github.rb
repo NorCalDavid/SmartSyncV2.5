@@ -26,7 +26,8 @@ class Github < ActiveRecord::Base
 							    								 starred_url: auth.extra.raw_info["starred_url"],
 							    								 subscriptions_url: auth.extra.raw_info["subscriptions_url"],
 							    								 organizations_url: auth.extra.raw_info["organizations_url"],
-							    								 events_url: auth.extra.raw_info["events_url"] )
+							    								 events_url: auth.extra.raw_info["events_url"],
+							    								 member_since: auth.extra.raw_info["created_at"] )
   end
 
 end

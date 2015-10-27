@@ -48,6 +48,10 @@
 								<%= button_to user_github_path(current_user), :method => :get, class: "btn-xs btn-block btn-social btn-github dropdown-social-btn center-block embossed" do %>
 									<i class="fa fa-github"></i> Github Profile
 								<% end %>
+							<% elsif connected[:reference] == "twitter" %>
+								<%= button_to user_twitter_path(current_user), :method => :get, class: "btn-xs btn-block btn-social btn-twitter dropdown-social-btn center-block embossed" do %>
+									<i class="fa fa-twitter"></i> Twitter Profile
+								<% end %>
 							<% else %>
 								<%= button_to omniauth_authorize_path(current_user, connected[:reference]), 
 										class: "btn-xs btn-block btn-social btn-#{connected[:name].downcase} dropdown-social-btn center-block embossed" do %>

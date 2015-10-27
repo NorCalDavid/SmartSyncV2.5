@@ -34,7 +34,6 @@
                     <th><%= model_class.human_attribute_name(:city) %></th>
                     <th><%= model_class.human_attribute_name(:state) %></th>
                     <th><%= model_class.human_attribute_name(:zipcode) %></th>
-                    <th><%= model_class.human_attribute_name(:user_id) %></th>
                     <th><%= model_class.human_attribute_name(:created_at) %></th>
                     <th><%=t '.actions', :default => t("helpers.actions") %></th>
                   </tr>
@@ -48,7 +47,6 @@
                       <td><%= property.city %></td>
                       <td><%= property.state %></td>
                       <td><%= property.zipcode %></td>
-                      <td><%= property.user_id %></td>
                       <td><%=l property.created_at, format: :long %></td>
                       <td>
                         <%= link_to property_path(property), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>

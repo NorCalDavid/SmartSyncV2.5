@@ -1,51 +1,57 @@
 <%- model_class = Property -%>
-<div class="main-content">
-  <div class="pageheader">
-    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-    <p class="description"><%= @property.name %></p>
-    <div class="breadcrumb-wrapper hidden-xs">
-      <span class="label">You are here:</span>
-      <ol class="breadcrumb">
-          <li class="active">View <%= @property.name %></li>
-      </ol>
-    </div>
-  </div>
-
+<div class="main-content padding-all-lg">
   <div class='container-body'>
     <div class="row">
-      <div class="col-md-offset-1 col-md-10 padding-top">
+      <div class="padding-top col-md-offset-1 col-md-10">
         <div class="panel panel-primary">
-          <div class="panel-body">           
+          <div class="panel-heading">
+            <div class="property-icon">
+              <%= thumbnail(@property.image) %>
+              <span class="white-color titleprint">
+                <%= @property.name %>
+              </span>
+            </div>
+          </div>
+
+          <div class="panel-body social-profile">    
             <div class="fieldset">
               <dl>
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
-                  <dd><pre class="prettyprint"><%= @property.name %></pre></dd>
+                <div class="col-md-12">
                   <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
                   <dd><pre class="prettyprint"><%= @property.description %></pre></dd>
+                </div>
+
+                <div class="col-md-12">
                   <dt class="label label-default"><%= model_class.human_attribute_name(:address) %></dt>
                   <dd><pre class="prettyprint"><%= @property.address %></pre></dd>
+                </div> 
+
+                <div class="col-md-8">
                   <dt class="label label-default"><%= model_class.human_attribute_name(:city) %></dt>
                   <dd><pre class="prettyprint"><%= @property.city %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
                   <dt class="label label-default"><%= model_class.human_attribute_name(:state) %></dt>
                   <dd><pre class="prettyprint"><%= @property.state %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
                   <dt class="label label-default"><%= model_class.human_attribute_name(:zipcode) %></dt>
                   <dd><pre class="prettyprint"><%= @property.zipcode %></pre></dd>
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:image) %></dt>
-                  <dd><pre class="prettyprint"><%= @property.image %></pre></dd>
+                </div> 
               </dl>
             </div>
-
-            <div class="form-group">
-              <%= link_to t('.back', :default => t("helpers.links.back")),
-                          properties_path, :class => 'btn btn-default'  %>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_property_path(@property), :class => 'btn btn-default' %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          property_path(@property),
-                          :method => 'delete',
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                          :class => 'btn btn-danger' %>
-            </div>
+          </div>
+          
+          <div class="panel-footer">
+            <div class="text-right">
+              <%= button_to "Back", properties_path, :method => "get", :class => 'btn btn-primary embossed' %>
+              
+              <%= button_to "Edit", edit_property_path(@property), :method => "get", :class => 'btn btn-primary embossed' %>
+                
+              <%= button_to "Delete", [:delete, @property], :method => "get", :class => 'btn btn-danger embossed' %>
+            </div> 
           </div>
         </div> 
       </div> 

@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_configuration, only: [:index, :refresh, :new_property, :new_room, :new_device ]
+  # before_action :set_configuration, only: [:index, :refresh, :new_property, :new_room, :new_device ]
   skip_before_filter :verify_authenticity_token, :only => :refresh
 
 

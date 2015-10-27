@@ -19,28 +19,40 @@
             </ul>
           </div>
           <% end %>
+            <div class="col-md-8"> 
+              <%= f.text_field :name %>
+            </div> 
+            <div class="col-md-4">
+              <%= f.hidden_field(:image_cache) %>
+              <%= f.file_field(:image, class: "form-control file-input") %>
+            </div>
+            <div class="col-md-12">
+              <%= f.text_area :description %>
+              </div>
+            <div class="col-md-12">
+              <%= f.text_field :address %>
+            </div>
+            <div class="col-md-6">
+              <%= f.text_field :city %>
+            </div> 
+            <div class="col-md-3">
+              <%= f.text_field :state %>
+            </div> 
+            <div class="col-md-3">
+              <%= f.text_field :zipcode %>
+            </div>
+            
+        </div>
 
-            <%= f.text_field :name %>
-            <%= f.text_area :description %>
-            <%= f.text_field :address %>
-            <%= f.text_field :city %>
-            <%= f.text_field :state %>
-            <%= f.text_field :zipcode %>
-            <%= f.hidden_field(:image_cache) %><br>
-            <%= f.file_field(:image) %>
-
-            <%= f.submit %>
-            <%= link_to dashboard_path, class: 'btn btn-default' do %>
-              <span class="glyphicon glyphicon-list-alt"></span>
-              Dashboard
-            <% end %>
-            <%= link_to properties_path, class: 'btn btn-primary' do %>
-              <span class="glyphicon glyphicon-info-sign"></span>
-              All Properties
-            <% end %>
-            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  properties_path, :class => 'btn btn-default' %>
-          <% end %>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <%= f.submit nil, class: 'btn btn-primary embossed' %>
+              <%= button_to "All Properties", properties_path, :method => "get", class: 'btn embossed' %>
+              <%= button_to "Cancel", properties_path, :method => "get", :class => 'btn btn-warning embossed' %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

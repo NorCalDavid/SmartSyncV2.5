@@ -1,0 +1,73 @@
+<%- model_class = Twitter -%>
+<div class="main-content padding-all-lg">
+  <div class='container-body'>
+    <div class="row">
+      <div class="padding-top col-md-offset-1 col-md-10">
+        <div class="panel panel-twitter">
+          <div class="panel-heading">
+            <%= image_tag("logo/TwitterLogoWhite.png", class: "logo-4em animated bounce") %>
+            <span class="social-profile-twitter-text">Twitter</span> 
+          </div>
+
+          <div class="panel-body social-profile">
+            <div class="row">
+              <div class="col-md-2">
+                <%= image_tag(@twitter.image_url, class: "social-profile-small embossed") %>
+                <dl class="dl">
+                  <dt class="label label-default">Followers</dt>
+                  <dd class="text-center"><pre class="prettyprint"><b><%= @twitter.followers_count %></b></pre></dd>
+
+                  <dt class="label label-default">Friends</dt>
+                  <dd class="text-center"><pre class="prettyprint"><b><%= @twitter.friends_count %></b></pre></dd>
+
+                  <dt class="label label-default">Favorites</dt>
+                  <dd class="text-center"><pre class="prettyprint"><b><%= @twitter.favorites_count %></b></pre></dd>
+                </dl>
+              </div>
+
+              <div class="col-md-10">
+                <dl class="dl"> 
+                  <div class="col-md-8">
+                    <dt class="label label-default">Screen Name</dt>
+                    <dd><pre class="prettyprint"><%= @twitter.screen_name %></pre></dd>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <dt class="label label-default">Member Since</dt>
+                    <dd><pre class="prettyprint"><%= @twitter.member_since.to_formatted_s(:long) %></pre></dd>
+                  </div>
+                  
+                  <div class="col-md-12">
+                    <dt class="label label-default">Bio</dt>
+                    <dd><pre class="prettyprint"><%= @twitter.description %></pre></dd>
+                  </div>
+                  
+                  <% unless @twitter.location.nil? %>
+                  <div class="col-md-12">
+                    <dt class="label label-default"><%= model_class.human_attribute_name(:location) %></dt>
+                    <dd><pre class="prettyprint"><%= @twitter.location %></pre></dd>
+                  </div>
+                  <% end %>
+
+                  <div class="col-md-12">
+                    <dt class="label label-default">Twitter Profile</dt>
+                    <dd>
+                      <%= link_to @twitter.profile_url do %>
+                        
+                        <pre class="prettyprint"><i class="fa fa-twitter fa-lg social-profile-twitter-color"></i>  <%= @twitter.profile_url %></pre>
+                      <% end %>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <%= link_to 'Dashboard', dashboard_path, :class => 'btn btn-default embossed'  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

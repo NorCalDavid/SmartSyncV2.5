@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_property, only: [:show, :edit, :update, :destroy]
+  before_action :set_property, only: [:show, :edit, :update, :delete, :destroy]
 
   # GET /properties
   # GET /properties.json
@@ -15,7 +15,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
-    @property = Property.properties.new
+    @property = Property.new
   end
 
   # GET /properties/1/edit
