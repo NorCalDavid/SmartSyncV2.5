@@ -17,6 +17,31 @@
   padding: 0;
   margin: 5px;
 }
+.property-post {
+  padding: 7px 10px;
+  @include roundBorders(13px);
+  position: relative;
+}
+.property-post.default {
+  background-color: #E6E6E6;
+}
+.property-post.danger {
+  background-color: $dangerColor;
+  color: #fff;
+}
+.property-post.primary {
+  background-color: $primaryColor;
+  color: #fff;
+}
+.property-post.default .arrow {
+  border-right-color: rgba(0, 0, 0, 0.1);
+}
+.property-post.primary .arrow {
+  border-left-color: rgba($primaryColor, 1);
+}
+.property-post.danger .arrow {
+  border-left-color: rgba($dangerColor, 1);
+}
 .property-name{
   padding: 0;
   margin: 0;
@@ -26,7 +51,7 @@
 .property-text{
   padding: 0 0 0 10px;
   margin: 2px 0 0 10px;
-  line-height: 1.2em;
+  line-height: 1em;
   font-size: 0.875em;
 }
 .status-text {

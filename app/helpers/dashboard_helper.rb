@@ -46,6 +46,18 @@ module DashboardHelper
     end
   end
 
+  def property_status_image_config
+    {:radius=>50, :width=>60, :height=>60, :crop=>:thumb, :gravity=>:center, :class=>"room-image"}
+  end
+
+  def property_status_image(object)
+    if object.nil?
+      cl_image_tag("http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png", property_status_image_config)
+    else
+      cl_image_tag(object, property_status_image_config)
+    end
+  end
+
    def header_image_config
     {:radius=>50, :width=>40, :height=>40, :crop=>:thumb, :gravity=>:center, :class=>"header_image"}
   end
@@ -76,6 +88,33 @@ module DashboardHelper
     else
       return "default"
     end
+  end
+
+  def title_for_property
+    if @configuration[:property_count] == 1 
+      property_title = "Property"
+    else
+      property_title = "Properties"
+    end
+    return "#{@configuration[:property_count]} #{property_title}"
+  end
+
+  def title_for_room
+    if @configuration[:room_count] == 1 
+      room_title = "Room"
+    else
+      room_title = "Rooms"
+    end
+    return "#{@configuration[:room_count]} #{room_title}"
+  end
+
+  def title_for_device
+    if @configuration[:device_count] == 1 
+      device_title = "Device"
+    else
+      device_title = "Devices"
+    end
+    return "#{@configuration[:device_count]} #{device_title}"
   end
 
 end

@@ -8,7 +8,7 @@
           <% if @configuration[:active_property].nil? %>
           <div class="col-xs-9">
             <div class="property-icon"><%= image_tag("icons/active/property-icon.png", class: "property-image2") %></div>
-            <div class="panel-title-dashboard">Properties <span class="badge badge-white primary-color"><%= "#{ @configuration[:property_count] }" %></span></div>
+            <div class="panel-title-dashboard"><%= title_for_property %></div>
           </div>
           <% else %>
           <div class="col-xs-9">
@@ -42,33 +42,42 @@
       <div class="panel-body auto-collapse">
 
         <!-- Property Details -->
-        <% unless @configuration[:properties].nil? %>
-        <% @configuration[:properties].each do |property| %>
+        <table class="table" id="rooms-table">
+        <tbody>
+          <% unless @configuration[:properties].nil? %>
+          <% @configuration[:properties].each do |property| %>
 
+          <tr class="property-row">
 
-        <a href="#" class="selected-property" id="P<%= property.id %>">
-          <div class="row wrapper animated fadeInRight">
-            <div class="col-xs-3 col-sm-3 col-md-3 ">
-              <span class="avatar">
-                <%= thumbnail(property.image) %>
+            <td class="property-col-1 property-status-block">
+              <span class="animated fadeInLeft">
+                <%= property_status_image(property.image) %>
                 <i class="on animated bounceIn"></i>
               </span>
-            </div>
+            </td>
 
-            <div class="col-xs-9 col-sm-9 col-md-9">
-              <div class="post <%= class_color_for_property(property) %>">
+            <td class="property-col-2">
+            <a href="#" class="selected-property" id="P<%= property.id %>">
+              <div class="property-post animated fadeInRightBig <%= class_color_for_property(property) %>">
                 <span class="arrow left"></span>
                 <span><b class="property-name"><%= property.name %></b><br/>
-                  <small><%= property.address %></small><br/>
-                  <small><%= "#{property.city}, #{property.state}  #{property.zipcode}" %></small>
+                   <blockquote class="property-text">
+                    <%= "#{property.address}\n#{property.city}, #{property.state}  #{property.zipcode}" %></br>
+                  </blockquote>
                 </span>
               </div>
-            </div>
-          </div>
-        </a>
+            </a>
+            </td>
 
-        <% end %>
-        <% end %>
+            <td class="room-col-3 animated bounceInRight">
+              <%= link_to 'Edit', edit_property_path(property), class: "btn btn-default btn-xs btn-block" %>
+            </td>
+
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
         <!-- End Property Details -->
 
       </div>
@@ -83,7 +92,7 @@
           <div class="col-xs-9">
             <div class="room-icon"><%= image_tag("icons/active/rooms-icon.png", class: "room-image") %></div>
             <% if @configuration[:active_room].nil? %>
-            <div class="panel-title-dashboard">Rooms <span class="badge badge-white green-color"><%= "#{ @configuration[:room_count] }" %></span></div>
+            <div class="panel-title-dashboard"><%= title_for_room %></div>
           </div>
           <% else %>
           <div class="panel-title-dashboard"><%= @configuration[:active_room].name %></div>
@@ -162,7 +171,7 @@
         <div class="row">
           <div class="col-xs-9">
             <div class="property-icon"><i class="fa fa-lightbulb-o fa-5x"></i></div>
-            <div class="panel-title-dashboard">Devices <span class="badge badge-white yellow-color"><%= "#{ @configuration[:device_count] }" %></span></div>
+            <div class="panel-title-dashboard"><%= title_for_device %></div>
           </div>
         </div>
 
