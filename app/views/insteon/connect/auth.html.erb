@@ -1,0 +1,103 @@
+
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading panel-heading-custom">
+			<%= image_tag("insteon_logo.png", class: "img-responsive center-block", alt: "Insteon") %>
+		</div>
+		<div class="panel-body">
+			<p>Smart Sync would like to access your Insteon account.</p>
+
+				<form action="<%= args[:url] %>" method="post">
+
+				<input name="__RequestVerificationToken" type="hidden" value="<%= args[:token] %>" />    
+
+				<div class="form form-horizontal form-group-lg">
+
+					<div class="text-capitalize text-danger"><h4>  </h4></div>
+
+
+					<div class="control-group">
+						<p class=""></p>
+						<div class="controls">
+							<input class="form-control text-box single-line" data-val="true" data-val-required="UserName is required." id="UserName" name="UserName" placeholder="Username" type="text" value="" />
+							<h5> <span class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></span></h5>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<p class=""></p>
+						<div class="controls">
+							<input Type="password" class="form-control text-box single-line" data-val="true" data-val-required="Password is required." id="Password" name="Password" placeholder="Password" type="text" value="" />
+							<h5> <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span> </h5>
+							<p class=""></p>
+						</div>
+					</div>
+					<input id="client_id" name="client_id" type="hidden" value="<%= args[:client_id] %>" />
+					<input id="authorization_code" name="authorization_code" type="hidden" value="" />
+					<input id="state" name="state" type="hidden" value="<%= args[:state] %>" />
+					<input id="response_type" name="response_type" type="hidden" value="{code}" />
+					<input id="redirect_url" name="redirect_url" type="hidden" value="http://localhost:3000/insteon/authenticate/token" />
+
+					<div class="control-group">
+						<div class="controls">
+							<p class=""></p>
+							<button class="btn btn-block btn-custom "><span class="font-style">Sign In</span></button>
+						</div>
+					</div>
+				</div> <!-- form form-horizontal -->
+</form>
+
+			<hr>
+			<p>When you provide your account information, Smart Sync will have access to perform the following functions:</p>
+
+			<table class="bullets">
+
+				<tr>
+					<td>
+						<span class="fa-stack fa-3x">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+						</span>
+					</td>
+					<td>
+						<b >Account Details</b>
+						<p>Create, edit, and delete account details</p>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span class="fa-stack fa-3x">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-cogs fa-stack-1x fa-inverse"></i>
+						</span>
+					</td>
+					<td>
+						<b>Configuration Details</b>
+						<p>Create, edit, and delete configuration details</p>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span class="fa-stack fa-3x">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-exchange fa-stack-1x fa-inverse"></i>
+						</span>
+					</td>
+					<td>
+						<b>Messaging</b>
+						<p>Send and receive all messages from your account</p>
+					</td>
+				</tr>
+
+			</table> <!--bulltes-->
+
+		</div> <!--panel-body-->
+	</div> <!-- panel panel-default -->
+		</div> <!-- container -->
+
+
+
+
+	</div>

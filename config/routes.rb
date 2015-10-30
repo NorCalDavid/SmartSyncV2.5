@@ -19,15 +19,10 @@ Rails.application.routes.draw do
   
   get '/users/profile' => 'users/users#profile', as: :user_profile 
   get '/users/github' => 'users/users#github', as: :user_github 
-  get '/users/twitter' => 'users/users#twitter', as: :user_twitter 
-  
+  get '/users/twitter' => 'users/users#twitter', as: :user_twitter
 
-  resources :reminders
-  post '/reminders/refresh_form' => 'reminders#refresh_form'
-  
-
-  get '/dashboard' => 'dashboard#index'
-
+  get 'insteon/authenticate' => 'insteon/connect#auth', as: :authenticate_insteon
+  get 'insteon/authenticate/token' => 'insteon/connect#callback'
 
   resources :properties do
     member { get :delete }
@@ -50,6 +45,9 @@ Rails.application.routes.draw do
     resources :action_series, controller: 'schedules/action_series'
     resources :actions, controller: 'schedules/actions'
   end
+
+  resources :reminders
+  post '/reminders/refresh_form' => 'reminders#refresh_form'
 
 scope module: 'admin' do
   resources :articles, :comments

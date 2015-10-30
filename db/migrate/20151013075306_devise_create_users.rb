@@ -12,6 +12,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :phone, :limit => 50
       t.string :mobile, :limit => 50
       t.boolean :receive_sms, null: false, default: false
+      t.string :insteon_token
 
       t.boolean :role,null: false, default: false
       t.integer :admin_user_id

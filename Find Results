@@ -1,0 +1,17 @@
+Searching 3384 files for "room-image" (case sensitive)
+
+/Users/DavidUli/Projects/SmartSync/SmartSyncV2.5/app/assets/SASS/_misc.scss:
+  278  }
+  279  
+  280: .room-icon .room-image {
+  281      height:75px;
+  282      width: 75px;
+
+/Users/DavidUli/Projects/SmartSync/SmartSyncV2.5/app/views/dashboard/partials/_dashboard.html.erb:
+   92          <div class="row">
+   93            <div class="col-xs-9">
+   94:             <div class="room-icon"><%= image_tag("icons/active/rooms-icon.png", class: "room-image") %></div>
+   95              <% if @configuration[:active_room].nil? %>
+   96              <div class="panel-title-dashboard">Rooms <span class="badge badge-white green-color"><%= "#{ @configuration[:room_count] }" %></span></div>
+
+2 matches across 2 files

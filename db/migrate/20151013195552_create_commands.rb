@@ -3,14 +3,14 @@ class CreateCommands < ActiveRecord::Migration
     create_table :commands do |t|
       t.string :name, null: false
       t.text :description
-      t.string :type, null: false
+      t.string :command_type, null: false
       t.string :action
+      t.string :action_type
+      t.string :values
+      t.string :headers
       t.string :route
-      t.references :device, index: true, foreign_key: true
 
-      t.timestamps null: false
-      t.integer :created_by
-      t.integer :updated_by      
+      t.timestamps null: false    
     end
   end
 end

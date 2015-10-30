@@ -59,19 +59,17 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   add_index "admin_users", ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true, using: :btree
 
   create_table "commands", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",         null: false
     t.text     "description"
-    t.string   "type",        null: false
+    t.string   "command_type", null: false
     t.string   "action"
+    t.string   "action_type"
+    t.string   "values"
+    t.string   "headers"
     t.string   "route"
-    t.integer  "device_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "created_by"
-    t.integer  "updated_by"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
-
-  add_index "commands", ["device_id"], name: "index_commands_on_device_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -450,6 +448,7 @@ ActiveRecord::Schema.define(version: 20151023215444) do
     t.string   "phone",                  limit: 50
     t.string   "mobile",                 limit: 50
     t.boolean  "receive_sms",                       default: false,                                                                          null: false
+    t.string   "insteon_token"
     t.boolean  "role",                              default: false,                                                                          null: false
     t.integer  "admin_user_id"
     t.string   "reset_password_token"
@@ -471,7 +470,6 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "commands", "devices"
   add_foreign_key "device_commands", "commands"
   add_foreign_key "device_commands", "devices"
   add_foreign_key "devices", "properties"

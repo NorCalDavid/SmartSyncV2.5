@@ -82,4 +82,5 @@ pickle-email-*.html
 /config/application.yml
 /config/cloudinary.yml
 /config/omniauth.yml
+/config/insteon.yml
 /config/secrets.yml

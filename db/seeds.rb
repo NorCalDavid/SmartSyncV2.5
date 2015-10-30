@@ -11,7 +11,7 @@ puts 'CREATED ADMIN USER: ' << user.email
 # See http://railsapps.github.io/rails-environment-variables.html
 AdminUser.create!(email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'], password_confirmation: ENV['ADMIN_PASSWORD'])
 
-
+# Create Standard Status Options
 Status.create({code: 0, name: "No Status", icon: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444386550/Status-Icons/0.png"})
 Status.create({code: 999, name: "Configure Device", icon: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444386550/Status-Icons/999.png"})
 Status.create({code: 500, name: "Ok", icon: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444386550/Status-Icons/500.png"})
@@ -88,3 +88,17 @@ Status.create({code: 753, name: "Opening", icon: "http://res.cloudinary.com/hupg
 Status.create({code: 754, name: "Closing", icon: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444386550/Status-Icons/754.png"})
 Status.create({code: 755, name: "Error", icon: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444386550/Status-Icons/755.png"})
 Status.create({code: 756, name: "Unknown", icon: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444386550/Status-Icons/756.png"})
+
+# Create Standard Command Options
+
+
+Command.create({  name: "Insteon-On", 
+									description: "Turns device on to Specified Level (Default Level is 100)", 
+									command_type: "Insteon", 
+									action: "", 
+									action_type: "POST",
+									values: "{\n    \"command\": \"on\",\n    \"level\": 50,\n    \"device_id\": 42\n}",
+									headers: "{:content_type => \"application/json\",:authentication => \"#{ENV["INSTEON_KEY"]}\",:authorization => \"\"}",
+									route: "/api/v2/commands"  })
+
+

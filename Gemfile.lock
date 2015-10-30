@@ -148,6 +148,7 @@ GEM
       excon (~> 0.44)
       multi_json (~> 1.8)
     high_voltage (2.4.0)
+    htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -342,6 +343,7 @@ DEPENDENCIES
   figaro
   font-awesome-sass
   high_voltage
+  htmlentities
   jquery-rails
   omniauth
   omniauth-facebook
@@ -358,6 +360,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails_12factor
   rails_layout
+  rest-client
   sass-rails
   twilio-ruby
   unicorn

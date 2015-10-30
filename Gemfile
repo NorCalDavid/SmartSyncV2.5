@@ -13,6 +13,9 @@ gem 'high_voltage'
 gem 'figaro'
 require 'yaml'
 
+gem 'rest-client'
+gem 'htmlentities'
+
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
