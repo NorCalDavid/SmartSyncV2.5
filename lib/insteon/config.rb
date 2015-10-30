@@ -1,8 +1,5 @@
-require 'rest_client'
-require 'json'
-
 module Insteon
-  class Config
+  class Config 
     attr_reader :callback, :api_key, :state
 
     def self.callback

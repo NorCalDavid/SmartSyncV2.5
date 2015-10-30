@@ -1,9 +1,6 @@
-require 'insteon/config'
-require 'insteon/authentication'
-require 'insteon/account'
-require 'rest_client'
+require 'insteon/auth'
 
-class Insteon::ConnectController < ApplicationController
+class Insteon::ConnectController < Insteon::BaseController
 	before_action :authenticate_user!
   before_action :set_insteon, only: []
 
@@ -18,18 +15,12 @@ class Insteon::ConnectController < ApplicationController
     if params["state"] == ENV["INSTEON_STATE"]
   	  auth_token = Insteon::Auth.request_token(params["code"])
       current_user.update_attributes(insteon_token: auth_token["access_token"])
-      response = {}
-      response[:auth_token] = auth_token
-      account = Insteon::Account.get_account(auth_token)
-      response[:account] = account
-      houses = Insteon::Account.get_houses(auth_token)
-      response[:houses] = houses
-      devices = Insteon::Account.get_devices(auth_token)
-      response[:devices] = devices
+      ap "Insteon Successfully Authenticated: #{auth_token}"
+      redirect_to dashboard_path, notice: 'Insteon Authentication was Successfull.'
     else
-      ap "Hacker Alert"
+      ap "Insteon Authentication Failed - Hacker Alert"
+      redirect_to dashboard_path, alert: 'Insteon Authentication Failed - Invalid Credentials.'
     end
-    render text: response
   end
   
   private
@@ -37,14 +28,5 @@ class Insteon::ConnectController < ApplicationController
   def set_auth
     @user = User.find(params[:id])
   end
-
-  # def insteon_params
-  #   accessible = [ :code, :state ] # extend with your own params
-  #   # accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-  #   params.require(:user).permit(accessible)
-  # end
   
 end
-
-
- 

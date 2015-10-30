@@ -1,4 +1,5 @@
 require 'insteon/config'
+
 require 'rest_client'
 require 'json'
 
