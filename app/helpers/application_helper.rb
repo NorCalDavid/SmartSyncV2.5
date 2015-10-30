@@ -20,6 +20,10 @@ module ApplicationHelper
     current_user.id
   end
 
+  def insteon_connected?
+    current_user.valid_insteon_token?
+  end
+
   def find_user(user_id)
     User.find(user_id)
   end

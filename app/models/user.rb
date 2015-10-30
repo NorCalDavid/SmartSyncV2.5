@@ -60,6 +60,11 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
+  # Insteon API
+  def valid_insteon_token?
+    self.insteon_token_expiration > DateTime.now 
+  end
+
   # Omniauth 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     # ap auth
@@ -177,5 +182,6 @@ class User < ActiveRecord::Base
   def set_name
     join_name if self.name.nil? && !self.firstname.nil? && !self.lastname.nil?
   end
+
 
 end

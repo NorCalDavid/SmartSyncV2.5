@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :ensure_signup_complete, only: [:create, :update]
   before_action :set_configuration
+  before_action :set_insteon_token 
 
   def ensure_signup_complete
     # Ensure we don't go into an infinite loop
@@ -102,6 +103,10 @@ class ApplicationController < ActionController::Base
     end
     
     return reminders
+  end
+
+  def set_insteon_token
+    @token = current_user.insteon_token if current_user.valid_insteon_token?
   end
 
 end

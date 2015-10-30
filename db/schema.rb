@@ -442,19 +442,22 @@ ActiveRecord::Schema.define(version: 20151023215444) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "name"
-    t.string   "email",                             default: "",                                                                             null: false
-    t.string   "encrypted_password",                default: "",                                                                             null: false
-    t.string   "image",                             default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultUser.png"
-    t.string   "phone",                  limit: 50
-    t.string   "mobile",                 limit: 50
-    t.boolean  "receive_sms",                       default: false,                                                                          null: false
+    t.string   "email",                               default: "",                                                                             null: false
+    t.string   "encrypted_password",                  default: "",                                                                             null: false
+    t.string   "image",                               default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultUser.png"
+    t.string   "phone",                    limit: 50
+    t.string   "mobile",                   limit: 50
+    t.boolean  "receive_sms",                         default: false,                                                                          null: false
     t.string   "insteon_token"
-    t.boolean  "role",                              default: false,                                                                          null: false
+    t.string   "insteon_refresh_token"
+    t.string   "insteon_token_type"
+    t.datetime "insteon_token_expiration"
+    t.boolean  "role",                                default: false,                                                                          null: false
     t.integer  "admin_user_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,                                                                              null: false
+    t.integer  "sign_in_count",                       default: 0,                                                                              null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -463,8 +466,8 @@ ActiveRecord::Schema.define(version: 20151023215444) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                                                                                                                 null: false
-    t.datetime "updated_at",                                                                                                                 null: false
+    t.datetime "created_at",                                                                                                                   null: false
+    t.datetime "updated_at",                                                                                                                   null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

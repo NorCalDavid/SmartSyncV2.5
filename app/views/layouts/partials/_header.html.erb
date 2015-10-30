@@ -22,6 +22,76 @@
   <li class="dropdown profile hidden-xs">
     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
         <span class="meta">
+        <button type="button" class="btn btn-social btn-github">
+		    	<% if insteon_connected? %> 
+		    		<i class="fa fa-plus"></i> Manage Insteon
+		    	<% else %>
+		    		<i class="fa fa-plus"></i> Connect To Insteon
+		    	<% end %>
+			  	</button>
+        </span>
+    </a>
+    
+    <ul class="dropdown-menu animated fadeInRight" role="menu">
+			<li class="text-center center-block">
+				<span class="arrow top"></span>
+				<%= image_tag("logo/insteon_logo.png") %>
+			</li>
+
+			<li class="divider"></li>
+			<% if insteon_connected? %> 
+				<li><small class="dropdown-profile-header center-block">Configuration</small></li>
+					<li class="padding-top-md">
+						<%= button_to insteon_accounts_path, method: "get",
+												class: "btn-xs btn-block btn-social btn-microsoft dropdown-social-btn center-block embossed" do %>
+							<i class="fa fa-list-alt"></i> Accounts
+						<% end %>					
+					</li>
+
+					<li class="padding-top-md">
+						<%= button_to insteon_houses_path, method: "get",
+												class: "btn-xs btn-block btn-social btn-microsoft dropdown-social-btn center-block embossed" do %>
+							<i class="fa fa-home"></i> Houses
+						<% end %>					
+					</li>
+
+					<li class="padding-top-md">
+						<%= button_to insteon_rooms_path, method: "get",
+												class: "btn-xs btn-block btn-social btn-microsoft dropdown-social-btn center-block embossed" do %>
+							<i class="fa fa-hotel"></i> Rooms
+						<% end %>					
+					</li>
+
+					<li class="padding-top-md">
+						<%= button_to insteon_devices_path, method: "get",
+												class: "btn-xs btn-block btn-social btn-microsoft dropdown-social-btn center-block embossed" do %>
+							<i class="fa fa-lightbulb-o"></i> Devices
+						<% end %>					
+					</li>
+
+				<li class="divider"></li>
+			
+				<li><small class="dropdown-profile-header center-block">Device Controls</small></li>
+					<li>
+						<div class="padding-top-md">
+						
+						</div>
+					</li>
+				
+				<li class="divider"></li>
+			<% else %>
+				<li class="padding-top-md">
+					<%= button_to authenticate_insteon_insteon_path, method: "get",
+											class: "btn-xs btn-block btn-social btn-microsoft dropdown-social-btn center-block embossed" do %>
+						<i class="fa fa-list-alt"></i> Connect to Insteon
+					<% end %>					
+				</li>
+			<% end %>
+		</ul>
+	</li>
+  <li class="dropdown profile hidden-xs">
+    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="meta">
         <button type="button" class="btn btn-social btn-google">
 		    		<i class="fa fa-plus"></i> Social Media Logins
 			  	</button>
