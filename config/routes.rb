@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'insteon/authenticate' => 'insteon/connect#auth', as: :authenticate_insteon
   get 'insteon/authenticate/token' => 'insteon/connect#callback'
+  get '/insteon/device/:device_id/off' => 'insteon/control#off'
 
   resources :properties do
     member { get :delete }

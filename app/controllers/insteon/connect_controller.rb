@@ -1,4 +1,6 @@
+require 'insteon/config'
 require 'insteon/authentication'
+require 'insteon/account'
 require 'rest_client'
 
 class Insteon::ConnectController < ApplicationController
@@ -7,36 +9,27 @@ class Insteon::ConnectController < ApplicationController
 
   # GET /insteon/authenticate
   def auth
-
   	@response = Insteon::Auth.authenticate
-    ap "Authenticate"
-    # render :text => @response.to_s 
     render 'auth', :locals => {args: @response[:auth_packet]}
   end
 
   # POST /insteon/authenticate/token
   def callback
-    ap params
-    
     if params["state"] == ENV["INSTEON_STATE"]
-      values = CGI::escape("grant_type=authorization_code\u0026code=#{params["code"]}\u0026client_id=#{ENV["INSTEON_KEY"]}\u0026client_secret=#{ENV["INSTEON_SECRET"]}\u0026redirect_uri=#{Insteon::Config.callback}")
-      values = {  grant_type: "authorization_code",
-                  code: params["code"],
-                  client_id: ENV["INSTEON_KEY"],
-                  client_secret: ENV["INSTEON_SECRET"],
-                  redirect_uri: Insteon::Config.callback }
-      ap values
-      headers  = {:content_type => "application/x-www-form-urlencoded"}
-
-      response = RestClient.post "https://connect.insteon.com/api/v2/oauth2/token", values, headers
-
-  	  # auth_token = Insteon::Auth.request_token(params["code"])
-     ap response
-     #  ap auth_token
+  	  auth_token = Insteon::Auth.request_token(params["code"])
+      current_user.update_attributes(insteon_token: auth_token["access_token"])
+      response = {}
+      response[:auth_token] = auth_token
+      account = Insteon::Account.get_account(auth_token)
+      response[:account] = account
+      houses = Insteon::Account.get_houses(auth_token)
+      response[:houses] = houses
+      devices = Insteon::Account.get_devices(auth_token)
+      response[:devices] = devices
     else
       ap "Hacker Alert"
     end
-    render nothing: true
+    render text: response
   end
   
   private
