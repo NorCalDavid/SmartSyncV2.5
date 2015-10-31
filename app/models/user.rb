@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
 
   # Insteon API
   def valid_insteon_token?
+    return false if self.insteon_token.nil?
     self.insteon_token_expiration > DateTime.now 
   end
 

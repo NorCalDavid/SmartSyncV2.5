@@ -21,6 +21,7 @@ module ApplicationHelper
   end
 
   def insteon_connected?
+    return false if current_user.nil?
     current_user.valid_insteon_token?
   end
 

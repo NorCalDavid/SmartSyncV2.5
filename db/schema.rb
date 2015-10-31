@@ -111,14 +111,15 @@ ActiveRecord::Schema.define(version: 20151023215444) do
     t.integer  "status_level"
     t.string   "status_icon"
     t.string   "brand"
-    t.string   "type"
-    t.string   "location"
+    t.string   "device_type"
+    t.string   "location",             default: "Undefined"
     t.string   "EDID"
     t.string   "version"
     t.string   "image",                default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultDevice.png"
     t.boolean  "controllable",         default: false
     t.string   "api_id"
-    t.integer  "api_firmware_version"
+    t.integer  "insteon_device_id"
+    t.string   "api_firmware_version"
     t.boolean  "dimmable",             default: false
     t.integer  "dim_level",            default: 100
     t.integer  "ramp_rate",            default: 1
@@ -259,15 +260,16 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string   "name",                                                                                                     null: false
+    t.string   "name",                                                                                                          null: false
     t.text     "description"
     t.string   "address"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
-    t.string   "image",       default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png"
-    t.datetime "created_at",                                                                                               null: false
-    t.datetime "updated_at",                                                                                               null: false
+    t.string   "image",            default: "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultProperty.png"
+    t.string   "insteon_house_id"
+    t.datetime "created_at",                                                                                                    null: false
+    t.datetime "updated_at",                                                                                                    null: false
     t.integer  "created_by"
     t.integer  "updated_by"
   end

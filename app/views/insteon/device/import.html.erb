@@ -1,0 +1,183 @@
+ <div class="pageheader">
+		<h1><i class="fa fa-lightbulb-o fa-2x yellow"></i> Devices <small>Import Insteon Device</small></h1>
+		<div class="breadcrumb-wrapper hidden-xs">
+				<span class="label">You are here:</span>
+				<ol class="breadcrumb">
+						<li><a href="/">Dashboard</a>
+						</li>
+						<li>Devices</li>
+						<li class="active">Import Insteon Device</li>
+				</ol>
+		</div>
+</div>
+<section id="main-content" class="animated fadeInUp">
+	<div class="row">
+		<div class="col-md-12">
+				<div class="panel panel-primary">
+						<div class="panel-heading">
+								<h3 class="panel-title">New Device Wizard</h3>
+								<div class="actions pull-right">
+								 <i class="fa fa-expand"></i>
+								 <i class="fa fa-chevron-down"></i>
+								 <i class="fa fa-times"></i>
+						 </div>
+				 </div>
+				 <div class="panel-body">
+						<section class="fuelux">
+								<div id="NewDeviceWizard" class="wizard">
+									<ul class="steps">
+										<li data-target="#step1" class="active">
+											<span class="badge badge-info">1</span>
+											<%= image_tag("logo/insteon_logo.png") %>
+											<span class="chevron"></span>
+										</li>
+									</ul>
+								</div>
+
+								<%= form_for(@device, class: "form-horizontal") do |f| %>
+								<% if @device.errors.any? %>
+								<div id="error_explanation">
+									<h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+
+									<ul>
+											<% @device.errors.full_messages.each do |message| %>
+											<li><%= message %></li>
+											<% end %>
+									</ul>
+							</div>
+							<% end %>
+
+							<div class="step-content">
+								<div class="step-pane active" id="step1">
+
+										<span class="row text-center">
+
+												<div class="form-group col-md-4">
+													<div class="input-group">
+														<span class="input-group-addon control-label">Select Property</span>
+														<%= f.select :property_id, options_for_select(collection_options(@configuration[:properties])), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+													</div><br/>
+												</div>
+
+												<div class="form-group col-md-4">
+													<div class="input-group">
+														<span class="input-group-addon control-label">Select Room</span>
+														<%= f.select :room_id, options_for_select(collection_options(@configuration[:rooms])), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+													</div><br/>
+												</div>
+
+												<div class="form-group col-md-4">
+													<div class="input-group">
+														<span class="input-group-addon control-label">Select Device Location</span>
+														<%= f.select :location, options_for_select(collection_options(@configuration[:device_location_options])), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+													</div><br/>
+												</div>
+
+										</span>
+
+										<div class="col-sm-12 divider"></div><br/>
+
+										<div class="row">
+											<div class="form-group col-md-offset-1 col-md-5">
+												<div class="input-group">
+													<span class="input-group-addon">Name: </span>
+													<%= f.text_field :name, class: 'form-control', placeholder: "Device Name" %>
+												</div><br/>
+
+												<div class="input-group col-md-5">
+													<span class="input-group-addon">Favorite: </span>
+													<%= f.select :favorite, options_for_select(options_yes_no, @device['Favorite']), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+												</div><br/>
+											</div>
+
+											<div class="form-group col-md-5">
+												<div class="input-group">
+													<span class="input-group-addon">Description: </span>
+													<%= f.text_area :description, class: 'form-control' %>
+												</div><br/>
+											</div>
+										</div>
+
+										<div class="col-md-12 divider"></div><br/>
+
+										<div class="row">
+											<div class="form-group col-md-offset-1 col-md-5">
+												<div class="input-group">
+														<span class="input-group-addon">Device Type: </span>
+														<%= f.select :device_type, options_for_select(device_types), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+												</div><br/>
+											</div>
+
+											<div class="form-group col-md-5">
+												<div class="input-group">
+													<span class="input-group-addon">Brand: </span>
+													<%= f.text_field :brand, class: 'form-control', placeholder: "Brand" %>
+												</div><br/>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-md-offset-1 col-md-3">
+												<div class="input-group">
+													<span class="input-group-addon">Version: </span>
+													<%= f.text_field :version, class: 'form-control', placeholder: "Version" %>
+												</div><br/>
+											</div>
+
+											<div class="form-group col-md-3">
+												<div class="input-group">
+													<span class="input-group-addon">EDID: </span>
+													<%= f.text_field :EDID, class: 'form-control', placeholder: "EDID" %>
+												</div><br/>
+											</div>
+
+											<div class="form-group col-md-2">
+												<div class="input-group">
+													<span class="input-group-addon">Status Code: </span>
+													<%= f.number_field :insteon_device_id, class: 'form-control', disabled: true %>
+												</div><br/>
+											</div>
+
+											<div class="form-group col-md-2">
+												<div class="input-group">
+													<span class="input-group-addon">Status Code: </span>
+													<%= f.number_field :status_code, class: 'form-control', disabled: true %>
+												</div><br/>
+											</div>
+
+											<div class="form-group col-md-2">
+												<div class="input-group">
+													<span class="input-group-addon">Status: </span>
+													<%= f.text_field :status, class: 'form-control', disabled: true %>
+												</div><br/>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group text-center">
+												<span class="col-md-offset-1 col-md-4"><%= f.submit class: "btn btn-primary btn-block" %></span>
+												<span class="col-md-offset-2 col-md-4"><%= link_to "Return To Dashboard", dashboard_path, class: "btn btn-default btn-block" %></span>
+											</div>
+										</div>
+
+								</div>
+							</div>
+						</div>
+
+				<% end %>
+		</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<% content_for :javascript do %>
+<!--Load these page level functions-->
+<script>
+$(document).ready(function() {
+		app.formWizard();
+});
+</script>
+<% end %>

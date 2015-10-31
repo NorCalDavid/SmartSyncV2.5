@@ -106,6 +106,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_insteon_token
+    return nil if current_user.nil? 
     @token = current_user.insteon_token if current_user.valid_insteon_token?
   end
 

@@ -9,14 +9,15 @@ class CreateDevices < ActiveRecord::Migration
       t.integer :status_level
       t.string :status_icon
       t.string :brand
-      t.string :type
-      t.string :location
+      t.string :device_type
+      t.string :location, :default => "Undefined"
       t.string :EDID
       t.string :version
       t.string :image, :default => "http://res.cloudinary.com/hupgpadmb/image/upload/v1444201245/DefaultDevice.png"
       t.boolean :controllable, :default => false
       t.string :api_id
-      t.integer :api_firmware_version
+      t.integer :insteon_device_id
+      t.string :api_firmware_version
       t.boolean :dimmable, :default => false
       t.integer :dim_level, :default => 100
       t.integer :ramp_rate, :default => 1

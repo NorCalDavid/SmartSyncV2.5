@@ -84,8 +84,6 @@ GEM
       railties (>= 3.2, < 5.0)
     bootstrap-social-rails (4.8.0)
       railties (>= 3.1)
-    bootstrap3-datetimepicker-rails (3.0.3)
-      momentjs-rails (>= 2.8.1)
     bootstrap_form (2.3.0)
     bourbon (4.2.6)
       sass (~> 3.4)
@@ -148,9 +146,11 @@ GEM
       excon (~> 0.44)
       multi_json (~> 1.8)
     high_voltage (2.4.0)
-    htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -170,6 +170,8 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
+    liftmaster_myq (0.0.2)
+      httparty (~> 0.12.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -178,8 +180,6 @@ GEM
     mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.1)
-    momentjs-rails (2.10.6)
-      railties (>= 3.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -331,7 +331,6 @@ DEPENDENCIES
   bootstrap-sass-extras
   bootstrap-slider-rails
   bootstrap-social-rails
-  bootstrap3-datetimepicker-rails (~> 3.0.0)
   bootstrap_form
   carrierwave
   cloudinary
@@ -343,8 +342,8 @@ DEPENDENCIES
   figaro
   font-awesome-sass
   high_voltage
-  htmlentities
   jquery-rails
+  liftmaster_myq
   omniauth
   omniauth-facebook
   omniauth-github

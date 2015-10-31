@@ -1,6 +1,7 @@
 require 'insteon/account'
 
 class Insteon::AccountController < Insteon::BaseController
+	before_action :authenticate_user!
 	
   # GET /insteon/accounts/
   def index

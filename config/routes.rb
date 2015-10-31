@@ -20,6 +20,22 @@ Rails.application.routes.draw do
   get '/users/twitter' => 'users/users#twitter', as: :user_twitter
 
 
+  # Liftmaster MyQ Device Controls
+  resource :myq, controller: 'myq/control', only: :none do
+    member do
+      get '/authenticate' => 'myq/control#auth', as: :authenticate_myq
+    end
+
+    resources :doors, controller: 'myq/control', only: [:index] do
+      collection do
+        get '/count' => 'myq/control#count'
+        get '/open' => 'myq/control#open'
+        get '/close' => 'myq/control#close'
+        get '/status' => 'myq/control#status' 
+      end 
+    end
+  end
+
   # Insteon Device and Account Controls
   resource :insteon, controller: 'insteon/connect', only: :none do
     member do
@@ -32,6 +48,10 @@ Rails.application.routes.draw do
     resources :rooms, controller: 'insteon/room'
 
     resources :devices, controller: 'insteon/device' do
+      collection do
+        get '/import' => 'insteon/device#import'
+      end
+
       member do
         get '/on' => 'insteon/control#on'
         get '/fast_on' => 'insteon/control#fast_on'
