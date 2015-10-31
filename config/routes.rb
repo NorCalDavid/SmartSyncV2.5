@@ -47,9 +47,10 @@ Rails.application.routes.draw do
     resources :houses, controller: 'insteon/house'
     resources :rooms, controller: 'insteon/room'
 
-    resources :devices, controller: 'insteon/device' do
+    resources :devices, controller: 'insteon/device', only: :index do
       collection do
         get '/import' => 'insteon/device#import'
+        post '/create' => 'insteon/device#create'
       end
 
       member do

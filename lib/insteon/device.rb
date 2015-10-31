@@ -12,7 +12,7 @@ module Insteon
     end
 
     def self.device_details(token, device_id)
-			response = RestClient.get "https://connect.insteon.com/api/v2/devices/#{device_id}", headers(token)
+			response = RestClient.get "https://connect.insteon.com/api/v2/devices/" + device_id, headers(token)
 			return JSON(response)
     end
 

@@ -31,48 +31,20 @@
                     <th class="text-center">Device ID</th>
                     <th class="text-center">Device Name</th>
                     <th class="text-center">Favorite?</th>
-                    <th class="text-center">On Time</th>
-                    <th class="text-center">Off Time</th>
-                    <th class="text-center">Timer Enabled?</th>
-                    <th class="text-center">Dim Level</th>
-                    <th class="text-center">Ramp Rate</th>
-                    <th class="text-center">LED Level</th>
-                    <th class="text-center">Group</th>
                     <th class="text-center">Insteon ID</th>
-                    <th class="text-center">Device Type</th>
-                    <th class="text-center">Category</th>
-                    <th class="text-center">Sub Category</th>
-                    <th class="text-center">Product Type</th>
-                    <th class="text-center">Manufacturer</th>
-                    <th class="text-center">Serial Number</th>
-                    <th class="text-center">Firmware Version</th>
                     <th class="text-center"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @insteon_devices.each do |device| %>
-                    <tr>
+                    <tr class="<%= "default-bg-color" if imported_device?(device['DeviceID']) %> ">
                       <td class="text-center"><%= device['HouseID'] %></td>
                       <td class="text-center"><%= device['DeviceID'] %></td>
                       <td class="text-center"><%= device['DeviceName'] %></td>
                       <td class="text-center"><%= device['Favorite'] %></td>
-                      <td class="text-center"><%= device['OnTime'] %></td>
-                      <td class="text-center"><%= device['OffTime'] %></td>
-                      <td class="text-center"><%= device['TimerEnabled'] %></td>
-                      <td class="text-center"><%= device['DimLevel'] %></td>
-                      <td class="text-center"><%= device['RampRate'] %></td>
-                      <td class="text-center"><%= device['LEDLevel'] %></td>
-                      <td class="text-center"><%= device['Group'] %></td>
                       <td class="text-center"><%= device['InsteonID'] %></td>
-                      <td class="text-center"><%= device['DeviceType'] %></td>
-                      <td class="text-center"><%= device['DevCat'] %></td>
-                      <td class="text-center"><%= device['SubCat'] %></td>
-                      <td class="text-center"><%= device['ProductType'] %></td>
-                      <td class="text-center"><%= device['Manufacturer'] %></td>
-                      <td class="text-center"><%= device['SerialNumber'] %></td>
-                      <td class="text-center"><%= device['FirmwareVersion'] %></td>
                       <td class="text-center">
-                        
+                        <%= button_to 'Import Device',"/insteon/devices/import?device_id=#{device['DeviceID']}", :method => "get", :class => 'btn btn-warning btn-sm embossed' %>
                       </td>
                     </tr>
                   <% end %>
