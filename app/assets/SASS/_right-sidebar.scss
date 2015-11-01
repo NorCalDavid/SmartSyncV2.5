@@ -1,5 +1,5 @@
 #sidebar-right {
-    width: 240px;
+    width: 320px;
     height: 100%;
     background: #fff;
     z-index: 100;
@@ -8,7 +8,7 @@
     overflow-x: hidden;
     top: 0;
     right: 0;
-    padding-top: 60px;
+    padding: 60px 10px 10px 10px;
     display: none;
     box-shadow: 0 0 9px rgba(190, 190, 190, .5);
 }

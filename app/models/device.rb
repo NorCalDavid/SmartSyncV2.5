@@ -1,3 +1,4 @@
+require 'insteon/control'
 class Device < ActiveRecord::Base
   # audited allow_mass_assignment: true
   
@@ -16,9 +17,29 @@ class Device < ActiveRecord::Base
   validates :name, presence: true
   validates :location, presence: true
 
+  def self.insteon_token=(token)
+    Thread.current[:insteon_token] = token
+  end
+
+  def self.insteon_token
+    Thread.current[:insteon_token]
+  end
+
   def set_status
     self.status = Status.find_by(code: self.status_code).name
     self.status_icon = Status.find_by(code: self.status_code).icon
+  end
+
+  def update_controls(token)
+    unless self.insteon_device_id.nil?
+      case self.status_code
+
+      when 100
+        Insteon::Control.fast_on(token, self.insteon_device_id)
+      when 101
+        Insteon::Control.fast_off(token, self.insteon_device_id)
+      end
+    end
   end
 
 end

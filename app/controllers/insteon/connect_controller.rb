@@ -15,6 +15,7 @@ class Insteon::ConnectController < Insteon::BaseController
     if params["state"] == ENV["INSTEON_STATE"]
   	  auth_token = Insteon::Auth.request_token(params["code"])
       session[:insteon_token] = "Connected"
+      
       current_user.update_attributes( insteon_token: auth_token["access_token"],
                                       insteon_refresh_token: auth_token["refresh_token"],
                                       insteon_token_type: auth_token["token_type"],

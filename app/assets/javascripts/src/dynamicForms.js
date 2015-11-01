@@ -1,7 +1,14 @@
 $(document).ready(function() {
 	function resetForm(id) {
 		$(id)[0].reset();
-	}
+	};
+	console.log("Watching ex1");
+	// With JQuery
+	$("#ex6").slider();
+	$("#ex6").on("slide", function(slideEvt) {
+		$("#ex6SliderVal").text(slideEvt.value);
+	});
+
 });
 
 $('form').ready(function() {
@@ -12,6 +19,12 @@ $('form').ready(function() {
 	jQuery(function($) {
 		$('.draggable').draggable({ scroll: true,
       													cursor: 'crosshair' });
+	});
+
+	jQuery(function($) {
+		$('#sidebar-right').on('click','#switch-submit',function() {
+    	$(this).closest('form').submit();
+    });
 	});
 	  
 

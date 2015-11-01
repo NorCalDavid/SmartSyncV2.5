@@ -17,34 +17,36 @@
 				<table class="table">
         <thead>
           <tr class="header-row">
-            <th class="device-col-1">Status</th>
+            <th class="device-col-1 text-center">Status</th>
             <th class="device-col-2">Device</th>
           </tr>
         </thead>
         <tbody>
+
 				<% unless @configuration[:devices].nil? %>
           <% @configuration[:devices].each do |device| %>
+        
           <tr class="device-row">
             <td class="device-sidebar-block">
               <span class="animated fadeInLeft">
-                <% if device.status_icon.nil? %>
-                  <%= image_tag("icons/active/0.png", class: "device-sidebar-icon primary-color") %>
-                <% else %>
-                  <%= image_tag(device.status_icon, class: "device-sidebar-icon primary-color") %>
+                <%= form_for device, remote: true do |f|  %>
+                <div class="switch">
+                  <%= f.check_box :status_code, {:id => "switch-submit", :type => "checkbox", :onclick => "javascript: document.list.submit();"}, 100, 101 %>
+                  <label><i></i></label>
+                </div> 
+                <%= f.submit nil, class: "hidden" %>
                 <% end %>
                 <i class="on animated bounceIn"></i>
               </span>
             </td>
             <td class="animated fadeInRightBig">
-              <b class="device-name"><%= device.name %></b>
-
+              <b class="device-name<%= " green-color" if device.status_code == 100 %>"><%= device.name %></b>
               <blockquote class="device-text">
-                <b class="status-text">Status: <%= device.status || "Unknown" %></b>
+                <b>Status: </b><i><%= device.status || "Unknown" %></i>
               </blockquote>
-
-              
             </td>
           </tr>
+          
           <% end %>
         <% end %>
 

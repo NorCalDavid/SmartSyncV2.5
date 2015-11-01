@@ -7,6 +7,7 @@
 //= require fullcalendar/gcal
 //= require maskedinput
 //= require jquery-ui
+//= bootstrap-slider
 
 
 //= require src/app

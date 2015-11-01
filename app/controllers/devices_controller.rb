@@ -1,6 +1,7 @@
 class DevicesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_device, only: [:show, :edit, :update, :adjust_dim_level, :destroy]
+  skip_before_filter :verify_authenticity_token, :only => :update
 
   # GET /devices
   # GET /devices.json
@@ -25,10 +26,11 @@ class DevicesController < ApplicationController
   # POST /devices
   # POST /devices.json
   def create
-    @device = User.find(current_user).devices.new(create_params)
+    @device = Device.new(create_params)
 
     respond_to do |format|
       if @device.save
+        current_user.devices << @device
         format.html { redirect_to dashboard_path, notice: 'Device was successfully created.' }
         format.json { render :show, status: :created, location: @device }
       else
@@ -45,10 +47,12 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
   def update
+    changed = (@device.status_code != params[:status_code])
     respond_to do |format|
       if @device.update(update_params)
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
-        format.json { render :show, status: :ok, location: @device }
+        @device.update_controls(@token) if changed
+        format.html { redirect_to dashboard_path }
+        format.json { render nothing: true, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @device.errors, status: :unprocessable_entity }
@@ -71,6 +75,7 @@ class DevicesController < ApplicationController
     def set_device
       @device = Device.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
