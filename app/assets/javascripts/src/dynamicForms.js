@@ -4,9 +4,22 @@ $(document).ready(function() {
 	};
 	console.log("Watching ex1");
 	// With JQuery
-	$("#ex6").slider();
-	$("#ex6").on("slide", function(slideEvt) {
-		$("#ex6SliderVal").text(slideEvt.value);
+
+	$(function() {
+    $( "#slider" ).slider({
+    	value: $('input#dimmer-slider').val(),
+      min: 0,
+      max: 100,
+      step: 5,
+      slide: function( event, ui ) {
+        $("#amount").val( ui.value );
+      },
+      change: function(event, ui) {
+		   $('input#dimmer-slider').val(ui.value);
+			}
+    });
+    $("input#dimmer-slider").val( $("#slider").slider("value") );
+    $("#amount").val( $("#slider").slider("value") );
 	});
 
 });

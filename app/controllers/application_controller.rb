@@ -112,6 +112,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user_insteon_token
+    return nil if current_user.nil?
     Device.insteon_token = current_user.insteon_token if current_user.valid_insteon_token?
   end
 
