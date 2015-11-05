@@ -11,16 +11,14 @@
             <%= f.text_field :name %>
             <%= f.text_field :description %>
             <%= f.text_field :location_type %>
-
-            <%= f.submit %>
-            <%= link_to location_options_path, class: 'btn btn-default' do %>
-              <span class="glyphicon glyphicon-info-sign"></span>
-              Cancel
-            <% end %>
-            <%= link_to dashboard_path, class: 'btn btn-primary' do %>
-              <span class="glyphicon glyphicon-list-alt"></span>
-              Dashboard
-            <% end %>
+        </div>
+        
+        <div class="panel-footer">
+          <div class="row">
+            <div class="form-group text-right">
+              <span class="col-md-4"><%= f.submit nil, class: 'btn btn-primary btn-block embossed' %></span>
+              <span class="col-md-4"><%= button_to "Return To Dashboard", dashboard_path, :method => "get", :class => 'btn btn-success btn-block embossed' %></span>
+              <span class="col-md-4"><%= button_to "View All Location Options", location_options_path, :method => "get", :class => 'btn btn-warning btn-block embossed' %></span>
           <% end %>
         </div>
       </div>

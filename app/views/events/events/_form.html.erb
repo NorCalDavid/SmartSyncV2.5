@@ -1,72 +1,72 @@
 <%- model_class = Event -%>
 <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this schedule from being saved:</h2>
 
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h3>
+    <ul>
+    <% @event.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
-  <div class="panel-body">
-    <%= form_for @event do |f| %>
+<% end %>
 
-      <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, :class => 'form-control' %>
-      </div>
+<div class='container-body'>
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10 padding-top">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h3>
+        </div>
+        <div class="panel-body">
+          <%= bootstrap_form_for @event do |f| %>
 
-      <div class="form-group">
-        <%= f.label :description %>
-        <%= f.text_field :description, :class => 'form-control' %>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-md-10 form-group">
-          <%= f.label "Start Date" %><br />
-          <%= f.datetime_select :start, :order => [:month, :day, :year], :ampm => true, class: "form-control" %>
-        </div>
-        
-        <div class="col-md-2 form-group">
-          <%= f.label "All Day" %><br />
-          <%= f.select :all_day, [["Yes", true], ["No", false]], { class: "selectpicker" } %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-md-12 form-group">
-          <%= f.label "End" %><br />
-          <%= f.datetime_select :finish, :order => [:month, :day, :year], :ampm => true, class: "form-control" %>
-        </div>
+            <div class="form-group">
+              <div class="col-md-6 form-group">
+                <%= f.text_field :name, :class => 'form-control' %>
+              </div>
+            
+              <div class="col-md-6 form-group">
+                <%= f.text_field :description, :class => 'form-control' %>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="col-md-5 form-group">
+                <%= f.datetime_select :start, :order => [:month, :day, :year], :ampm => true, class: "form-control" %>
+              </div>
+              
+              <div class="col-md-1 form-group">
+                <%= f.select :all_day, [["Yes", true], ["No", false]], { class: "selectpicker" } %>
+              </div>
 
-        <div class="col-md-2 form-group">
-          <%= f.label "Time Zone" %><br />
-          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
-        </div>
-      </div>
+              <div class="col-md-4 form-group">
+                <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
+              </div>
+            </div>
+            
+            <div class="form-group">
 
-      <div class="row"></div>
-    </div>
-    <div class="panel-footer block-center">
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.submit :class => 'btn btn-block btn-primary embossed' %>
-          <% end %>
-        </div> 
-        
-        <% if action?('edit') %>
-        <div class="col-md-6">
-          <%= button_to @event, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, id: 'destroy', class: 'btn btn-block btn-danger embossed' do %>
-            <span class="glyphicon glyphicon-exclamation"></span> Delete
-          <% end %>  
-        </div> 
+              <div class="col-md-5 form-group">
+                <%= f.datetime_select :finish, :order => [:month, :day, :year], :ampm => true, class: "form-control" %>
+              </div>
+
+            </div>
+
+            <div class="row"></div>
+          </div>
+          
+          <div class="panel-footer">
+            <div class="row">
+              <div class="form-group text-right">
+                <span class="col-md-4"><%= f.submit nil, class: 'btn btn-primary btn-block embossed' %></span>
+                <span class="col-md-4"><%= button_to "Return To Dashboard", dashboard_path, :method => "get", :class => 'btn btn-success btn-block embossed' %></span>
+                <span class="col-md-4"><%= button_to "View All Events", events_path, :method => "get", :class => 'btn btn-warning btn-block embossed' %></span>
+              </div>
+            </div> 
+          </div>
         <% end %> 
-      </div> 
-    </div>
+      </div>
+    </div> 
+  </div> 
 </div>

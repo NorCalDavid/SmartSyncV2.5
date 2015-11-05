@@ -29,7 +29,7 @@ class LocationOptionsController < ApplicationController
 
     respond_to do |format|
       if @location_option.save
-        format.html { redirect_to @location_option, notice: 'Location option was successfully created.' }
+        format.html { redirect_to location_options_path, notice: 'Location option was successfully created.' }
         format.json { render :show, status: :created, location: @location_option }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class LocationOptionsController < ApplicationController
   def update
     respond_to do |format|
       if @location_option.update(location_option_params)
-        format.html { redirect_to @location_option, notice: 'Location option was successfully updated.' }
+        format.html { redirect_to location_options_path, notice: 'Location option was successfully updated.' }
         format.json { render :show, status: :ok, location: @location_option }
       else
         format.html { render :edit }

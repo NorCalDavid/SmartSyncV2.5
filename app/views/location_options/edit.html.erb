@@ -1,20 +1,24 @@
 <%- model_class = LocationOption -%>
+<% model_title = t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+<% action_title = t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %>
 <div class="main-content">
   <div class="pageheader">
-    <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
-    <p class="description">Edit <%= @location_option.name %></p>
+    <h1><i class="fa fa-home fa-2x primary-color"></i> <%=model_title %> <small><%= action_title %></small></h1>
+    <p class="description">Manage Your <%= model_class %> Details</p>
     <div class="breadcrumb-wrapper hidden-xs">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
-         <li class="active">Edit <%= @location_option.name %></li>
+        <li><%= model_title %></li>
+        <li class="active">
+          <%= link_to action_title %>
+        </li>
       </ol>
     </div>
-	</div>
- 
-  <div class='container-body' id="edit-location_options">
-
-    <%= render :partial => 'form' %>
-
   </div>
 
+  <div class='container-body' id="edit-location_option">
+
+    <%= render :partial => 'form' %>
+    
+  </div>
 </div>
