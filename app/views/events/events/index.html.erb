@@ -1,56 +1,35 @@
 <%- model_class = Event -%>
 <div class="main-content">
-  <div class="pageheader">
-    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-    <p class="description">Manage SmartSync Reminders and Notifications</p>
-    <div class="breadcrumb-wrapper hidden-xs">
-      <span class="label">You are here:</span>
-      <ol class="breadcrumb">
-          <li class="active"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1></li>
-      </ol>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+				    <div class="col-md-10">
+					    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+					    <p class="description">Manage Smart Events</p>
+						</div>
+						<div class="col-md-2 pull-right text-right padding-top">
+							<%= link_to new_event_path, class: "btn btn-primary embossed" do %>
+								New Event
+							<% end %>						
+						</div>
+					</div>
+				</div>
 
-  <div class='container-body'>
-    <div class="row">
-      <div class="col-md-offset-1 col-md-10 padding-top">
-        <div class="panel panel-primary">
-        	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-          <%= link_to new_event_path do %>
-          	New Event
-          <% end %>
+				<div class="panel-body">
 
-          <div class="panel-body">
+					<div class="row">
+						<div class="col-md-12" id="event-calendar"></div>
+					</div>
 
-
-          	<div class="row" id="event-calendar">
-          		<div class="col-md-10 col-md-offset-1" id="calendar">
-	        		
-	        		</div>
-	        	</div>
-          	
-          	<div class="row">
-          		<div id="myModal" class="modal fade" id="event-modal" tabindex="-1" aria-labelleby="myModalLabel" aria-hidden="true">
-          				<div class="modal-dialog draggable">
-								    <!-- Modal content-->
-								    <div class="modal-content">
-								      <div class="modal-header">
-								        <button type="button" class="close" data-dismiss="modal">&times;</button>
-								        <h4 class="modal-title">Events</h4>
-								      </div>
-								      <div class="modal-body">
-
-								      </div>
-	
-								    </div>
-								  </div>
-								</div>
-          	</div>
-            
-          </div> 
-
-        </div>
-      </div>   
-    </div>
-  </div> 
+				</div> 
+				<div class="panel-footer">
+					<%= link_to new_event_path do %>
+						New Event
+					<% end %>
+				</div>
+			</div>
+		</div>   
+	</div>
 </div> 

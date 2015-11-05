@@ -8,6 +8,9 @@ class RoomsController < ApplicationController
   # GET /rooms.json
   def index
     @rooms = Room.all
+    if @rooms.length == 0
+      flash[:alert] = "You have no rooms. Create one now to get started."
+    end
   end
 
   # GET /rooms/1
@@ -17,7 +20,6 @@ class RoomsController < ApplicationController
 
   # GET /rooms/new
   def new
-
     @room = Room.new
   end
 

@@ -22,48 +22,46 @@
           </tr>
         </thead>
         </table>
-				<% unless @configuration[:devices].nil? %>
-          <% @configuration[:devices].each do |device| %>
-            <div class="row padding-md-all">
-              <div class="col-md-5">
-                <span class="animated fadeInLeft">
-                  <%= form_for device, remote: true do |f|  %>
-                  <div class="switch">
-                    <%= f.check_box :status_code, {:id => "switch-submit", :type => "checkbox", :onclick => "javascript: document.list.submit();"}, 100, 101 %>
-                    <label><i></i></label>
-                  </div>
-                  <i class="on animated bounceIn"></i>
-                </span>
-              </div>
-              <div class="col-md-7 animated fadeInRightBig">
-                <b class="device-name<%= " green-color" if device.status_code == 100 %>"><%= device.name %></b>
-                <blockquote class="device-text">
-                  <b>Status: </b><i><%= device.status || "Unknown" %></i>
-                  <div class="padding-all-sm"><%= button_tag "Adjust Dimmer Level", data: { toggle: "collapse" }, href: "#collapse1", class: "btn btn-primary btn-xs embossed" %></div>
-                </blockquote>
-              </div>
-              <div class="col-md-12 padding-top">
-                <div class="panel-group">
-                  <div id="collapse1" class="panel-collapse collapse">
-                    <div class="panel panel-primary padding-md-all">
-                      <div class="panel-heading">
-                        <h2 class="panel-title">Adjust Dimmer Level</h2>
-                      </div>
-                        <div class="panel-body">
-                          <label for="amount">Dimmer Level:</label>
-                          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                          <div id="slider"></div>
-                          <%= f.hidden_field :status_level, id: "dimmer-slider" %>
-                          <div class="text-right padding-top">
-                            <%= f.submit nil, class: "btn btn-primary btn-xs embossed" %>
-                          </div>
-                        </div>    
-                      </div>
+        <% favorite_devices.each do |device| %>
+          <div class="row padding-md-all">
+            <div class="col-md-5">
+              <span class="animated fadeInLeft">
+                <%= form_for device, remote: true do |f|  %>
+                <div class="switch">
+                  <%= f.check_box :status_code, {:id => "switch-submit", :type => "checkbox", :onclick => "javascript: document.list.submit();"}, 100, 101 %>
+                  <label><i></i></label>
+                </div>
+                <i class="on animated bounceIn"></i>
+              </span>
+            </div>
+            <div class="col-md-7 animated fadeInRightBig">
+              <b class="device-name<%= " green-color" if device.status_code == 100 %>"><%= device.name %></b>
+              <blockquote class="device-text">
+                <b>Status: </b><i><%= device.status || "Unknown" %></i>
+                <div class="padding-all-sm"><%= button_tag "Adjust Dimmer Level", data: { toggle: "collapse" }, href: "#collapse1", class: "btn btn-primary btn-xs embossed" %></div>
+              </blockquote>
+            </div>
+            <div class="col-md-12 padding-top">
+              <div class="panel-group">
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel panel-primary padding-md-all">
+                    <div class="panel-heading">
+                      <h2 class="panel-title">Adjust Dimmer Level</h2>
+                    </div>
+                      <div class="panel-body">
+                        <label for="amount">Dimmer Level:</label>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <div id="slider"></div>
+                        <%= f.hidden_field :status_level, id: "dimmer-slider" %>
+                        <div class="text-right padding-top">
+                          <%= f.submit nil, class: "btn btn-primary btn-xs embossed" %>
+                        </div>
+                      </div>    
                     </div>
                   </div>
                 </div>
               </div>
-            <% end %>
+            </div>
           <% end %>
         <% end %>
 

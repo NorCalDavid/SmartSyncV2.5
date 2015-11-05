@@ -354,28 +354,19 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   add_index "schedule_conditions", ["schedule_id"], name: "index_schedule_conditions_on_schedule_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "frequency",      default: 1
-    t.string   "period",         default: "monthly"
-    t.datetime "start_time",                         null: false
-    t.datetime "end_time",                           null: false
-    t.string   "time_zone",                          null: false
-    t.boolean  "all_day",        default: false
-    t.string   "type",                               null: false
-    t.boolean  "published",      default: false
-    t.datetime "published_on"
-    t.boolean  "favorite",       default: false
-    t.integer  "executed_count", default: 0,         null: false
-    t.datetime "executed_last"
-    t.integer  "property_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "created_by"
-    t.integer  "updated_by"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "name",                            null: false
+    t.datetime "start"
+    t.datetime "finish"
+    t.text     "description",                     null: false
+    t.boolean  "all_day",     default: false,     null: false
+    t.integer  "frequency",   default: 1
+    t.string   "period",      default: "monthly"
+    t.string   "time_zone",                       null: false
   end
 
-  add_index "schedules", ["property_id"], name: "index_schedules_on_property_id", using: :btree
+  add_index "schedules", ["name"], name: "index_schedules_on_name", using: :btree
 
   create_table "status_options", force: :cascade do |t|
     t.integer  "status_id"
@@ -488,7 +479,6 @@ ActiveRecord::Schema.define(version: 20151023215444) do
   add_foreign_key "rooms", "properties"
   add_foreign_key "schedule_actions", "schedules"
   add_foreign_key "schedule_conditions", "schedules"
-  add_foreign_key "schedules", "properties"
   add_foreign_key "status_options", "devices"
   add_foreign_key "status_options", "statuses"
   add_foreign_key "twitters", "users"

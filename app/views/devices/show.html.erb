@@ -1,81 +1,172 @@
 <%- model_class = Device -%>
+<% model_title = t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+<% action_title = t '.title', :default => [:'helpers.titles.view', 'View %{model}'], :model => model_class.model_name.human.titleize %>
 <div class="main-content">
   <div class="pageheader">
-    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-    <p class="description">Device Details</p>
+    <h1><i class="fa fa-lightbulb-o fa-2x yellow-color"></i> <%=model_title %> <small><%= action_title %></small></h1>
+    <p class="description">Manage Your <%= model_class %> Details</p>
     <div class="breadcrumb-wrapper hidden-xs">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
-         <li class="active">Device Details</li>
+        <li><%= model_title %></li>
+        <li class="active">
+          <%= link_to action_title %>
+        </li>
       </ol>
     </div>
   </div>
 
-<div class="fieldset">
-  <dl>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
-      <dd><pre class="prettyprint"><%= @device.name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
-      <dd><pre class="prettyprint"><%= @device.description %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:favorite) %></dt>
-      <dd><pre class="prettyprint"><%= @device.favorite %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:status_code) %></dt>
-      <dd><pre class="prettyprint"><%= @device.status_code %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:status) %></dt>
-      <dd><pre class="prettyprint"><%= @device.status %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:status_icon) %></dt>
-      <dd><pre class="prettyprint"><%= @device.status_icon %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:status_level) %></dt>
-      <dd><pre class="prettyprint"><%= @device.status_level %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:brand) %></dt>
-      <dd><pre class="prettyprint"><%= @device.brand %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:device_type) %></dt>
-      <dd><pre class="prettyprint"><%= @device.device_type %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:location) %></dt>
-      <dd><pre class="prettyprint"><%= @device.location %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:EDID) %></dt>
-      <dd><pre class="prettyprint"><%= @device.EDID %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:version) %></dt>
-      <dd><pre class="prettyprint"><%= @device.version %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:image) %></dt>
-      <dd><pre class="prettyprint"><%= @device.image %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:property_id) %></dt>
-      <dd><pre class="prettyprint"><%= @device.property_id %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:room_id) %></dt>
-      <dd><pre class="prettyprint"><%= @device.room_id %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:controllable) %></dt>
-      <dd><pre class="prettyprint"><%= @device.controllable %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:api_id) %></dt>
-      <dd><pre class="prettyprint"><%= @device.api_id %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:api_firmware_version) %></dt>
-      <dd><pre class="prettyprint"><%= @device.api_firmware_version %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:dimmable) %></dt>
-      <dd><pre class="prettyprint"><%= @device.dimmable %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:dim_level) %></dt>
-      <dd><pre class="prettyprint"><%= @device.dim_level %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:ramp_rate) %></dt>
-      <dd><pre class="prettyprint"><%= @device.ramp_rate %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:led_level) %></dt>
-      <dd><pre class="prettyprint"><%= @device.led_level %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:on_time) %></dt>
-      <dd><pre class="prettyprint"><%= @device.on_time %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:off_time) %></dt>
-      <dd><pre class="prettyprint"><%= @device.off_time %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:timer_enabled) %></dt>
-      <dd><pre class="prettyprint"><%= @device.timer_enabled %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:group) %></dt>
-      <dd><pre class="prettyprint"><%= @device.group %></pre></dd>
-  </dl>
-</div>
+  <div class='container-body padding-all-md'>
+    <div class="row">
+      <div class="padding-top col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="property-icon">
+              <%= image_tag(@device.status_icon, class: "device-status-icon primary-color") %>
+              <span class="white-color titleprint">
+                <%= @device.name %>
+              </span>
+            </div>
+          </div>
 
-<div class="form-group">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              devices_path, :class => 'btn btn-default'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_device_path(@device), :class => 'btn btn-default' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              device_path(@device),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+          <div class="panel-body social-profile">    
+            <div class="fieldset">
+              <dl>
+                <div class="col-md-12">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.description || " "  %></pre></dd>
+                </div>
+
+                <div class="col-md-3">
+                  <dt class="label label-default">Property</dt>
+                  <dd><pre class="prettyprint"><%= property_name(@device.property_id) %></pre></dd>
+                </div> 
+
+                <div class="col-md-3">
+                  <dt class="label label-default">Room</dt>
+                  <dd><pre class="prettyprint"><%= room_name(@device.room_id) %></pre></dd>
+                </div> 
+                
+                <div class="col-md-6">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:location) %></dt>
+                  <dd><pre class="prettyprint"><%= location_name(@device.location) || " "  %></pre></dd>
+                </div> 
+
+                <div class="col-md-3">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:status) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.status || " "  %></pre></dd>
+                </div> 
+
+                <div class="col-md-3">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:status_level) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.status_level || " " %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:favorite) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.favorite %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:controllable) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.controllable %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:dimmable) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.dimmable %></pre></dd>
+                </div> 
+
+                <div class="col-md-3">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:brand) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.brand || " " %></pre></dd>
+                </div> 
+
+                <div class="col-md-3">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:device_type) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.device_type || " " %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:version) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.version || " " %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default">Firmware Version</dt>
+                  <dd><pre class="prettyprint"><%= @device.api_firmware_version || " " %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default">Device ID (EDID)</dt>
+                  <dd><pre class="prettyprint"><%= @device.insteon_device_id || " " %></pre></dd>
+                </div> 
+
+
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:dim_level) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.dim_level %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:ramp_rate) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.ramp_rate %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:led_level) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.led_level %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:timer_enabled) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.timer_enabled %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:on_time) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.on_time || " " %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:off_time) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.off_time || " " %></pre></dd>
+                </div> 
+
+                <!-- <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:status_code) %></dt>
+                  <dd><pre class="prettyprint"><%= @device.status_code || " "  %></pre></dd>                
+                </div>  -->
+
+              </dl>
+            </div>
+          </div>
+          
+          <div class="panel-footer">
+            <div class="row">
+              <div class="form-group text-right">
+                <span class="col-md-4">
+                  <%= button_to t('.back', :default => t("helpers.links.back")),
+                            devices_path, :class => 'btn btn-default btn-block embossed'  %>
+                </span>
+
+                <span class="col-md-4">
+                  <%= button_to t('.edit', :default => t("helpers.links.edit")), edit_device_path(@device), :method => "get", :class => 'btn btn-warning btn-block embossed' %>
+                </span>
+
+                <span class="col-md-4">
+                  <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
+                            device_path(@device),
+                            :method => 'delete',
+                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                            :class => 'btn btn-danger btn-block embossed' %>
+                </span>
+              </div>
+            </div> 
+          </div>
+        </div> 
+      </div> 
+    </div> 
+  </div> 
+</div> 

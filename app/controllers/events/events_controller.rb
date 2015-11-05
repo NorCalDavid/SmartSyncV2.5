@@ -1,4 +1,4 @@
-class EventsController < InheritedResources::Base
+class Events::EventsController < InheritedResources::Base
   before_action :authenticate_user!
   before_action :set_event, only: [:edit, :update, :delete, :destroy]
   skip_before_filter :verify_authenticity_token, :only => [:new, :create, :update]

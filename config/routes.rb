@@ -79,16 +79,20 @@ Rails.application.routes.draw do
 
   resources :event_groups, controller: 'events/groups'
   
-  resources :events, except: :show do
+  resources :events, controller: 'events/events', except: :show do
     get :delete
   end
 
-  resources :schedules, controller: 'schedules/schedules' do
-    get :calendar, on: :collection, as: :schedule_calendar
-    
-    resources :action_series, controller: 'schedules/action_series'
-    resources :actions, controller: 'schedules/actions'
+  resources :schedules, controller: 'schedules/schedules', except: :show do
+    get :delete
   end
+
+  # resources :schedules, controller: 'schedules/schedules' do
+  #   get :calendar, on: :collection, as: :schedule_calendar
+    
+  #   resources :action_series, controller: 'schedules/action_series'
+  #   resources :actions, controller: 'schedules/actions'
+  # end
 
   resources :reminders
   post '/reminders/refresh_form' => 'reminders#refresh_form'

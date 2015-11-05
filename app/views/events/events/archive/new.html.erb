@@ -1,5 +1,16 @@
-<%- model_class = Event -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+			<!-- Modal -->
+	<div class="modal-dialog draggable">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Events</h4>
+      </div>
+      <div class="modal-body" id="new-modal-landing">
+
+        <%= render 'form' %>
+
+      </div>
+    </div>
+  </div>
 </div>
-<%= render :partial => 'form' %>

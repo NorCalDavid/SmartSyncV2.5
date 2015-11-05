@@ -3,7 +3,7 @@
 
 $(document).ready(function() {
 
-   $("div#calendar").fullCalendar({
+  $("div#event-calendar").fullCalendar({
      header: { left: "prev,next today",
                center: "title",
                right: "month,agendaWeek,agendaDay",
@@ -15,6 +15,33 @@ $(document).ready(function() {
      selectable: true,
      resizable: true,
      events: "/events",
+     timeFormat: "h:mm A to h:mm A ",
+     timezone: true,
+     dragOpacity: "0  .5",
+     eventRender: function(event, element) {
+      $('a.fc-event-draggable').attr('data-remote', true);
+     },
+     eventResize: function(event, dayDelta, minuteDelta) {
+       resize(event, dayDelta, minuteDelta);
+     },
+     eventDrop: function(event, dayDelta, minuteDelta, allDay){
+       drop(event, dayDelta, minuteDelta);
+     }
+
+  });
+
+  $("div#schedule-calendar").fullCalendar({
+     header: { left: "prev,next today",
+               center: "title",
+               right: "month,agendaWeek,agendaDay",
+     defaultView: "month" },
+     height: 500,
+     slotMinutes: 30,
+     allDayDefault: false,
+     editable: true,
+     selectable: true,
+     resizable: true,
+     events: "/schedules",
      timeFormat: "h:mm A to h:mm A ",
      timezone: true,
      dragOpacity: "0  .5",
@@ -56,28 +83,28 @@ $(document).ready(function() {
     });
   }
 
-  $(document).on('page:change', function() {
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      height: 600,
-      editable: true,
-      resizable: true,
-      events: '/events',
-      eventRender: function(event, element) {
-        $('a.fc-event-draggable').attr('data-remote', true);
-      },
-      eventResize: function(event, dayDelta, minuteDelta) {
-        resize(event, dayDelta, minuteDelta);
-      },
-      eventDrop: function(event, dayDelta, minuteDelta, allDay){
-        drop(event, dayDelta, minuteDelta);
-      }
-    });
-  });
+  // $(document).on('page:change', function() {
+  //   $('#calendar').fullCalendar({
+  //     header: {
+  //       left: 'prev,next today',
+  //       center: 'title',
+  //       right: 'month,agendaWeek,agendaDay'
+  //     },
+  //     height: 600,
+  //     editable: true,
+  //     resizable: true,
+  //     events: '/events',
+  //     eventRender: function(event, element) {
+  //       $('a.fc-event-draggable').attr('data-remote', true);
+  //     },
+  //     eventResize: function(event, dayDelta, minuteDelta) {
+  //       resize(event, dayDelta, minuteDelta);
+  //     },
+  //     eventDrop: function(event, dayDelta, minuteDelta, allDay){
+  //       drop(event, dayDelta, minuteDelta);
+  //     }
+  //   });
+  // });
 
 });
 

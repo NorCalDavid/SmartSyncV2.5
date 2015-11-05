@@ -46,15 +46,14 @@
 
         <div class="panel-footer">
           <div class="row">
-            <div class="col-md-12 text-right">
-              <%= f.submit nil, class: 'btn btn-primary embossed' %>
-              <%= button_to "All Properties", properties_path, :method => "get", class: 'btn embossed' %>
-              <%= button_to "Cancel", properties_path, :method => "get", :class => 'btn btn-warning embossed' %>
-              <% end %>
+            <div class="form-group text-right">
+              <span class="col-md-4"><%= f.submit nil, class: 'btn btn-primary btn-block embossed' %></span>
+              <span class="col-md-4"><%= button_to "Return To Dashboard", dashboard_path, :method => "get", :class => 'btn btn-success btn-block embossed' %></span>
+              <span class="col-md-4"><%= button_to "View All Properties", properties_path, :method => "get", :class => 'btn btn-warning btn-block embossed' %></span>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

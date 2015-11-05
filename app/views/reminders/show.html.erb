@@ -1,33 +1,32 @@
 <%- model_class = Reminder -%>
+<% model_title = t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+<% action_title = t '.title', :default => [:'helpers.titles.view', 'View %{model}'], :model => model_class.model_name.human.titleize %>
 <div class="main-content">
   <div class="pageheader">
-    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-    <p class="description">SmartSync Reminders and Notifications</p>
+    <h1><i class="fa fa-bell fa-2x primary-color"></i> <%=model_title %> <small><%= action_title %></small></h1>
+    <p class="description">Manage Your <%= model_class %> Details</p>
     <div class="breadcrumb-wrapper hidden-xs">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
-          <li class="active"><%=t '.title', :default => model_class.model_name.human.titleize %></h1></li>
+        <li><%= model_title %></li>
+        <li class="active">
+          <%= link_to action_title %>
+        </li>
       </ol>
     </div>
   </div>
 
-  <div class='container-body'>
+  <div class='container-body padding-all-lg'>
     <div class="row">
-      <div class="col-md-offset-1 col-md-10 padding-top">
+      <div class="col-md-12 padding-top">
         <div class="panel panel-primary">
-
           <div class="panel-heading">
-            <%= link_to t('.back', :default => t("helpers.links.back")),
-                          reminders_path, :class => 'btn btn-default btn-xs'  %>
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_reminder_path(@reminder), :class => 'btn btn-default btn-xs' %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        reminder_path(@reminder),
-                        :method => 'delete',
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-danger btn-xs' %>
+            <div class="property-icon">
+              <i class="fa fa-arrow-right fa-2x"></i>
+              <span class="white-color titleprint"><%= model_title %></span>
+            </div>
           </div>
-
+            
           <div class="panel-body">
             <div class="fieldset">
               <dl>
@@ -46,6 +45,29 @@
               </dl>
             </div>
           </div> 
+
+          <div class="panel-footer">
+            <div class="row">
+              <div class="form-group text-right">
+                <span class="col-md-4">
+                  <%= button_to t('.back', :default => t("helpers.links.back")),
+                            reminders_path, :class => 'btn btn-default btn-block embossed'  %>
+                </span>
+
+                <span class="col-md-4">
+                  <%= button_to t('.edit', :default => t("helpers.links.edit")), edit_reminder_path(@reminder), :method => "get", :class => 'btn btn-warning btn-block embossed' %>
+                </span>
+
+                <span class="col-md-4">
+                  <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
+                            reminder_path(@reminder),
+                            :method => 'delete',
+                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                            :class => 'btn btn-danger btn-block embossed' %>
+                </span>
+              </div>
+            </div> 
+          </div>
         </div>
       </div>   
     </div>

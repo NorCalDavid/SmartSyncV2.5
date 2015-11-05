@@ -1,58 +1,153 @@
-<div class="row">
-  <div class="col-md-offset-1 col-md-10 padding-top">
-    <div class="panel panel-primary">
+<section id="main-content" class="animated fadeInUp">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Device Wizard</h3>
+				</div>
+				
+				<div class="panel-body">
+					<section class="fuelux">
+						<div id="NewDeviceWizard" class="wizard">
+							<ul class="steps">
+								<li data-target="#step1" class="active">Device Info<span class="chevron"></span>
+								</li>
+							</ul>
+						</div>
 
-      <div class="panel-heading">
-        <h3 class="panel-title">Location Options</h3>
-      </div>
-      <div class="panel-body">
-        <%= bootstrap_form_for(@device) do |f| %>
-          <% if @device.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+						<%= form_for(@device, class: "form-horizontal") do |f| %>
+							<% if @device.errors.any? %>
+								<div id="error_explanation">
+									<h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
 
-              <ul>
-              <% @device.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
+									<ul>
+										<% @device.errors.full_messages.each do |message| %>
+											<li><%= message %></li>
+										<% end %>
+									</ul>
+								</div>
+							<% end %>
+
+						<div class="step-content">
+							<div class="step-pane active" id="step1">
+
+								<span class="row text-center">
+
+									<div class="form-group col-md-4">
+										<div class="input-group">
+											<span class="input-group-addon control-label">Select Property</span>
+											<%= f.select :property_id, options_for_select(collection_options(@configuration[:properties]), active_property), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+										</div><br/>
+									</div>
+
+									<div class="form-group col-md-4">
+										<div class="input-group">
+											<span class="input-group-addon control-label">Select Room</span>
+											<%= f.select :room_id, options_for_select(collection_options(@configuration[:rooms]), active_room), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+										</div><br/>
+									</div>
+
+									<div class="form-group col-md-4">
+										<div class="input-group">
+											<span class="input-group-addon control-label">Select Device Location</span>
+											<%= f.select :location, options_for_select(collection_options(@configuration[:device_location_options])), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+										</div><br/>
+									</div>
+
+							</span>
+
+							<div class="col-sm-12 divider"></div><br/>
+
+							<div class="row">
+								<div class="form-group col-md-offset-1 col-md-5">
+									<div class="input-group">
+										<span class="input-group-addon">Name: </span>
+										<%= f.text_field :name, class: 'form-control', placeholder: "Device Name" %>
+									</div><br/>
+
+									<div class="input-group col-md-5">
+										<span class="input-group-addon">Favorite: </span>
+										<%= f.select :favorite, options_for_select(options_yes_no), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+									</div><br/>
+								</div>
+
+								<div class="form-group col-md-5">
+									<div class="input-group">
+										<span class="input-group-addon">Description: </span>
+										<%= f.text_area :description, class: 'form-control' %>
+									</div><br/>
+								</div>
+							</div>
+
+							<div class="col-md-12 divider"></div><br/>
+
+							<div class="row">
+								<div class="form-group col-md-offset-1 col-md-5">
+									<div class="input-group">
+											<span class="input-group-addon">Device Type: </span>
+											<%= f.select :favorite, options_for_select(device_types), {:prompt => 'Select'}, {class: "form-control box-left"} %>
+									</div><br/>
+								</div>
+
+								<div class="form-group col-md-5">
+									<div class="input-group">
+										<span class="input-group-addon">Brand: </span>
+										<%= f.text_field :brand, class: 'form-control', placeholder: "Brand" %>
+									</div><br/>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-md-offset-1 col-md-3">
+									<div class="input-group">
+										<span class="input-group-addon">Version: </span>
+										<%= f.text_field :version, class: 'form-control', placeholder: "Version" %>
+									</div><br/>
+								</div>
+
+								<div class="form-group col-md-3">
+									<div class="input-group">
+										<span class="input-group-addon">EDID: </span>
+										<%= f.text_field :EDID, class: 'form-control', placeholder: "EDID" %>
+									</div><br/>
+								</div>
+
+								<div class="form-group col-md-2">
+									<div class="input-group">
+										<span class="input-group-addon">Status Code: </span>
+										<%= f.number_field :status_code, class: 'form-control', disabled: true %>
+									</div><br/>
+								</div>
+
+								<div class="form-group col-md-2">
+									<div class="input-group">
+										<span class="input-group-addon">Status: </span>
+										<%= f.text_field :status, class: 'form-control', disabled: true %>
+									</div><br/>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			  <div class="panel-footer">
+          <div class="row">
+            <div class="form-group text-right">
+              <span class="col-md-4"><%= f.submit nil, class: 'btn btn-primary btn-block embossed' %></span>
+              <span class="col-md-4"><%= button_to "Return To Dashboard", dashboard_path, :method => "get", :class => 'btn btn-success btn-block embossed' %></span>
+              <span class="col-md-4"><%= button_to "View All Devices", devices_path, :method => "get", :class => 'btn btn-warning btn-block embossed' %></span>
             </div>
-          <% end %>
-
-            <%= f.text_field :name %>
-            <%= f.text_area :description %>
-            <%= f.check_box :favorite, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
-            <%= f.number_field :status_code %>
-            <%= f.number_field :status_level %>
-            <%= f.text_field :brand %>
-            <%= f.text_field :device_type %>
-            <%= f.text_field :location %>
-            <%= f.text_field :EDID %>
-            <%= f.text_field :version %>
-            <%= f.text_field :image %>
-            <%= f.check_box :controllable, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
-            <%= f.number_field :api_id %>
-            <%= f.text_field :api_firmware_version %>            
-            <%= f.check_box :dimmable, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
-            <%= f.number_field :dim_level %>
-            <%= f.number_field :ramp_rate %>
-            <%= f.number_field :led_level %>
-            <%= f.check_box :timer_enabled, :data => { :size=>'small', 'on-color'=>'success', 'on-text'=>'YES', 'off-text'=>'NO' } %>
-            <%= f.text_field :group %>
-
-            <%= f.submit %>
-            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                devices_path, :class => 'btn btn-default' %>
-            <%= link_to dashboard_path, class: 'btn btn-default' do %>
-              <span class="glyphicon glyphicon-list-alt"></span>
-              Dashboard
-            <% end %>
-            <%= link_to devices_path, class: 'btn btn-primary' do %>
-              <span class="glyphicon glyphicon-info-sign"></span>
-              All Devices
-            <% end %>
-        <% end %>
-      </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  </div>
-</div>
+	</div>
+</section>
+
+<% content_for :javascript do %>
+<!--Load these page level functions-->
+<script>
+$(document).ready(function() {
+		app.formWizard();
+});
+</script>
+<% end %>

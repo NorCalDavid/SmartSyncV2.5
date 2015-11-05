@@ -63,16 +63,14 @@
 						</div> 
 					</div>
 	        
-	        <div class="panel-footer text-right">
-						<%= f.submit nil, :class => 'btn btn-primary embossed' %>
-						
-						<%= link_to reminders_path, class: 'btn btn-default embossed' do %>
-	            <span class="glyphicon glyphicon-info-sign"></span> Cancel
-	          <% end %>
-	          
-	          <%= link_to dashboard_path, class: 'btn btn-primary embossed' do %>
-	            <span class="glyphicon glyphicon-list-alt"></span> Dashboard
-	          <% end %>
+	        <div class="panel-footer">
+	          <div class="row">
+	            <div class="form-group text-right">
+	              <span class="col-md-4"><%= f.submit nil, class: 'btn btn-primary btn-block embossed' %></span>
+	              <span class="col-md-4"><%= button_to "Return To Dashboard", dashboard_path, :method => "get", :class => 'btn btn-success btn-block embossed' %></span>
+	              <span class="col-md-4"><%= button_to "View All Reminders", reminders_path, :method => "get", :class => 'btn btn-warning btn-block embossed' %></span>
+	            </div>
+	          </div>
 	        </div>
 				</div>
 	    <% end %>

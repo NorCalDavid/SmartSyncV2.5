@@ -25,6 +25,22 @@ module ApplicationHelper
     current_user.valid_insteon_token?
   end
 
+  def favorite_devices
+    current_user.devices.where(favorite: true)
+  end
+
+  def property_name(id)
+    Property.find(id).name
+  end
+
+  def room_name(id)
+    Room.find(id).name
+  end
+
+  def location_name(id)
+    LocationOption.find(id).name
+  end
+
   def find_user(user_id)
     User.find(user_id)
   end

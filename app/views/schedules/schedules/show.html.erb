@@ -1,4 +1,4 @@
-<%- model_class = Room -%>
+<%- model_class = Schedule -%>
 <% model_title = t '.title', :default => model_class.model_name.human.pluralize.titleize %>
 <% action_title = t '.title', :default => [:'helpers.titles.view', 'View %{model}'], :model => model_class.model_name.human.titleize %>
 <div class="main-content">
@@ -24,27 +24,38 @@
             <div class="property-icon">
               <i class="fa fa-arrow-right fa-2x"></i>
               <span class="white-color titleprint">
-                <%= @room.name %>
+                <%= @schedule.name %>
               </span>
             </div>
           </div>
 
-          <div class="panel-body social-profile">    
+          <div class="panel-body social-profile">
             <div class="fieldset">
               <dl>
-                <div class="col-md-12">
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
-                  <dd><pre class="prettyprint"><%= @room.description || " " %></pre></dd>
+
+                <div class="col-md-6">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+                  <dd><pre class="prettyprint"><%= @schedule.name %></pre></dd>
                 </div>
 
                 <div class="col-md-6">
-                  <dt class="label label-default">Property</dt>
-                  <dd><pre class="prettyprint"><%= property_name(@room.property_id) %></pre></dd>
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+                  <dd><pre class="prettyprint"><%= @schedule.description %></pre></dd>
                 </div> 
                 
-                <div class="col-md-6">
-                  <dt class="label label-default"><%= model_class.human_attribute_name(:location) %></dt>
-                  <dd><pre class="prettyprint"><%= location_name(@room.location) || " "  %></pre></dd>
+                <div class="col-md-4">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:start) %></dt>
+                  <dd><pre class="prettyprint"><%= @schedule.start %></pre></dd>
+                </div> 
+
+                <div class="col-md-4">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:finish) %></dt>
+                  <dd><pre class="prettyprint"><%= @schedule.finish %></pre></dd>
+                </div> 
+
+                <div class="col-md-2">
+                  <dt class="label label-default"><%= model_class.human_attribute_name(:all_day) %></dt>
+                  <dd><pre class="prettyprint"><%= @schedule.all_day %></pre></dd>
                 </div> 
 
               </dl>
@@ -56,16 +67,16 @@
               <div class="form-group text-right">
                 <span class="col-md-4">
                   <%= button_to t('.back', :default => t("helpers.links.back")),
-                            rooms_path, :class => 'btn btn-default btn-block embossed'  %>
+                            schedules_path, :class => 'btn btn-default btn-block embossed'  %>
                 </span>
 
                 <span class="col-md-4">
-                  <%= button_to t('.edit', :default => t("helpers.links.edit")), edit_room_path(@room), :method => "get", :class => 'btn btn-warning btn-block embossed' %>
+                  <%= button_to t('.edit', :default => t("helpers.links.edit")), edit_schedule_path(@schedule), :method => "get", :class => 'btn btn-warning btn-block embossed' %>
                 </span>
 
                 <span class="col-md-4">
                   <%= button_to t('.destroy', :default => t("helpers.links.destroy")),
-                            room_path(@room),
+                            schedule_path(@schedule),
                             :method => 'delete',
                             :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                             :class => 'btn btn-danger btn-block embossed' %>
